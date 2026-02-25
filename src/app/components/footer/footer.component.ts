@@ -63,7 +63,6 @@ import { SITE_CONFIG } from '../../config/site-config';
       height: 40px;
       border-radius: 50%;
       border: 1px solid rgba(201,168,76,0.35);
-      color: var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -71,10 +70,12 @@ import { SITE_CONFIG } from '../../config/site-config';
       font-size: 1rem;
       transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
     }
+    .social-link[aria-label='Instagram'] { color: #E1306C; }
+    .social-link[aria-label='LinkedIn'] { color: #0A66C2; }
+    .social-link[aria-label='Google Business'] { color: #EA4335; }
     .social-link:hover {
-      background: var(--gold);
-      color: var(--dark);
-      border-color: var(--gold);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.35);
       transform: translateY(-2px);
     }
 
