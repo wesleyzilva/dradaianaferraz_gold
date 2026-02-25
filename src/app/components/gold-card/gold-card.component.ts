@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 
 @Component({
   selector: 'app-gold-card',
   standalone: true,
   template: `
-    <section class="gold-card-section" id="gold-card">
+    <section class="gold-card-section" [id]="sectionId()">
       <div class="section-container">
         <div class="card-wrapper">
           <!-- Decorative background elements -->
@@ -16,12 +16,12 @@ import { SITE_CONFIG } from '../../config/site-config';
             <div class="card-badge">
               <i class="fas fa-crown"></i> Exclusivo
             </div>
-            <h2 class="card-title">{{ config.goldCard.title }}</h2>
-            <p class="card-subtitle">{{ config.goldCard.subtitle }}</p>
-            <p class="card-description">{{ config.goldCard.description }}</p>
+            <h2 class="card-title">{{ activeCard().title }}</h2>
+            <p class="card-subtitle">{{ activeCard().subtitle }}</p>
+            <p class="card-description">{{ activeCard().description }}</p>
 
             <ul class="benefits-list">
-              @for (benefit of config.goldCard.benefits; track benefit) {
+              @for (benefit of activeCard().benefits; track benefit) {
                 <li class="benefit-item">
                   <span class="benefit-check"><i class="fas fa-check"></i></span>
                   <span>{{ benefit }}</span>
@@ -31,7 +31,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 
             <a [href]="whatsappUrl" target="_blank" class="btn-gold-cta">
               <i class="fab fa-whatsapp"></i>
-              {{ config.goldCard.ctaText }}
+              {{ activeCard().ctaText }}
             </a>
           </div>
 
@@ -39,16 +39,16 @@ import { SITE_CONFIG } from '../../config/site-config';
             <div class="gold-card-visual">
               <div class="gc-top">
                 <i class="fas fa-crown gc-crown"></i>
-                <span class="gc-label">Cartão Ouro</span>
+                <span class="gc-label">{{ visualLabel() }}</span>
               </div>
               <div class="gc-name">{{ config.professional.name }}</div>
-              <div class="gc-tagline">Harmonização Facial Premium</div>
+              <div class="gc-tagline">{{ visualTagline() }}</div>
               <div class="gc-discount">
-                <span class="gc-discount-value">50%</span>
-                <span class="gc-discount-label">OFF</span>
+                <span class="gc-discount-value">{{ visualDiscountValue() }}</span>
+                <span class="gc-discount-label">{{ visualDiscountLabel() }}</span>
               </div>
               <div class="gc-footer">
-                <span>Consulta de Avaliação Inclusa</span>
+                <span>{{ visualFooter() }}</span>
                 <i class="fas fa-gem"></i>
               </div>
             </div>
@@ -290,9 +290,34 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class GoldCardComponent {
   config = SITE_CONFIG;
+  readonly cardType = input<'gold' | 'fidelity'>('gold');
+
+  readonly activeCard = computed(() =>
+    this.cardType() === 'fidelity' ? this.config.fidelityCard : this.config.goldCard,
+  );
+
+  readonly sectionId = computed(() => (this.cardType() === 'fidelity' ? 'fidelity-card' : 'gold-card'));
+
+  readonly visualLabel = computed(() =>
+    this.cardType() === 'fidelity' ? 'Cartão Fidelidade' : 'Cartão Ouro',
+  );
+
+  readonly visualTagline = computed(() =>
+    this.cardType() === 'fidelity' ? 'Odontologia VIP' : 'Harmonização Orofacial Premium',
+  );
+
+  readonly visualDiscountValue = computed(() => (this.cardType() === 'fidelity' ? 'VIP' : 'OURO'));
+
+  readonly visualDiscountLabel = computed(() => (this.cardType() === 'fidelity' ? 'DESC.' : 'VIP'));
+
+  readonly visualFooter = computed(() =>
+    this.cardType() === 'fidelity'
+      ? 'Retorno em até 12 meses + indicação/família'
+      : 'Benefícios exclusivos para Harmonização',
+  );
 
   get whatsappUrl(): string {
-    const msg = encodeURIComponent(this.config.goldCard.whatsappMessage);
+    const msg = encodeURIComponent(this.activeCard().whatsappMessage);
     return `${this.config.professional.whatsapp}?text=${msg}`;
   }
 }

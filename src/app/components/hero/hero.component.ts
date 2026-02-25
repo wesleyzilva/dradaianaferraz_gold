@@ -1,24 +1,81 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
+import type { AppArea } from '../../app';
+
+type BottomMenuLink = {
+  label: string;
+  anchor?: string;
+  href?: string;
+  external?: boolean;
+};
 
 @Component({
   selector: 'app-hero',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- Navigation -->
     <nav class="navbar">
       <div class="nav-container">
         <span class="nav-logo">{{ config.professional.name }}</span>
+        <div class="view-switch" role="group" aria-label="Selecionar área de atendimento">
+          <button
+            type="button"
+            class="switch-btn"
+            [class.switch-btn-active]="selectedArea() === 'odontologia'"
+            [attr.aria-pressed]="selectedArea() === 'odontologia'"
+            (click)="setArea('odontologia')"
+          >
+            Odontologia
+          </button>
+          <button
+            type="button"
+            class="switch-btn"
+            [class.switch-btn-active]="selectedArea() === 'harmonizacao'"
+            [attr.aria-pressed]="selectedArea() === 'harmonizacao'"
+            (click)="setArea('harmonizacao')"
+          >
+            Harmonização
+          </button>
+        </div>
         <ul class="nav-links">
-          @for (item of config.navigation; track item.anchor) {
+          @for (item of visibleNavigation(); track item.anchor) {
             <li><a [href]="'#' + item.anchor">{{ item.label }}</a></li>
           }
         </ul>
-        <a [href]="config.professional.whatsapp" target="_blank" class="btn-nav">
-          Agendar Consulta
-        </a>
+        @if (selectedArea() !== 'odontologia') {
+          <a [href]="config.professional.whatsapp" target="_blank" class="btn-nav">
+            Agendar Consulta
+          </a>
+        }
       </div>
     </nav>
+
+    @if (showBottomMenu()) {
+      <div class="bottom-nav">
+        <button
+          type="button"
+          class="bottom-nav-btn"
+          [attr.aria-expanded]="isBottomMenuOpen()"
+          aria-haspopup="menu"
+          (click)="toggleBottomMenu()"
+        >
+          Mais opções
+          <i class="fas" [class.fa-chevron-up]="isBottomMenuOpen()" [class.fa-chevron-down]="!isBottomMenuOpen()"></i>
+        </button>
+
+        @if (isBottomMenuOpen()) {
+          <div class="bottom-dropdown" role="menu" [attr.aria-label]="bottomMenuAriaLabel()">
+            @for (item of bottomMenuLinks(); track item.label) {
+              @if (item.anchor) {
+                <a [href]="'#' + item.anchor" role="menuitem" (click)="closeBottomMenu()">{{ item.label }}</a>
+              } @else {
+                <a [href]="item.href" [attr.target]="item.external ? '_blank' : null" role="menuitem" (click)="closeBottomMenu()">{{ item.label }}</a>
+              }
+            }
+          </div>
+        }
+      </div>
+    }
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
@@ -34,8 +91,8 @@ import { SITE_CONFIG } from '../../config/site-config';
           <p class="hero-crm">{{ config.professional.crm }}</p>
           <p class="hero-bio">{{ config.professional.bio }}</p>
           <div class="hero-cta">
-            <a href="#gold-card" class="btn-primary">Agende sua Consulta</a>
-            <a href="#services" class="btn-secondary">Conheça os Serviços</a>
+            <a [href]="primaryCtaHref()" class="btn-primary">{{ primaryCtaLabel() }}</a>
+            <a [href]="secondaryCtaHref()" class="btn-secondary">{{ secondaryCtaLabel() }}</a>
           </div>
         </div>
       </div>
@@ -77,6 +134,30 @@ import { SITE_CONFIG } from '../../config/site-config';
       margin: 0;
       padding: 0;
     }
+    .view-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border: 1px solid rgba(201, 168, 76, 0.5);
+      border-radius: 999px;
+      padding: 0.2rem;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .switch-btn {
+      border: 0;
+      background: transparent;
+      color: var(--white);
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .switch-btn-active {
+      background: var(--gold);
+      color: var(--dark);
+    }
     .nav-links a {
       color: var(--white);
       text-decoration: none;
@@ -96,6 +177,55 @@ import { SITE_CONFIG } from '../../config/site-config';
       transition: background 0.3s, transform 0.2s;
     }
     .btn-nav:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 1rem;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .bottom-nav-btn {
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      background: rgba(26, 26, 26, 0.95);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .bottom-dropdown {
+      min-width: 180px;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      background: rgba(26, 26, 26, 0.98);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+    }
+    .bottom-dropdown a {
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+    .bottom-dropdown a:last-child {
+      border-bottom: 0;
+    }
+    .bottom-dropdown a:hover {
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.08);
+    }
 
     /* Hero */
     .hero {
@@ -194,6 +324,7 @@ import { SITE_CONFIG } from '../../config/site-config';
     /* Responsive */
     @media (max-width: 900px) {
       .nav-links { display: none; }
+      .view-switch { margin-left: auto; }
       .hero-content { flex-direction: column; text-align: center; gap: 2rem; }
       .hero-photo { width: 220px; height: 220px; }
       .hero-bio { margin: 0 auto 2rem; }
@@ -202,10 +333,86 @@ import { SITE_CONFIG } from '../../config/site-config';
     @media (max-width: 480px) {
       .navbar { padding: 0 1rem; }
       .nav-logo { font-size: 0.9rem; }
+      .switch-btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
       .hero-content { padding: 2rem 1rem; }
     }
   `],
 })
 export class HeroComponent {
   config = SITE_CONFIG;
+  readonly isBottomMenuOpen = signal(false);
+
+  readonly selectedArea = input<AppArea>('harmonizacao');
+  readonly selectedAreaChange = output<AppArea>();
+
+  readonly visibleNavigation = computed(() => {
+    if (this.selectedArea() === 'odontologia') {
+      const navByAnchor = new Map(this.config.navigation.map((item) => [item.anchor, item]));
+      return [
+        navByAnchor.get('services'),
+        navByAnchor.get('reviews'),
+        navByAnchor.get('fidelity-card'),
+        navByAnchor.get('location'),
+      ].filter((item) => item !== undefined);
+    }
+
+    return this.config.navigation.filter((item) =>
+      ['services', 'products', 'gold-card'].includes(item.anchor),
+    );
+  });
+
+  readonly showBottomMenu = computed(() =>
+    this.selectedArea() === 'harmonizacao' || this.selectedArea() === 'odontologia',
+  );
+
+  readonly bottomMenuAriaLabel = computed(() =>
+    this.selectedArea() === 'odontologia'
+      ? 'Menu inferior de odontologia'
+      : 'Menu inferior da harmonização',
+  );
+
+  readonly bottomMenuLinks = computed<BottomMenuLink[]>(() => {
+    if (this.selectedArea() === 'odontologia') {
+      return [
+        {
+          label: 'Agendar Consulta',
+          href: this.config.professional.whatsapp,
+          external: true,
+        },
+      ];
+    }
+
+    return this.config.navigation
+      .filter((item) => ['reviews', 'location'].includes(item.anchor))
+      .map((item) => ({ label: item.label, anchor: item.anchor }));
+  });
+
+  readonly primaryCtaHref = computed(() =>
+    this.selectedArea() === 'odontologia' ? '#fidelity-card' : '#gold-card',
+  );
+
+  readonly secondaryCtaHref = computed(() =>
+    this.selectedArea() === 'odontologia' ? '#services' : '#procedures',
+  );
+
+  readonly primaryCtaLabel = computed(() =>
+    this.selectedArea() === 'odontologia' ? 'Conheça o Cartão Fidelidade' : 'Conheça o Cartão Ouro',
+  );
+
+  readonly secondaryCtaLabel = computed(() =>
+    this.selectedArea() === 'odontologia' ? 'Conheça a Odontologia' : 'Ver Procedimentos',
+  );
+
+  setArea(area: AppArea): void {
+    this.isBottomMenuOpen.set(false);
+    this.selectedAreaChange.emit(area);
+  }
+
+  toggleBottomMenu(): void {
+    this.isBottomMenuOpen.update((open) => !open);
+  }
+
+  closeBottomMenu(): void {
+    this.isBottomMenuOpen.set(false);
+  }
 }

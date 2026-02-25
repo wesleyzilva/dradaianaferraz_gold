@@ -9,11 +9,11 @@ import { SITE_CONFIG } from '../../config/site-config';
       <div class="section-container">
         <div class="section-header">
           <p class="section-eyebrow">Qualidade & Excelência</p>
-          <h2 class="section-title">Produtos Utilizados</h2>
+          <h2 class="section-title">Produtos Anna Pegova</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Trabalhamos apenas com produtos premium, selecionados criteriosamente para garantir
-            segurança, eficácia e os melhores resultados para você.
+            Priorizamos protocolos com foco na linha profissional Anna Pegova,
+            associando tecnologia dermocosmética, segurança e alta performance em cada atendimento.
           </p>
         </div>
         <div class="products-grid">

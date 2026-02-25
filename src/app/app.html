@@ -1,8 +1,18 @@
-<app-hero></app-hero>
-<app-services></app-services>
-<app-products></app-products>
-<app-procedures></app-procedures>
-<app-gold-card></app-gold-card>
+<app-hero
+	[selectedArea]="selectedArea()"
+	(selectedAreaChange)="onAreaChange($event)"
+></app-hero>
+
+@if (selectedArea() === 'harmonizacao') {
+	<app-services></app-services>
+	<app-products></app-products>
+	<app-procedures></app-procedures>
+	<app-gold-card cardType="gold"></app-gold-card>
+} @else {
+	<app-odontology></app-odontology>
+	<app-gold-card cardType="fidelity"></app-gold-card>
+}
+
 <app-reviews></app-reviews>
 <app-location></app-location>
 <app-footer></app-footer>

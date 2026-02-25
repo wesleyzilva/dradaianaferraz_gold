@@ -13,7 +13,7 @@ import { SITE_CONFIG } from '../../config/site-config';
           <div class="gold-line"></div>
           <div class="google-badge">
             <i class="fab fa-google"></i>
-            <span>Avaliações no Google</span>
+            <span>Google 4,9 · 119 avaliações</span>
           </div>
         </div>
 
