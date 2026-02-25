@@ -8,6 +8,7 @@ import { ProceduresComponent } from './components/procedures/procedures.componen
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { GoldCardComponent } from './components/gold-card/gold-card.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { MiniAnalyticsComponent } from './components/mini-analytics/mini-analytics.component';
 
 export type AppArea = 'odontologia' | 'harmonizacao';
 
@@ -23,6 +24,7 @@ export type AppArea = 'odontologia' | 'harmonizacao';
     ReviewsComponent,
     GoldCardComponent,
     FooterComponent,
+    MiniAnalyticsComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.html',

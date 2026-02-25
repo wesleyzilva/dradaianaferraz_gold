@@ -33,10 +33,18 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <span class="info-icon">📍</span>
                 <div>
                   <strong>Endereço</strong>
-                  <p>{{ config.location.address }}</p>
-                  <p>{{ config.location.neighborhood }}</p>
-                  <p>{{ config.location.city }}</p>
-                  <p>{{ config.location.cep }}</p>
+                  <a
+                    [href]="directionsUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="address-link"
+                    aria-label="Abrir rota no Google Maps"
+                  >
+                    <p>{{ config.location.address }}</p>
+                    <p>{{ config.location.neighborhood }}</p>
+                    <p>{{ config.location.city }}</p>
+                    <p>{{ config.location.cep }}</p>
+                  </a>
                 </div>
               </li>
               <li>
@@ -157,6 +165,16 @@ import { SITE_CONFIG } from '../../config/site-config';
       margin: 0;
       line-height: 1.5;
     }
+    .address-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+    .address-link p {
+      transition: color 0.2s;
+    }
+    .address-link:hover p {
+      color: var(--gold-light);
+    }
     .btn-whatsapp {
       display: inline-flex;
       align-items: center;
@@ -182,8 +200,13 @@ import { SITE_CONFIG } from '../../config/site-config';
 export class LocationComponent {
   config = SITE_CONFIG;
   safeMapUrl: SafeResourceUrl;
+  directionsUrl: string;
 
   constructor(private sanitizer: DomSanitizer) {
     this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.config.mapEmbedUrl);
+    const destination = encodeURIComponent(
+      `${this.config.location.address}, ${this.config.location.neighborhood}, ${this.config.location.city}, ${this.config.location.cep}`,
+    );
+    this.directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
   }
 }

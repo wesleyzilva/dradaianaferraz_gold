@@ -10,10 +10,9 @@ export const SITE_CONFIG = {
 
   navigation: [
     { label: 'Serviços', anchor: 'services' },
-    { label: 'Produtos', anchor: 'products' },
+    { label: 'Linha Anna Pegova', anchor: 'products' },
     { label: 'Procedimentos', anchor: 'procedures' },
     { label: 'Cartão Ouro', anchor: 'gold-card' },
-    { label: 'Odontologia', anchor: 'services' },
     { label: 'Cartão Fidelidade', anchor: 'fidelity-card' },
     { label: 'Avaliações', anchor: 'reviews' },
     { label: 'Localização', anchor: 'location' },
@@ -21,9 +20,9 @@ export const SITE_CONFIG = {
 
   services: [
     {
-      icon: '✨',
-      title: 'Harmonização Facial',
-      description: 'Procedimentos personalizados para realçar sua beleza natural com técnicas avançadas e seguras.',
+      icon: '🔊',
+      title: 'Ultrassom Microfocado',
+      description: 'Tecnologia para firmeza da pele, estímulo de colágeno e redefinição do contorno facial sem cirurgia.',
     },
     {
       icon: '💉',
@@ -49,6 +48,16 @@ export const SITE_CONFIG = {
       icon: '🧵',
       title: 'Fios de PDO',
       description: 'Lifting sem cirurgia com fios bioestimuladores para remodelamento facial.',
+    },
+    {
+      icon: '🌸',
+      title: 'Peeling Coreano',
+      description: 'Protocolo avançado para renovação da pele, melhora de textura e luminosidade com recuperação controlada.',
+    },
+    {
+      icon: '👃',
+      title: 'Rinomodelação',
+      description: 'Harmonização do perfil nasal sem cirurgia, com técnica minimamente invasiva e planejamento individualizado.',
     },
   ],
 
@@ -128,7 +137,7 @@ export const SITE_CONFIG = {
     city: 'São Carlos - SP',
     cep: '13568-450',
     phone: '(16) 99140-0423',
-    email: 'contato@dradaianaferraz.com.br',
+    email: 'odontologia.ipanema.sc@gmail.com',
     hours: 'Seg: 09h30–19h | Ter: 07h30–19h | Qua: 09h30–19h | Qui: 07h30–19h | Sex: 09h30–19h | Sáb: 09h30–12h',
   },
 
@@ -183,9 +192,9 @@ export const SITE_CONFIG = {
     title: 'Conheça o Cartão Ouro',
     subtitle: 'Seu convite exclusivo para Harmonização Orofacial',
     description:
-      'Pacientes em harmonização recebem acesso a condições especiais em protocolos selecionados, com atendimento premium e planejamento personalizado.',
+      'Pacientes em harmonização recebem acesso a condições especiais apenas em serviços selecionados, com atendimento premium e planejamento personalizado.',
     benefits: [
-      'Condições especiais em protocolos de harmonização selecionados',
+      'Condições especiais apenas em serviços de harmonização selecionados',
       'Acesso preferencial para avaliação e acompanhamento',
       'Planejamento personalizado por fase de tratamento',
       'Atendimento premium com foco em naturalidade',
@@ -198,11 +207,11 @@ export const SITE_CONFIG = {
     title: 'Conheça o Cartão Fidelidade',
     subtitle: 'Programa VIP para pacientes de Odontologia',
     description:
-      'Pacientes que retornam em até 1 ano e chegam por indicação ou vínculo familiar recebem condição VIP com desconto especial em procedimentos odontológicos elegíveis.',
+      'Pacientes que retornam em até 1 ano e chegam por indicação ou vínculo familiar recebem condição VIP com desconto especial apenas em serviços odontológicos elegíveis.',
     benefits: [
       'Benefício válido para retorno em até 12 meses',
       'Elegível para pacientes por indicação ou família',
-      'Desconto VIP em procedimentos odontológicos selecionados',
+      'Desconto VIP apenas em serviços odontológicos selecionados',
       'Acompanhamento personalizado do plano de tratamento',
     ],
     ctaText: 'Quero meu Cartão Fidelidade',

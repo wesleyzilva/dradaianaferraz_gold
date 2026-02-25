@@ -16,7 +16,7 @@ type BottomMenuLink = {
     <!-- Navigation -->
     <nav class="navbar">
       <div class="nav-container">
-        <span class="nav-logo">{{ config.professional.name }}</span>
+        <a href="#hero-content" class="nav-logo">{{ config.professional.name }}</a>
         <div class="view-switch" role="group" aria-label="Selecionar área de atendimento">
           <button
             type="button"
@@ -42,54 +42,39 @@ type BottomMenuLink = {
             <li><a [href]="'#' + item.anchor">{{ item.label }}</a></li>
           }
         </ul>
-        @if (selectedArea() !== 'odontologia') {
-          <a [href]="config.professional.whatsapp" target="_blank" class="btn-nav">
-            Agendar Consulta
-          </a>
-        }
+        <a href="#location" class="btn-nav">
+          Agendar Consulta
+        </a>
       </div>
     </nav>
 
     @if (showBottomMenu()) {
       <div class="bottom-nav">
-        <button
-          type="button"
-          class="bottom-nav-btn"
-          [attr.aria-expanded]="isBottomMenuOpen()"
-          aria-haspopup="menu"
-          (click)="toggleBottomMenu()"
-        >
-          Mais opções
-          <i class="fas" [class.fa-chevron-up]="isBottomMenuOpen()" [class.fa-chevron-down]="!isBottomMenuOpen()"></i>
-        </button>
-
-        @if (isBottomMenuOpen()) {
-          <div class="bottom-dropdown" role="menu" [attr.aria-label]="bottomMenuAriaLabel()">
-            @for (item of bottomMenuLinks(); track item.label) {
-              @if (item.anchor) {
-                <a [href]="'#' + item.anchor" role="menuitem" (click)="closeBottomMenu()">{{ item.label }}</a>
-              } @else {
-                <a [href]="item.href" [attr.target]="item.external ? '_blank' : null" role="menuitem" (click)="closeBottomMenu()">{{ item.label }}</a>
-              }
+        <div class="bottom-dropdown" role="menu" [attr.aria-label]="bottomMenuAriaLabel()">
+          @for (item of bottomMenuLinks(); track item.label) {
+            @if (item.anchor) {
+              <a [href]="'#' + item.anchor" role="menuitem">{{ item.label }}</a>
+            } @else {
+              <a [href]="item.href" [attr.target]="item.external ? '_blank' : null" role="menuitem">{{ item.label }}</a>
             }
-          </div>
-        }
+          }
+        </div>
       </div>
     }
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
       <div class="hero-overlay"></div>
-      <div class="hero-content">
+      <div class="hero-content" id="hero-content">
         <div class="hero-photo-wrapper">
           <img [src]="config.professional.photo" [alt]="config.professional.name" class="hero-photo" />
         </div>
         <div class="hero-text">
-          <p class="hero-eyebrow">Bem-vinda à</p>
+          <p class="hero-eyebrow">{{ heroEyebrow() }}</p>
           <h1 class="hero-name">{{ config.professional.name }}</h1>
-          <p class="hero-title">{{ config.professional.title }}</p>
+          <p class="hero-title">{{ heroTitle() }}</p>
           <p class="hero-crm">{{ config.professional.crm }}</p>
-          <p class="hero-bio">{{ config.professional.bio }}</p>
+          <p class="hero-bio">{{ heroBio() }}</p>
           <div class="hero-cta">
             <a [href]="primaryCtaHref()" class="btn-primary">{{ primaryCtaLabel() }}</a>
             <a [href]="secondaryCtaHref()" class="btn-secondary">{{ secondaryCtaLabel() }}</a>
@@ -184,43 +169,28 @@ type BottomMenuLink = {
       transform: translateX(-50%);
       bottom: 1rem;
       z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .bottom-nav-btn {
-      border: 1px solid rgba(201, 168, 76, 0.4);
-      background: rgba(26, 26, 26, 0.95);
-      color: var(--white);
-      border-radius: 999px;
-      padding: 0.55rem 1rem;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
+      display: block;
     }
     .bottom-dropdown {
-      min-width: 180px;
+      min-width: 220px;
       border: 1px solid rgba(201, 168, 76, 0.35);
       background: rgba(26, 26, 26, 0.98);
-      border-radius: 12px;
+      border-radius: 999px;
       overflow: hidden;
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
       display: flex;
-      flex-direction: column;
+      align-items: center;
     }
     .bottom-dropdown a {
       color: var(--white);
       text-decoration: none;
-      padding: 0.75rem 1rem;
+      padding: 0.65rem 1rem;
       font-size: 0.9rem;
-      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      border-right: 1px solid rgba(201, 168, 76, 0.15);
+      white-space: nowrap;
     }
     .bottom-dropdown a:last-child {
-      border-bottom: 0;
+      border-right: 0;
     }
     .bottom-dropdown a:hover {
       color: var(--gold);
@@ -340,10 +310,25 @@ type BottomMenuLink = {
 })
 export class HeroComponent {
   config = SITE_CONFIG;
-  readonly isBottomMenuOpen = signal(false);
 
   readonly selectedArea = input<AppArea>('harmonizacao');
   readonly selectedAreaChange = output<AppArea>();
+
+  readonly heroEyebrow = computed(() =>
+    this.selectedArea() === 'odontologia' ? 'Odontologia' : 'Harmonização Orofacial',
+  );
+
+  readonly heroTitle = computed(() =>
+    this.selectedArea() === 'odontologia'
+      ? 'Dentista em Odontologia Estética e Perícia Judicial Odontológica'
+      : 'Especialista em Harmonização Orofacial',
+  );
+
+  readonly heroBio = computed(() =>
+    this.selectedArea() === 'odontologia'
+      ? 'Atendimento odontológico com foco em estética, prevenção e funcionalidade, incluindo atuação técnica em perícia judicial odontológica com abordagem ética e personalizada.'
+      : 'Atendimento em harmonização orofacial com planejamento individual, técnicas avançadas e foco em resultados naturais, seguros e proporcionais ao perfil de cada paciente.',
+  );
 
   readonly visibleNavigation = computed(() => {
     if (this.selectedArea() === 'odontologia') {
@@ -352,7 +337,6 @@ export class HeroComponent {
         navByAnchor.get('services'),
         navByAnchor.get('reviews'),
         navByAnchor.get('fidelity-card'),
-        navByAnchor.get('location'),
       ].filter((item) => item !== undefined);
     }
 
@@ -376,8 +360,7 @@ export class HeroComponent {
       return [
         {
           label: 'Agendar Consulta',
-          href: this.config.professional.whatsapp,
-          external: true,
+          anchor: 'location',
         },
       ];
     }
@@ -404,15 +387,6 @@ export class HeroComponent {
   );
 
   setArea(area: AppArea): void {
-    this.isBottomMenuOpen.set(false);
     this.selectedAreaChange.emit(area);
-  }
-
-  toggleBottomMenu(): void {
-    this.isBottomMenuOpen.update((open) => !open);
-  }
-
-  closeBottomMenu(): void {
-    this.isBottomMenuOpen.set(false);
   }
 }
