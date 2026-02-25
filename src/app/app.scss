@@ -1,0 +1,4 @@
+/* App-level reset: remove default Angular placeholder styles */
+:host {
+  display: block;
+}
