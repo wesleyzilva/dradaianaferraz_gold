@@ -1,0 +1,11 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "git remote": true,
+        "git rev-parse": true,
+        "git push": true,
+        "git ls-remote": true,
+        "npx ng": true,
+        "npx angular-cli-ghpages": true,
+        "npx --yes angular-cli-ghpages": true
+    }
+}
