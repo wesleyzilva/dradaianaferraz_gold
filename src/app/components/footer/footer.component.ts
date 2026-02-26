@@ -8,7 +8,7 @@ import { SITE_CONFIG } from '../../config/site-config';
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-container">
-          <div class="footer-brand">
+          <div class="footer-main-row">
             <div class="social-links">
               <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
                 <i class="fab fa-instagram"></i>
@@ -20,14 +20,10 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <i class="fab fa-google"></i>
               </a>
             </div>
+            <p class="copyright">{{ config.footer.copyright }}</p>
+            <span class="footer-tag">Última atualização: {{ config.footer.lastUpdated }}</span>
+            <span class="footer-tag">{{ config.footer.technicalResponsible }}</span>
           </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="footer-container footer-bottom-inner">
-          <p class="copyright">{{ config.footer.copyright }}</p>
-          <p class="disclaimer">{{ config.footer.disclaimer }}</p>
         </div>
       </div>
     </footer>
@@ -39,7 +35,6 @@ import { SITE_CONFIG } from '../../config/site-config';
     }
     .footer-top {
       padding: 0 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .footer-container {
       max-width: 1200px;
@@ -47,11 +42,16 @@ import { SITE_CONFIG } from '../../config/site-config';
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 70px;
+      min-height: 86px;
       gap: 1rem;
     }
-    .footer-brand {
-      text-align: center;
+    .footer-main-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
     .social-links {
       display: flex;
@@ -78,21 +78,21 @@ import { SITE_CONFIG } from '../../config/site-config';
       border-color: rgba(255,255,255,0.35);
       transform: translateY(-2px);
     }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 1.5rem 2rem;
-    }
-    .footer-bottom-inner {
-      grid-template-columns: 1fr;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
     .copyright {
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.62);
       font-size: 0.82rem;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .footer-tag {
+      color: rgba(255,255,255,0.78);
+      border: 1px solid rgba(201,168,76,0.28);
+      background: rgba(201,168,76,0.08);
+      border-radius: 999px;
+      padding: 0.34rem 0.7rem;
+      font-size: 0.75rem;
+      line-height: 1;
+      white-space: nowrap;
     }
     .disclaimer {
       color: rgba(255,255,255,0.3);
@@ -100,12 +100,14 @@ import { SITE_CONFIG } from '../../config/site-config';
     }
 
     @media (max-width: 900px) {
-      .footer-container { min-height: 70px; }
+      .footer-container { min-height: 90px; }
     }
     @media (max-width: 500px) {
       .footer-top { padding: 0 1rem; }
-      .footer-bottom { padding: 1.25rem 1rem; }
-      .footer-container { min-height: 64px; }
+      .footer-container { min-height: 96px; }
+      .footer-main-row { gap: 0.55rem; }
+      .footer-tag { font-size: 0.72rem; }
+      .copyright { font-size: 0.78rem; }
     }
   `],
 })

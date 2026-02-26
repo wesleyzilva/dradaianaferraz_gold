@@ -234,7 +234,9 @@ export const SITE_CONFIG = {
   },
 
   footer: {
-    copyright: `© ${new Date().getFullYear()} Dra. Daiana Ferraz — Todos os direitos reservados`,
+    copyright: `© ${new Date().getFullYear()} Dra. Daiana Ferraz`,
+    lastUpdated: '26/02/2026',
+    technicalResponsible: 'wesley.zilva@gmail.com',
     disclaimer: 'Procedimentos realizados por dentista habilitada. Resultados podem variar.',
   },
 };
