@@ -41,35 +41,46 @@ type BottomMenuLink = {
 
     @if (showBottomMenu()) {
       <div class="bottom-nav">
-        <div class="bottom-dropdown" role="menu" [attr.aria-label]="bottomMenuAriaLabel()">
-          @for (item of bottomMenuLinks(); track item.label) {
-            <div class="bottom-menu-item" [class.services-item]="item.anchor === 'services'">
-              @if (item.anchor) {
-                <a [href]="'#' + item.anchor" role="menuitem" class="bottom-menu-link">{{ item.label }}</a>
-              } @else {
-                <a
-                  [href]="item.href"
-                  [attr.target]="item.external ? '_blank' : null"
-                  role="menuitem"
-                  class="bottom-menu-link"
-                >
-                  {{ item.label }}
-                </a>
-              }
+        <button
+          type="button"
+          class="bottom-menu-toggle"
+          [attr.aria-expanded]="!isBottomMenuMinimized()"
+          (click)="toggleBottomMenu()"
+        >
+          {{ isBottomMenuMinimized() ? 'Expandir menu' : 'Minimizar menu' }}
+        </button>
 
-              @if (item.anchor === 'services') {
-                <div class="services-tooltip" role="note" aria-live="polite">
-                  <p class="services-tooltip-title">Serviços com desconto de deslocamento</p>
-                  <ul class="services-tooltip-list">
-                    @for (service of discountEligibleServices(); track service) {
-                      <li>{{ service }}</li>
-                    }
-                  </ul>
-                </div>
-              }
-            </div>
-          }
-        </div>
+        @if (!isBottomMenuMinimized()) {
+          <div class="bottom-dropdown" role="menu" [attr.aria-label]="bottomMenuAriaLabel()">
+            @for (item of bottomMenuLinks(); track item.label) {
+              <div class="bottom-menu-item" [class.services-item]="item.anchor === 'services'">
+                @if (item.anchor) {
+                  <a [href]="'#' + item.anchor" role="menuitem" class="bottom-menu-link">{{ item.label }}</a>
+                } @else {
+                  <a
+                    [href]="item.href"
+                    [attr.target]="item.external ? '_blank' : null"
+                    role="menuitem"
+                    class="bottom-menu-link"
+                  >
+                    {{ item.label }}
+                  </a>
+                }
+
+                @if (item.anchor === 'services') {
+                  <div class="services-tooltip" role="note" aria-live="polite">
+                    <p class="services-tooltip-title">Serviços com desconto de deslocamento</p>
+                    <ul class="services-tooltip-list">
+                      @for (service of discountEligibleServices(); track service) {
+                        <li>{{ service }}</li>
+                      }
+                    </ul>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
       </div>
     }
 
@@ -156,6 +167,24 @@ type BottomMenuLink = {
       display: block;
       width: calc(100vw - 1rem);
       max-width: 980px;
+    }
+    .bottom-menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.55rem;
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      background: rgba(26, 26, 26, 0.96);
+      color: var(--gold-light);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .bottom-menu-toggle:hover {
+      background: rgba(201, 168, 76, 0.14);
+      color: var(--gold);
     }
     .bottom-dropdown {
       width: max-content;
@@ -365,6 +394,31 @@ type BottomMenuLink = {
         display: inline-flex;
         flex-shrink: 0;
       }
+      .bottom-nav {
+        width: calc(100vw - 1.25rem);
+        max-width: 420px;
+      }
+      .bottom-dropdown {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .bottom-menu-item {
+        width: 100%;
+      }
+      .bottom-menu-link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-right: 0;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      }
+      .bottom-dropdown .bottom-menu-item:last-child .bottom-menu-link {
+        border-bottom: 0;
+      }
       .hero-content { flex-direction: column; text-align: center; gap: 2rem; }
       .hero-photo { width: 220px; height: 220px; }
       .hero-bio { margin: 0 auto 2rem; }
@@ -375,11 +429,13 @@ type BottomMenuLink = {
       .nav-container { min-height: 60px; }
       .switch-btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
       .hero-content { padding: 2rem 1rem; }
+
     }
   `],
 })
 export class HeroComponent {
   config = SITE_CONFIG;
+  readonly isBottomMenuMinimized = signal(false);
 
   readonly selectedArea = input<AppArea>('harmonizacao');
   readonly selectedAreaChange = output<AppArea>();
@@ -456,10 +512,15 @@ export class HeroComponent {
 
   setArea(area: AppArea): void {
     this.selectedAreaChange.emit(area);
+    this.isBottomMenuMinimized.set(false);
 
     const heroContent = document.getElementById('hero-content');
     if (heroContent) {
       heroContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  toggleBottomMenu(): void {
+    this.isBottomMenuMinimized.update((value) => !value);
   }
 }
