@@ -370,7 +370,7 @@ export class HeroComponent {
   readonly heroBio = computed(() =>
     this.selectedArea() === 'odontologia'
       ? 'Atendimento odontológico com foco em estética, prevenção e funcionalidade, incluindo atuação técnica em perícia judicial odontológica com abordagem ética e personalizada.'
-      : 'Atendimento em harmonização orofacial com planejamento individual, técnicas avançadas e foco em resultados naturais, seguros e proporcionais ao perfil de cada paciente.',
+      : 'Atendimento em harmonização orofacial com planejamento individual, técnicas avançadas e foco em resultados naturais, seguros e proporcionais ao perfil de cada paciente, seja com tecnologia não invasiva ou com produtos injetáveis.',
   );
 
   readonly showBottomMenu = computed(() =>
