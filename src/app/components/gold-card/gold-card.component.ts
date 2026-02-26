@@ -24,7 +24,25 @@ import { SITE_CONFIG } from '../../config/site-config';
               @for (benefit of activeCard().benefits; track benefit) {
                 <li class="benefit-item">
                   <span class="benefit-check"><i class="fas fa-check"></i></span>
-                  <span>{{ benefit }}</span>
+                  @if (benefit.includes(hoverTriggerText())) {
+                    <span>
+                      {{ benefitBeforeTrigger(benefit) }}
+                      <span class="benefit-tooltip-trigger" tabindex="0">
+                        {{ hoverTriggerText() }}
+                        <span class="benefit-tooltip" role="note">
+                          <span class="benefit-tooltip-title">Serviços elegíveis</span>
+                          <ul class="benefit-tooltip-list">
+                            @for (service of discountEligibleServices(); track service) {
+                              <li>{{ service }}</li>
+                            }
+                          </ul>
+                        </span>
+                      </span>
+                      {{ benefitAfterTrigger(benefit) }}
+                    </span>
+                  } @else {
+                    <span>{{ benefit }}</span>
+                  }
                 </li>
               }
             </ul>
@@ -146,6 +164,51 @@ import { SITE_CONFIG } from '../../config/site-config';
       gap: 0.75rem;
       color: rgba(255,255,255,0.85);
       font-size: 0.95rem;
+    }
+    .benefit-tooltip-trigger {
+      position: relative;
+      color: var(--gold-light);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      cursor: help;
+      outline: none;
+    }
+    .benefit-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 0.45rem);
+      transform: translateX(-50%);
+      min-width: 290px;
+      max-width: min(90vw, 360px);
+      padding: 0.7rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid rgba(201,168,76,0.45);
+      background: rgba(22, 22, 22, 0.98);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.18s ease, visibility 0.18s ease;
+      z-index: 8;
+    }
+    .benefit-tooltip-trigger:hover .benefit-tooltip,
+    .benefit-tooltip-trigger:focus .benefit-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+    .benefit-tooltip-title {
+      display: block;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .benefit-tooltip-list {
+      margin: 0;
+      padding-left: 1rem;
+      color: rgba(255,255,255,0.92);
+      font-size: 0.8rem;
+      line-height: 1.45;
     }
     .benefit-check {
       width: 22px;
@@ -292,6 +355,30 @@ export class GoldCardComponent {
   config = SITE_CONFIG;
   readonly cardType = input<'gold' | 'fidelity'>('gold');
 
+  readonly hoverTriggerText = computed(() =>
+    this.cardType() === 'fidelity'
+      ? 'serviços de odontologia selecionados'
+      : 'serviços de harmonização selecionados',
+  );
+
+  readonly discountEligibleServices = computed<string[]>(() =>
+    this.cardType() === 'fidelity'
+      ? [
+          'Prevenção Bucal com Câmera Intraoral',
+          'Clareamento Dental',
+          'Facetas de Resina',
+          'Implantes Dentários',
+          'Prótese Dentária',
+        ]
+      : [
+          'Ultrassom Microfocado',
+          'Toxina Botulínica (Botox)',
+          'Preenchimento Labial',
+          'Skinbooster',
+          'Bioestimuladores de Colágeno',
+        ],
+  );
+
   readonly activeCard = computed(() =>
     this.cardType() === 'fidelity' ? this.config.fidelityCard : this.config.goldCard,
   );
@@ -319,5 +406,25 @@ export class GoldCardComponent {
   get whatsappUrl(): string {
     const msg = encodeURIComponent(this.activeCard().whatsappMessage);
     return `${this.config.professional.whatsapp}?text=${msg}`;
+  }
+
+  benefitBeforeTrigger(benefit: string): string {
+    const trigger = this.hoverTriggerText();
+    const triggerStart = benefit.indexOf(trigger);
+    if (triggerStart < 0) {
+      return benefit;
+    }
+
+    return benefit.slice(0, triggerStart);
+  }
+
+  benefitAfterTrigger(benefit: string): string {
+    const trigger = this.hoverTriggerText();
+    const triggerStart = benefit.indexOf(trigger);
+    if (triggerStart < 0) {
+      return '';
+    }
+
+    return benefit.slice(triggerStart + trigger.length);
   }
 }

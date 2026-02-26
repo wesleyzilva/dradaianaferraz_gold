@@ -91,6 +91,12 @@ export const SITE_CONFIG = {
           'Recupere função, segurança e autoestima com implantes planejados para conforto, estabilidade e estética impecável.',
       },
       {
+        icon: '🦷',
+        title: 'Prótese Dentária',
+        description:
+          'Reabilitação oral com próteses planejadas para devolver mastigação, conforto e estética do sorriso com adaptação personalizada.',
+      },
+      {
         icon: '📐',
         title: 'Ortodontia',
         description:
@@ -195,7 +201,7 @@ export const SITE_CONFIG = {
       'Condição exclusiva para quem busca harmonização de alto padrão, com vantagens especiais em serviços selecionados e acompanhamento premium.',
     benefits: [
       'Condições especiais apenas em serviços de harmonização selecionados',
-      'Pagamos o Uber para você ou revertemos seu deslocamento em desconto',
+      'Desconto Ouro ou pagamos o seu Uber, apenas em serviços de harmonização selecionados com valor total acima de R$300. Não aplicado para produtos.',
       'Acesso preferencial para avaliação e acompanhamento',
       'Planejamento personalizado por fase de tratamento',
       'Atendimento premium com foco em naturalidade',
@@ -212,7 +218,7 @@ export const SITE_CONFIG = {
     benefits: [
       'Benefício válido para retorno em até 12 meses',
       'Elegível para pacientes por indicação ou família',
-      'Desconto VIP do valor do seu Uber apenas em serviços odontológicos selecionados',
+      'Desconto VIP ou pagamos o seu Uber, apenas em serviços de odontologia selecionados e com valor total acima de R$300. Não aplicado para produtos.',
       'Acompanhamento personalizado do plano de tratamento para Cartão Gold e VIP',
     ],
     ctaText: 'Quero meu Cartão Fidelidade',

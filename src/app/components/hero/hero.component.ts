@@ -43,11 +43,31 @@ type BottomMenuLink = {
       <div class="bottom-nav">
         <div class="bottom-dropdown" role="menu" [attr.aria-label]="bottomMenuAriaLabel()">
           @for (item of bottomMenuLinks(); track item.label) {
-            @if (item.anchor) {
-              <a [href]="'#' + item.anchor" role="menuitem">{{ item.label }}</a>
-            } @else {
-              <a [href]="item.href" [attr.target]="item.external ? '_blank' : null" role="menuitem">{{ item.label }}</a>
-            }
+            <div class="bottom-menu-item" [class.services-item]="item.anchor === 'services'">
+              @if (item.anchor) {
+                <a [href]="'#' + item.anchor" role="menuitem" class="bottom-menu-link">{{ item.label }}</a>
+              } @else {
+                <a
+                  [href]="item.href"
+                  [attr.target]="item.external ? '_blank' : null"
+                  role="menuitem"
+                  class="bottom-menu-link"
+                >
+                  {{ item.label }}
+                </a>
+              }
+
+              @if (item.anchor === 'services') {
+                <div class="services-tooltip" role="note" aria-live="polite">
+                  <p class="services-tooltip-title">Serviços com desconto de deslocamento</p>
+                  <ul class="services-tooltip-list">
+                    @for (service of discountEligibleServices(); track service) {
+                      <li>{{ service }}</li>
+                    }
+                  </ul>
+                </div>
+              }
+            </div>
           }
         </div>
       </div>
@@ -139,7 +159,7 @@ type BottomMenuLink = {
       background: rgba(26, 26, 26, 0.98);
       border-radius: 999px;
       overflow-x: auto;
-      overflow-y: hidden;
+      overflow-y: visible;
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
       display: flex;
       align-items: center;
@@ -147,7 +167,12 @@ type BottomMenuLink = {
       scrollbar-width: none;
     }
     .bottom-dropdown::-webkit-scrollbar { display: none; }
-    .bottom-dropdown a {
+    .bottom-menu-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .bottom-menu-link {
       color: var(--white);
       text-decoration: none;
       padding: 0.65rem 1rem;
@@ -156,12 +181,49 @@ type BottomMenuLink = {
       white-space: nowrap;
       flex-shrink: 0;
     }
-    .bottom-dropdown a:last-child {
+    .bottom-dropdown .bottom-menu-item:last-child .bottom-menu-link {
       border-right: 0;
     }
-    .bottom-dropdown a:hover {
+    .bottom-menu-link:hover {
       color: var(--gold);
       background: rgba(201, 168, 76, 0.08);
+    }
+    .services-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 0.5rem);
+      transform: translateX(-50%);
+      min-width: 280px;
+      max-width: min(92vw, 360px);
+      padding: 0.8rem 0.95rem;
+      border-radius: 12px;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      background: rgba(20, 20, 20, 0.98);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      z-index: 1002;
+    }
+    .services-item:hover .services-tooltip,
+    .services-item:focus-within .services-tooltip {
+      opacity: 1;
+      visibility: visible;
+    }
+    .services-tooltip-title {
+      margin: 0 0 0.45rem;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .services-tooltip-list {
+      margin: 0;
+      padding-left: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.82rem;
+      line-height: 1.5;
     }
 
     /* Hero */
@@ -330,6 +392,24 @@ export class HeroComponent {
       .filter((item) => anchors.includes(item.anchor))
       .map((item) => ({ label: item.label, anchor: item.anchor }));
   });
+
+  readonly discountEligibleServices = computed<string[]>(() =>
+    this.selectedArea() === 'odontologia'
+      ? [
+          'Prevenção Bucal com Câmera Intraoral',
+          'Clareamento Dental',
+          'Facetas de Resina',
+          'Implantes Dentários',
+          'Prótese Dentária',
+        ]
+      : [
+          'Ultrassom Microfocado',
+          'Toxina Botulínica (Botox)',
+          'Preenchimento Labial',
+          'Skinbooster',
+          'Bioestimuladores de Colágeno',
+        ],
+  );
 
   readonly primaryCtaHref = computed(() =>
     this.selectedArea() === 'odontologia' ? '#fidelity-card' : '#gold-card',

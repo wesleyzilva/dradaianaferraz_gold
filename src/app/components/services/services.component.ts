@@ -12,8 +12,9 @@ import { SITE_CONFIG } from '../../config/site-config';
           <h2 class="section-title">Serviços de Alta Performance</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Protocolos exclusivos de harmonização com tecnologia avançada e abordagem personalizada para
-            valorizar sua beleza com naturalidade, segurança e resultado superior.
+            Procedimentos de harmonização realizados sem ingestão de produtos e com máquinas de
+            tecnologia dermatológica, em uma abordagem personalizada para valorizar sua beleza com
+            naturalidade e segurança.
           </p>
         </div>
         <div class="services-grid">
