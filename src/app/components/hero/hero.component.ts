@@ -85,6 +85,12 @@ type BottomMenuLink = {
           <h1 class="hero-name">{{ config.professional.name }}</h1>
           <p class="hero-title">{{ heroTitle() }}</p>
           <p class="hero-crm">{{ config.professional.crm }}</p>
+          <p class="hero-bio-links">
+            <span class="hero-bio-label">BIO:</span>
+            <a [href]="config.social.lattes" target="_blank" rel="noopener noreferrer">Lattes</a>
+            <span>·</span>
+            <a [href]="config.social.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </p>
           <p class="hero-bio">{{ heroBio() }}</p>
           <div class="hero-cta">
             <a [href]="primaryCtaHref()" class="btn-primary">{{ primaryCtaLabel() }}</a>
@@ -286,7 +292,28 @@ type BottomMenuLink = {
     .hero-crm {
       color: var(--gray);
       font-size: 0.9rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.45rem;
+    }
+    .hero-bio-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0 0 1.3rem;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+    }
+    .hero-bio-label {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+    .hero-bio-links a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hero-bio-links a:hover {
+      text-decoration: underline;
     }
     .hero-bio {
       color: rgba(255,255,255,0.8);
@@ -369,7 +396,7 @@ export class HeroComponent {
 
   readonly heroBio = computed(() =>
     this.selectedArea() === 'odontologia'
-      ? 'Atendimento odontológico com foco em estética, prevenção e funcionalidade, incluindo atuação técnica em perícia judicial odontológica com abordagem ética e personalizada.'
+      ? 'Atendimento odontológico com foco em estética, prevenção e funcionalidade, incluindo atuação técnica em perícia judicial odontológica e utilizando o profissionalismo de perito judicial para um atendimento ético e personalizado.'
       : 'Atendimento em harmonização orofacial com planejamento individual, técnicas avançadas e foco em resultados naturais, seguros e proporcionais ao perfil de cada paciente, seja com tecnologia não invasiva ou com produtos injetáveis.',
   );
 

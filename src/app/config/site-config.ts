@@ -2,7 +2,7 @@ export const SITE_CONFIG = {
   professional: {
     name: 'Dra. Daiana Ferraz',
     title: 'Dentista especialista em Harmonização Orofacial, Odontologia Estética e Perícia Judicial',
-    crm: 'CRO/RS 00000',
+    crm: 'CRO/SP 15000',
     photo: 'https://placehold.co/400x400/C9A84C/FFFFFF?text=Dra+Daiana',
     bio: 'Excelência em harmonização orofacial e odontologia estética com atendimento premium, planejamento estratégico e foco em resultados naturais, seguros e duradouros para valorizar sua melhor versão.',
     whatsapp: 'https://wa.me/5516991400423',
@@ -228,6 +228,7 @@ export const SITE_CONFIG = {
 
   social: {
     instagram: 'https://instagram.com/dradaianaferrazsc',
+    lattes: 'https://lattes.cnpq.br/',
     linkedin: 'https://www.linkedin.com/',
     googleBusiness: 'https://g.page/r/CdKq0HEOJamhEAE/review',
   },
