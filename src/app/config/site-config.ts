@@ -198,13 +198,14 @@ export const SITE_CONFIG = {
     title: 'Conheça o Cartão Ouro',
     subtitle: 'Seu acesso VIP à Harmonização Orofacial',
     description:
-      'Condição exclusiva para quem busca harmonização de alto padrão, com vantagens especiais em serviços selecionados e acompanhamento premium.',
+      'Condição exclusiva para quem busca harmonização de alto padrão, com benefícios reais de deslocamento, acompanhamento próximo e atendimento premium.',
     benefits: [
-      'Condições especiais apenas em serviços de harmonização selecionados',
+      'Benefícios válidos em serviços de harmonização selecionados',
       'Desconto Ouro ou pagamos o seu Uber, apenas em serviços de harmonização selecionados com valor total acima de R$300. Não aplicado para produtos.',
       'Acesso preferencial para avaliação e acompanhamento',
       'Planejamento personalizado por fase de tratamento',
       'Atendimento premium com foco em naturalidade',
+      'Ficou com dúvidas? Entre em contato.',
     ],
     ctaText: 'Quero meu Cartão Ouro',
     whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Ouro para Harmonização e os benefícios disponíveis.',

@@ -61,13 +61,8 @@ import { SITE_CONFIG } from '../../config/site-config';
               </div>
               <div class="gc-name">{{ config.professional.name }}</div>
               <div class="gc-tagline">{{ visualTagline() }}</div>
-              <div class="gc-discount">
-                <span class="gc-discount-value">{{ visualDiscountValue() }}</span>
-                <span class="gc-discount-label">{{ visualDiscountLabel() }}</span>
-              </div>
               <div class="gc-footer">
                 <span>{{ visualFooter() }}</span>
-                <i class="fas fa-gem"></i>
               </div>
             </div>
           </div>
@@ -309,26 +304,9 @@ import { SITE_CONFIG } from '../../config/site-config';
       font-size: 0.75rem;
       letter-spacing: 1px;
     }
-    .gc-discount {
-      display: flex;
-      align-items: baseline;
-      gap: 0.2rem;
-    }
-    .gc-discount-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--dark);
-      line-height: 1;
-    }
-    .gc-discount-label {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--dark);
-    }
     .gc-footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
       border-top: 1px solid rgba(26,26,26,0.2);
       padding-top: 0.5rem;
@@ -337,7 +315,6 @@ import { SITE_CONFIG } from '../../config/site-config';
       font-weight: 600;
       letter-spacing: 0.5px;
     }
-    .gc-footer i { font-size: 0.9rem; color: var(--dark); }
 
     @media (max-width: 900px) {
       .card-wrapper { grid-template-columns: 1fr; gap: 3rem; }
@@ -347,7 +324,6 @@ import { SITE_CONFIG } from '../../config/site-config';
     @media (max-width: 500px) {
       .gold-card-section { padding: 4rem 1rem; }
       .gold-card-visual { width: 280px; height: 175px; }
-      .gc-discount-value { font-size: 1.8rem; }
     }
   `],
 })
@@ -393,13 +369,9 @@ export class GoldCardComponent {
     this.cardType() === 'fidelity' ? 'Odontologia VIP' : 'Harmonização Orofacial Premium',
   );
 
-  readonly visualDiscountValue = computed(() => (this.cardType() === 'fidelity' ? 'VIP' : 'OURO'));
-
-  readonly visualDiscountLabel = computed(() => (this.cardType() === 'fidelity' ? 'DESC.' : 'VIP'));
-
   readonly visualFooter = computed(() =>
     this.cardType() === 'fidelity'
-      ? 'Retorno em até 12 meses + indicação/família'
+      ? 'Retorno em até 12 meses ou indicação/família'
       : 'Benefícios exclusivos para Harmonização',
   );
 
