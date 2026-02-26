@@ -378,6 +378,9 @@ type BottomMenuLink = {
 
     /* Responsive */
     @media (max-width: 900px) {
+      .bottom-nav {
+        bottom: 6.5rem;
+      }
       .navbar {
         position: fixed;
         top: 0;
@@ -503,7 +506,7 @@ export class HeroComponent {
   );
 
   readonly primaryCtaLabel = computed(() =>
-    this.selectedArea() === 'odontologia' ? 'Conheça o Cartão Fidelidade' : 'Conheça o Cartão Ouro',
+    this.selectedArea() === 'odontologia' ? 'Conheça o Cartão Ouro' : 'Conheça o Cartão Ouro',
   );
 
   readonly secondaryCtaLabel = computed(() =>

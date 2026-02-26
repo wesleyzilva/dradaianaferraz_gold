@@ -59,9 +59,8 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <i class="fas fa-crown gc-crown"></i>
                 <span class="gc-label">{{ visualLabel() }}</span>
               </div>
-              <div class="gc-name">{{ config.professional.name }}</div>
               <div class="gc-tagline">{{ visualTagline() }}</div>
-              <div class="gc-footer">
+              <div class="gc-footer" [class.gc-footer-compact]="cardType() === 'fidelity'">
                 <span>{{ visualFooter() }}</span>
               </div>
             </div>
@@ -293,12 +292,6 @@ import { SITE_CONFIG } from '../../config/site-config';
       letter-spacing: 3px;
       text-transform: uppercase;
     }
-    .gc-name {
-      font-family: 'Playfair Display', serif;
-      color: var(--dark);
-      font-size: 1rem;
-      font-weight: 700;
-    }
     .gc-tagline {
       color: rgba(26,26,26,0.7);
       font-size: 0.75rem;
@@ -315,6 +308,14 @@ import { SITE_CONFIG } from '../../config/site-config';
       font-weight: 600;
       letter-spacing: 0.5px;
     }
+    .gc-footer span {
+      white-space: nowrap;
+    }
+    .gc-footer-compact span {
+      white-space: normal;
+      font-size: 0.64rem;
+      line-height: 1.2;
+    }
 
     @media (max-width: 900px) {
       .card-wrapper { grid-template-columns: 1fr; gap: 3rem; }
@@ -324,6 +325,7 @@ import { SITE_CONFIG } from '../../config/site-config';
     @media (max-width: 500px) {
       .gold-card-section { padding: 4rem 1rem; }
       .gold-card-visual { width: 280px; height: 175px; }
+      .gc-footer-compact span { font-size: 0.58rem; }
     }
   `],
 })
@@ -362,17 +364,17 @@ export class GoldCardComponent {
   readonly sectionId = computed(() => (this.cardType() === 'fidelity' ? 'fidelity-card' : 'gold-card'));
 
   readonly visualLabel = computed(() =>
-    this.cardType() === 'fidelity' ? 'Cartão Fidelidade' : 'Cartão Ouro',
+    this.cardType() === 'fidelity' ? 'Cartão Ouro' : 'Cartão Ouro',
   );
 
   readonly visualTagline = computed(() =>
-    this.cardType() === 'fidelity' ? 'Odontologia VIP' : 'Harmonização Orofacial Premium',
+    this.cardType() === 'fidelity' ? 'Odontologia Premium' : 'Harmonização Orofacial Premium',
   );
 
   readonly visualFooter = computed(() =>
     this.cardType() === 'fidelity'
       ? 'Retorno em até 12 meses ou indicação/família'
-      : 'Benefícios exclusivos para Harmonização',
+      : 'Benefícios exclusivos.',
   );
 
   get whatsappUrl(): string {

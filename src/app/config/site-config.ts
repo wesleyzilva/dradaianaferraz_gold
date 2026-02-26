@@ -13,7 +13,7 @@ export const SITE_CONFIG = {
     { label: 'Linha Anna Pegova', anchor: 'products' },
     { label: 'Procedimentos', anchor: 'procedures' },
     { label: 'Cartão Ouro', anchor: 'gold-card' },
-    { label: 'Cartão Fidelidade', anchor: 'fidelity-card' },
+    { label: 'Cartão Ouro', anchor: 'fidelity-card' },
     { label: 'Avaliações', anchor: 'reviews' },
     { label: 'Localização', anchor: 'location' },
   ],
@@ -196,7 +196,7 @@ export const SITE_CONFIG = {
 
   goldCard: {
     title: 'Conheça o Cartão Ouro',
-    subtitle: 'Seu acesso VIP à Harmonização Orofacial',
+    subtitle: 'Seu acesso ao Cartão Ouro em Harmonização Orofacial',
     description:
       'Condição exclusiva para quem busca harmonização de alto padrão, com benefícios reais de deslocamento, acompanhamento próximo e atendimento premium.',
     benefits: [
@@ -212,18 +212,17 @@ export const SITE_CONFIG = {
   },
 
   fidelityCard: {
-    title: 'Conheça o Cartão Fidelidade',
-    subtitle: 'Programa VIP para pacientes de Odontologia Premium',
+    title: 'Conheça o Cartão Ouro',
+    subtitle: 'Programa Cartão Ouro para pacientes de Odontologia Premium',
     description:
-      'Retorne em até 1 ano por indicação ou vínculo familiar e desbloqueie uma condição VIP com vantagens especiais em serviços odontológicos elegíveis.',
+      'Retorne em até 1 ano por indicação ou vínculo familiar e desbloqueie uma condição Cartão Ouro com vantagens especiais em serviços odontológicos elegíveis.',
     benefits: [
       'Benefício válido para retorno em até 12 meses',
-      'Elegível para pacientes por indicação ou família',
-      'Desconto VIP ou pagamos o seu Uber, apenas em serviços de odontologia selecionados e com valor total acima de R$300. Não aplicado para produtos.',
-      'Acompanhamento personalizado do plano de tratamento para Cartão Gold e VIP',
+      'Elegível para pacientes por indicação via cartão ouro físico',
+      'Desconto Ouro ou pagamos o seu Uber, apenas em serviços de odontologia selecionados e com valor total acima de R$300. Não aplicado para produtos.',
     ],
-    ctaText: 'Quero meu Cartão Fidelidade',
-    whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Fidelidade da Odontologia e as regras do desconto VIP.',
+    ctaText: 'Quero meu Cartão Ouro',
+    whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Ouro da Odontologia e as regras do desconto Ouro.',
   },
 
   social: {
