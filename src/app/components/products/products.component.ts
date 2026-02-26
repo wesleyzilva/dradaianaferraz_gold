@@ -16,6 +16,18 @@ import { SITE_CONFIG } from '../../config/site-config';
             Priorizamos protocolos com foco na linha profissional Anna Pegova,
             associando tecnologia dermocosmética, segurança e alta performance em cada atendimento.
           </p>
+          <div class="anna-callout" data-track="anna-pegova-amostras">
+            <i class="fas fa-vial"></i>
+            <p>
+              Descubra a experiência Anna Pegova no conforto da sua casa: solicite amostras e uma
+              demonstração personalizada. Fórmulas premium, seguras e eficazes para realçar o melhor da sua
+              pele, inclusive as mais sensíveis.
+            </p>
+            <a [href]="annaPegovaWhatsappUrl" target="_blank" rel="noopener noreferrer" class="anna-cta">
+              <i class="fab fa-whatsapp"></i>
+              Solicite amostras
+            </a>
+          </div>
         </div>
 
         <div class="carousel-shell">
@@ -98,6 +110,40 @@ import { SITE_CONFIG } from '../../config/site-config';
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.8;
+    }
+    .anna-callout {
+      margin: 1.5rem auto 0;
+      max-width: 760px;
+      border: 1px solid rgba(201,168,76,0.3);
+      background: rgba(201,168,76,0.08);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .anna-callout > i {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+    .anna-callout p {
+      color: rgba(255,255,255,0.82);
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .anna-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 700;
     }
     .carousel-shell {
       display: grid;
@@ -205,6 +251,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 export class ProductsComponent {
   config = SITE_CONFIG;
   readonly currentIndex = signal(0);
+  readonly annaPegovaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar um papo sobre as amostras dos produtos Anna Pegova.')}`;
 
   readonly carouselTransform = computed(() => `translateX(-${this.currentIndex() * 100}%)`);
 

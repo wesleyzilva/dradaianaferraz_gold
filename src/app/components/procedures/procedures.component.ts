@@ -12,7 +12,7 @@ import { SITE_CONFIG } from '../../config/site-config';
           <h2 class="section-title">Antes & Depois</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Acompanhe as transformações reais dos nossos pacientes. Resultados naturais e personalizados para cada rosto.
+            Veja transformações reais que combinam técnica, precisão e naturalidade para revelar a melhor versão de cada paciente.
           </p>
         </div>
 

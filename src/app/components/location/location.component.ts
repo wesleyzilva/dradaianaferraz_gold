@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Component, signal } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 
 @Component({
@@ -14,25 +13,13 @@ import { SITE_CONFIG } from '../../config/site-config';
           <div class="gold-line"></div>
         </div>
         <div class="location-content">
-          <div class="map-wrapper">
-            <iframe
-              [src]="safeMapUrl"
-              width="100%"
-              height="400"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Localização da Clínica"
-            ></iframe>
-          </div>
           <div class="location-info">
             <h3 class="info-title">{{ config.professional.name }}</h3>
             <ul class="info-list">
               <li>
                 <span class="info-icon">📍</span>
                 <div>
-                  <strong>Endereço</strong>
+                  <strong>Rota da sua localização até nosso endereço</strong>
                   <a
                     [href]="directionsUrl"
                     target="_blank"
@@ -69,9 +56,21 @@ import { SITE_CONFIG } from '../../config/site-config';
                 </div>
               </li>
             </ul>
-            <a [href]="config.professional.whatsapp" target="_blank" class="btn-whatsapp">
-              <i class="fab fa-whatsapp"></i> Fale no WhatsApp
-            </a>
+            <div class="location-actions">
+              <a [href]="config.professional.whatsapp" target="_blank" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+              </a>
+              <a
+                [href]="uberUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-uber"
+                [class.btn-uber-discount]="uberDiscountGlow()"
+                (click)="highlightUberDiscount()"
+              >
+                <i class="fab fa-uber"></i> Chamar Uber
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -111,23 +110,16 @@ import { SITE_CONFIG } from '../../config/site-config';
       border-radius: 2px;
     }
     .location-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      display: flex;
+      justify-content: center;
       align-items: start;
     }
-    .map-wrapper {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(201,168,76,0.3);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    }
-    .map-wrapper iframe { display: block; }
     .location-info {
       background: var(--dark-light);
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 16px;
       padding: 2rem;
+      width: min(760px, 100%);
     }
     .info-title {
       font-family: 'Playfair Display', serif;
@@ -189,8 +181,59 @@ import { SITE_CONFIG } from '../../config/site-config';
       transition: background 0.3s, transform 0.2s;
     }
     .btn-whatsapp:hover { background: #1fbc59; transform: translateY(-2px); }
+    .location-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .btn-uber {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #000;
+      color: #fff;
+      padding: 0.85rem 1.75rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-uber:hover {
+      background: #111;
+      transform: translateY(-2px);
+    }
+    .btn-uber-discount {
+      border-color: rgba(201,168,76,0.95);
+      box-shadow:
+        0 0 0 2px rgba(201,168,76,0.35),
+        0 0 22px rgba(201,168,76,0.85),
+        0 0 38px rgba(201,168,76,0.55);
+      animation: uber-discount-glow 1.1s ease-out;
+    }
+    @keyframes uber-discount-glow {
+      0% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 0 0 rgba(201,168,76,0);
+      }
+      45% {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow:
+          0 0 0 3px rgba(201,168,76,0.4),
+          0 0 30px rgba(201,168,76,0.95),
+          0 0 44px rgba(201,168,76,0.65);
+      }
+      100% {
+        transform: translateY(-2px) scale(1);
+        box-shadow:
+          0 0 0 2px rgba(201,168,76,0.35),
+          0 0 22px rgba(201,168,76,0.85),
+          0 0 38px rgba(201,168,76,0.55);
+      }
+    }
     @media (max-width: 900px) {
-      .location-content { grid-template-columns: 1fr; }
+      .location-content { display: block; }
     }
     @media (max-width: 600px) {
       .location-section { padding: 4rem 1rem; }
@@ -199,14 +242,27 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class LocationComponent {
   config = SITE_CONFIG;
-  safeMapUrl: SafeResourceUrl;
   directionsUrl: string;
+  uberUrl: string;
+  readonly uberDiscountGlow = signal(false);
+  private uberGlowTimeoutId: number | undefined;
 
-  constructor(private sanitizer: DomSanitizer) {
-    this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.config.mapEmbedUrl);
+  constructor() {
     const destination = encodeURIComponent(
       `${this.config.location.address}, ${this.config.location.neighborhood}, ${this.config.location.city}, ${this.config.location.cep}`,
     );
     this.directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+    this.uberUrl = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${destination}`;
+  }
+
+  highlightUberDiscount(): void {
+    if (this.uberGlowTimeoutId) {
+      window.clearTimeout(this.uberGlowTimeoutId);
+    }
+
+    this.uberDiscountGlow.set(true);
+    this.uberGlowTimeoutId = window.setTimeout(() => {
+      this.uberDiscountGlow.set(false);
+    }, 1200);
   }
 }

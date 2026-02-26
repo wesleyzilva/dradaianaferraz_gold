@@ -2,6 +2,12 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, signal
 
 type ClickStatsMap = Record<string, number>;
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 @Component({
   selector: 'app-mini-analytics',
   standalone: true,
@@ -122,6 +128,13 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
       stats[key] = (stats[key] ?? 0) + 1;
       localStorage.setItem(this.clickStatsKey, JSON.stringify(stats));
       this.clickStats.set(stats);
+
+      if (window.gtag) {
+        window.gtag('event', 'click', {
+          event_category: 'engagement',
+          event_label: key,
+        });
+      }
     };
 
     document.addEventListener('click', listener, { passive: true });

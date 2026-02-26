@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
     title: 'Dentista especialista em Harmonização Orofacial, Odontologia Estética e Perícia Judicial',
     crm: 'CRO/RS 00000',
     photo: 'https://placehold.co/400x400/C9A84C/FFFFFF?text=Dra+Daiana',
-    bio: 'Dentista dedicada à harmonização orofacial, à odontologia estética e à perícia judicial. Atua com abordagem técnica, ética e personalizada para oferecer segurança, funcionalidade e resultados naturais em cada atendimento.',
+    bio: 'Excelência em harmonização orofacial e odontologia estética com atendimento premium, planejamento estratégico e foco em resultados naturais, seguros e duradouros para valorizar sua melhor versão.',
     whatsapp: 'https://wa.me/5516991400423',
   },
 
@@ -22,85 +22,85 @@ export const SITE_CONFIG = {
     {
       icon: '🔊',
       title: 'Ultrassom Microfocado',
-      description: 'Tecnologia para firmeza da pele, estímulo de colágeno e redefinição do contorno facial sem cirurgia.',
+      description: 'Tecnologia de última geração para firmeza, estímulo intenso de colágeno e redefinição do contorno facial sem cirurgia.',
     },
     {
       icon: '💉',
       title: 'Toxina Botulínica (Botox)',
-      description: 'Suavização de rugas e linhas de expressão com resultados naturais e duradouros.',
+      description: 'Suavize rugas e linhas de expressão com técnica precisa para um resultado elegante, natural e duradouro.',
     },
     {
       icon: '💋',
       title: 'Preenchimento Labial',
-      description: 'Volume e definição para os lábios com ácido hialurônico de última geração.',
+      description: 'Definição e volume na medida certa com ácido hialurônico premium para lábios mais harmônicos e sofisticados.',
     },
     {
       icon: '💧',
       title: 'Skinbooster',
-      description: 'Hidratação profunda e rejuvenescimento da pele com microinjeções de ácido hialurônico.',
+      description: 'Hidratação profunda com efeito glow para uma pele mais viçosa, iluminada e com aspecto rejuvenescido.',
     },
     {
       icon: '🌟',
       title: 'Bioestimuladores de Colágeno',
-      description: 'Estimulação natural da produção de colágeno para pele mais firme e jovem.',
+      description: 'Ative o colágeno de forma inteligente para firmeza progressiva, sustentação e rejuvenescimento natural.',
     },
     {
       icon: '🧵',
       title: 'Fios de PDO',
-      description: 'Lifting sem cirurgia com fios bioestimuladores para remodelamento facial.',
+      description: 'Efeito lifting sem cirurgia com reposicionamento sutil e estímulo de colágeno para contornos mais definidos.',
     },
     {
       icon: '🌸',
       title: 'Peeling Coreano',
-      description: 'Protocolo avançado para renovação da pele, melhora de textura e luminosidade com recuperação controlada.',
+      description: 'Renovação avançada para textura refinada, luminosidade intensa e pele com aparência premium.',
     },
     {
       icon: '👃',
       title: 'Rinomodelação',
-      description: 'Harmonização do perfil nasal sem cirurgia, com técnica minimamente invasiva e planejamento individualizado.',
+      description: 'Ajuste estratégico do perfil nasal sem cirurgia para equilíbrio facial e resultado natural de alto padrão.',
     },
   ],
 
   odontology: {
-    title: 'Odontologia com foco em prevenção e estética',
+    title: 'Odontologia de alta performance com foco em prevenção e estética',
     subtitle:
-      'Atendimento completo para saúde bucal, com planejamento individual, tecnologias modernas para diagnóstico preciso e suporte técnico em perícia judicial odontológica.',
+      'Sorriso saudável, bonito e funcional com protocolos modernos, diagnóstico de precisão e experiência clínica orientada a resultados.',
     services: [
       {
         icon: '🦷',
         title: 'Prevenção Bucal com Câmera Intraoral',
         description:
-          'Avaliação detalhada da saúde bucal com visualização em tempo real para orientar cuidados preventivos personalizados.',
+          'Mapeamento detalhado em tempo real para prevenir problemas e criar um plano inteligente de manutenção do seu sorriso.',
       },
       {
         icon: '✨',
         title: 'Clareamento Dental',
         description:
-          'Protocolos seguros para dentes mais claros, preservando estrutura e sensibilidade com acompanhamento profissional.',
+          'Dentes mais claros com protocolo seguro e acompanhamento profissional para um sorriso radiante sem abrir mão da saúde dental.',
       },
       {
         icon: '😁',
         title: 'Facetas de Resina',
         description:
-          'Correção estética de formato, cor e pequenos desalinhamentos com acabamento natural e harmonioso.',
+          'Transformação estética rápida de cor, formato e alinhamento com acabamento natural e sofisticado.',
       },
       {
         icon: '🔩',
         title: 'Implantes Dentários',
         description:
-          'Reabilitação funcional e estética com planejamento criterioso para devolver segurança ao sorrir e mastigar.',
+          'Recupere função, segurança e autoestima com implantes planejados para conforto, estabilidade e estética impecável.',
       },
       {
         icon: '📐',
         title: 'Ortodontia',
         description:
-          'Alinhamento dental com abordagem personalizada para melhorar oclusão, função e estética do sorriso.',
+          'Alinhamento estratégico para melhorar mordida, função e estética, elevando o resultado final do seu sorriso.',
       },
       {
         icon: '⚖️',
         title: 'Perícia Judicial em Harmonização e Odontologia',
         description:
-          'Atuação técnica com elaboração de pareceres e assistência em demandas judiciais relacionadas à harmonização orofacial e odontologia.',
+          'Atuação técnica especializada com pareceres claros e suporte qualificado em demandas de odontologia e harmonização orofacial.',
       },
     ],
   },
@@ -108,22 +108,22 @@ export const SITE_CONFIG = {
   products: [
     {
       name: 'Limpeza de Pele Anna Pegova',
-      description: 'Protocolos de higienização profunda com ativos profissionais para preparar e revitalizar a pele.',
+      description: 'Higienização profunda com ativos de alta performance para uma pele renovada, equilibrada e luminosa.',
       image: 'https://placehold.co/300x300/C9A84C/FFFFFF?text=Anna+Pegova+Limpeza',
     },
     {
       name: 'Hidratação Intensiva Anna Pegova',
-      description: 'Cuidado dermocosmético para reposição de água e conforto cutâneo com toque profissional.',
+      description: 'Reposição intensiva de hidratação para toque sedoso, viço imediato e conforto prolongado da pele.',
       image: 'https://placehold.co/300x300/1a1a1a/C9A84C?text=Anna+Pegova+Hidratação',
     },
     {
       name: 'Revitalização Facial Anna Pegova',
-      description: 'Combinação de ativos para luminosidade, uniformização e melhora global da textura da pele.',
+      description: 'Blend de ativos premium para luminosidade, uniformidade e textura refinada com efeito de pele bem cuidada.',
       image: 'https://placehold.co/300x300/C9A84C/FFFFFF?text=Anna+Pegova+Revitalização',
     },
     {
       name: 'Linha Profissional Anna Pegova',
-      description: 'Seleção de produtos de cabine e home care para prolongar resultados entre as sessões.',
+      description: 'Curadoria profissional de cabine e home care para potencializar e prolongar resultados entre as sessões.',
       image: 'https://placehold.co/300x300/1a1a1a/C9A84C?text=Linha+Anna+Pegova',
     },
   ],
@@ -190,11 +190,12 @@ export const SITE_CONFIG = {
 
   goldCard: {
     title: 'Conheça o Cartão Ouro',
-    subtitle: 'Seu convite exclusivo para Harmonização Orofacial',
+    subtitle: 'Seu acesso VIP à Harmonização Orofacial',
     description:
-      'Pacientes em harmonização recebem acesso a condições especiais apenas em serviços selecionados, com atendimento premium e planejamento personalizado.',
+      'Condição exclusiva para quem busca harmonização de alto padrão, com vantagens especiais em serviços selecionados e acompanhamento premium.',
     benefits: [
       'Condições especiais apenas em serviços de harmonização selecionados',
+      'Pagamos o Uber para você ou revertemos seu deslocamento em desconto',
       'Acesso preferencial para avaliação e acompanhamento',
       'Planejamento personalizado por fase de tratamento',
       'Atendimento premium com foco em naturalidade',
@@ -205,14 +206,14 @@ export const SITE_CONFIG = {
 
   fidelityCard: {
     title: 'Conheça o Cartão Fidelidade',
-    subtitle: 'Programa VIP para pacientes de Odontologia',
+    subtitle: 'Programa VIP para pacientes de Odontologia Premium',
     description:
-      'Pacientes que retornam em até 1 ano e chegam por indicação ou vínculo familiar recebem condição VIP com desconto especial apenas em serviços odontológicos elegíveis.',
+      'Retorne em até 1 ano por indicação ou vínculo familiar e desbloqueie uma condição VIP com vantagens especiais em serviços odontológicos elegíveis.',
     benefits: [
       'Benefício válido para retorno em até 12 meses',
       'Elegível para pacientes por indicação ou família',
-      'Desconto VIP apenas em serviços odontológicos selecionados',
-      'Acompanhamento personalizado do plano de tratamento',
+      'Desconto VIP do valor do seu Uber apenas em serviços odontológicos selecionados',
+      'Acompanhamento personalizado do plano de tratamento para Cartão Gold e VIP',
     ],
     ctaText: 'Quero meu Cartão Fidelidade',
     whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Fidelidade da Odontologia e as regras do desconto VIP.',

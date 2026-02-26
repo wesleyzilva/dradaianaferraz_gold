@@ -9,11 +9,11 @@ import { SITE_CONFIG } from '../../config/site-config';
       <div class="section-container">
         <div class="section-header">
           <p class="section-eyebrow">O que oferecemos</p>
-          <h2 class="section-title">Nossos Serviços</h2>
+          <h2 class="section-title">Serviços de Alta Performance</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Tratamentos estéticos avançados com técnicas modernas e produtos de alta qualidade,
-            sempre priorizando resultados naturais e sua segurança.
+            Protocolos exclusivos de harmonização com tecnologia avançada e abordagem personalizada para
+            valorizar sua beleza com naturalidade, segurança e resultado superior.
           </p>
         </div>
         <div class="services-grid">
@@ -24,6 +24,12 @@ import { SITE_CONFIG } from '../../config/site-config';
               <p class="service-desc">{{ service.description }}</p>
             </div>
           }
+        </div>
+        <div class="services-cta" data-track="harmonizacao-whatsapp">
+          <a [href]="harmonizacaoWhatsappUrl" target="_blank" rel="noopener noreferrer" class="btn-harmo-wa">
+            <i class="fab fa-whatsapp"></i>
+            Solicitar avaliação de Harmonização
+          </a>
         </div>
       </div>
     </section>
@@ -72,6 +78,22 @@ import { SITE_CONFIG } from '../../config/site-config';
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
+    .services-cta {
+      margin-top: 1.4rem;
+      text-align: center;
+    }
+    .btn-harmo-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.2rem;
+      border-radius: 999px;
+      background: #25D366;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
     .service-card {
       background: var(--dark);
       border: 1px solid rgba(201,168,76,0.2);
@@ -109,4 +131,5 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class ServicesComponent {
   config = SITE_CONFIG;
+  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma havaliação de harmonização.')}`;
 }

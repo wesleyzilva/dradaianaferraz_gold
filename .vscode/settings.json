@@ -6,6 +6,11 @@
         "git ls-remote": true,
         "npx ng": true,
         "npx angular-cli-ghpages": true,
-        "npx --yes angular-cli-ghpages": true
+        "npx --yes angular-cli-ghpages": true,
+        "git fetch": true,
+        "Get-Item": true,
+        "ForEach-Object": true,
+        ".\\node_modules\\.bin\\ng.cmd": true,
+        "&": true
     }
 }

@@ -16,7 +16,6 @@ type BottomMenuLink = {
     <!-- Navigation -->
     <nav class="navbar">
       <div class="nav-container">
-        <a href="#hero-content" class="nav-logo">{{ config.professional.name }}</a>
         <div class="view-switch" role="group" aria-label="Selecionar área de atendimento">
           <button
             type="button"
@@ -37,14 +36,6 @@ type BottomMenuLink = {
             Harmonização
           </button>
         </div>
-        <ul class="nav-links">
-          @for (item of visibleNavigation(); track item.anchor) {
-            <li><a [href]="'#' + item.anchor">{{ item.label }}</a></li>
-          }
-        </ul>
-        <a href="#location" class="btn-nav">
-          Agendar Consulta
-        </a>
       </div>
     </nav>
 
@@ -101,23 +92,9 @@ type BottomMenuLink = {
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       height: 70px;
       gap: 1rem;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold);
-      font-size: 1.1rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-      margin: 0;
-      padding: 0;
     }
     .view-switch {
       display: inline-flex;
@@ -143,25 +120,6 @@ type BottomMenuLink = {
       background: var(--gold);
       color: var(--dark);
     }
-    .nav-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .btn-nav {
-      background: var(--gold);
-      color: var(--dark);
-      padding: 0.5rem 1.2rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .btn-nav:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     .bottom-nav {
       position: fixed;
@@ -170,17 +128,25 @@ type BottomMenuLink = {
       bottom: 1rem;
       z-index: 999;
       display: block;
+      width: calc(100vw - 1rem);
+      max-width: 980px;
     }
     .bottom-dropdown {
-      min-width: 220px;
+      width: max-content;
+      max-width: 100%;
+      margin: 0 auto;
       border: 1px solid rgba(201, 168, 76, 0.35);
       background: rgba(26, 26, 26, 0.98);
       border-radius: 999px;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
       display: flex;
       align-items: center;
+      justify-content: center;
+      scrollbar-width: none;
     }
+    .bottom-dropdown::-webkit-scrollbar { display: none; }
     .bottom-dropdown a {
       color: var(--white);
       text-decoration: none;
@@ -188,6 +154,7 @@ type BottomMenuLink = {
       font-size: 0.9rem;
       border-right: 1px solid rgba(201, 168, 76, 0.15);
       white-space: nowrap;
+      flex-shrink: 0;
     }
     .bottom-dropdown a:last-child {
       border-right: 0;
@@ -293,8 +260,22 @@ type BottomMenuLink = {
 
     /* Responsive */
     @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .view-switch { margin-left: auto; }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      .nav-container {
+        display: flex;
+        min-height: 64px;
+        height: auto;
+        gap: 0.75rem;
+      }
+      .view-switch {
+        display: inline-flex;
+        flex-shrink: 0;
+      }
       .hero-content { flex-direction: column; text-align: center; gap: 2rem; }
       .hero-photo { width: 220px; height: 220px; }
       .hero-bio { margin: 0 auto 2rem; }
@@ -302,7 +283,7 @@ type BottomMenuLink = {
     }
     @media (max-width: 480px) {
       .navbar { padding: 0 1rem; }
-      .nav-logo { font-size: 0.9rem; }
+      .nav-container { min-height: 60px; }
       .switch-btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
       .hero-content { padding: 2rem 1rem; }
     }
@@ -330,21 +311,6 @@ export class HeroComponent {
       : 'Atendimento em harmonização orofacial com planejamento individual, técnicas avançadas e foco em resultados naturais, seguros e proporcionais ao perfil de cada paciente.',
   );
 
-  readonly visibleNavigation = computed(() => {
-    if (this.selectedArea() === 'odontologia') {
-      const navByAnchor = new Map(this.config.navigation.map((item) => [item.anchor, item]));
-      return [
-        navByAnchor.get('services'),
-        navByAnchor.get('reviews'),
-        navByAnchor.get('fidelity-card'),
-      ].filter((item) => item !== undefined);
-    }
-
-    return this.config.navigation.filter((item) =>
-      ['services', 'products', 'gold-card'].includes(item.anchor),
-    );
-  });
-
   readonly showBottomMenu = computed(() =>
     this.selectedArea() === 'harmonizacao' || this.selectedArea() === 'odontologia',
   );
@@ -356,17 +322,12 @@ export class HeroComponent {
   );
 
   readonly bottomMenuLinks = computed<BottomMenuLink[]>(() => {
-    if (this.selectedArea() === 'odontologia') {
-      return [
-        {
-          label: 'Agendar Consulta',
-          anchor: 'location',
-        },
-      ];
-    }
+    const anchors = this.selectedArea() === 'odontologia'
+      ? ['services', 'reviews', 'fidelity-card', 'location']
+      : ['services', 'products', 'procedures', 'gold-card', 'location'];
 
     return this.config.navigation
-      .filter((item) => ['reviews', 'location'].includes(item.anchor))
+      .filter((item) => anchors.includes(item.anchor))
       .map((item) => ({ label: item.label, anchor: item.anchor }));
   });
 
@@ -388,5 +349,10 @@ export class HeroComponent {
 
   setArea(area: AppArea): void {
     this.selectedAreaChange.emit(area);
+
+    const heroContent = document.getElementById('hero-content');
+    if (heroContent) {
+      heroContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

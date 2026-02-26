@@ -52,6 +52,13 @@ import { SITE_CONFIG } from '../../config/site-config';
             </article>
           </div>
         }
+
+        <div class="odonto-cta" data-track="odontologia-whatsapp">
+          <a [href]="odontologiaWhatsappUrl" target="_blank" rel="noopener noreferrer" class="btn-odonto-wa">
+            <i class="fab fa-whatsapp"></i>
+            Solicitar avaliação com dentista
+          </a>
+        </div>
       </div>
     </section>
   `,
@@ -167,6 +174,24 @@ import { SITE_CONFIG } from '../../config/site-config';
         text-align: center;
       }
 
+      .odonto-cta {
+        margin-top: 1.5rem;
+        text-align: center;
+      }
+
+      .btn-odonto-wa {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #25D366;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 0.75rem 1.2rem;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
       @media (max-width: 600px) {
         .odontology-section {
           padding: 4rem 1rem;
@@ -181,6 +206,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class OdontologyComponent {
   config = SITE_CONFIG;
+  readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quer marcar uma avaliação com dentista.')}`;
 
   readonly orthodonticsService = this.config.odontology.services.find((service) =>
     service.title.toLowerCase().includes('ortodontia'),
