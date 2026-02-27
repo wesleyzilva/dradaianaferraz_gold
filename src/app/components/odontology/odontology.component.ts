@@ -206,7 +206,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class OdontologyComponent {
   config = SITE_CONFIG;
-  readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quer marcar uma avaliação com dentista.')}`;
+  readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma avaliação com dentista.')}`;
 
   readonly orthodonticsService = this.config.odontology.services.find((service) =>
     service.title.toLowerCase().includes('ortodontia'),

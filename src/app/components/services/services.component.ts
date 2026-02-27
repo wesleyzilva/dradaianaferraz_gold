@@ -132,5 +132,5 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class ServicesComponent {
   config = SITE_CONFIG;
-  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma havaliação de harmonização.')}`;
+  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma avaliação de harmonização.')}`;
 }
