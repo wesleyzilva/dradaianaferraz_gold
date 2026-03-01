@@ -33,25 +33,23 @@ declare global {
   styles: [
     `
       .mini-analytics {
-        position: fixed;
-        right: 10px;
-        bottom: 10px;
-        z-index: 998;
-        border: 1px solid rgba(201, 168, 76, 0.2);
-        background: rgba(0, 0, 0, 0.55);
-        color: rgba(255, 255, 255, 0.55);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(201, 168, 76, 0.28);
+        background: rgba(201, 168, 76, 0.08);
+        color: rgba(255, 255, 255, 0.78);
         border-radius: 999px;
-        padding: 0.25rem 0.55rem;
-        font-size: 0.68rem;
+        padding: 0.34rem 0.7rem;
+        font-size: 0.75rem;
         letter-spacing: 0.2px;
         cursor: pointer;
-        opacity: 0.32;
-        transition: opacity 0.2s ease, border-color 0.2s ease;
+        transition: background 0.2s ease, border-color 0.2s ease;
       }
 
       .mini-analytics:hover {
-        opacity: 0.95;
-        border-color: rgba(201, 168, 76, 0.55);
+        background: rgba(201, 168, 76, 0.14);
+        border-color: rgba(201, 168, 76, 0.45);
       }
     `,
   ],

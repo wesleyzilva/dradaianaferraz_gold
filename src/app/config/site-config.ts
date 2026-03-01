@@ -18,7 +18,7 @@ export const SITE_CONFIG = {
     { label: 'Linha Anna Pegova', anchor: 'products' },
     { label: 'Procedimentos', anchor: 'procedures' },
     { label: 'Cartão Ouro', anchor: 'gold-card' },
-    { label: 'Cartão Ouro', anchor: 'fidelity-card' },
+    { label: 'Cartão Fidelidade', anchor: 'fidelity-card' },
     { label: 'Avaliações', anchor: 'reviews' },
     { label: 'Localização', anchor: 'location' },
   ],
@@ -100,6 +100,24 @@ export const SITE_CONFIG = {
         title: 'Prótese Dentária',
         description:
           'Reabilitação oral com próteses planejadas para devolver mastigação, conforto e estética do sorriso com adaptação personalizada.',
+      },
+      {
+        icon: '😬',
+        title: 'Tratamento para Bruxismo',
+        description:
+          'Diagnóstico e manejo do bruxismo para reduzir dores, proteger os dentes e melhorar a qualidade do sono com abordagem personalizada.',
+      },
+      {
+        icon: '🧩',
+        title: 'ClearCorrect',
+        description:
+          'Alinhadores transparentes ClearCorrect para correção ortodôntica discreta, confortável e planejada digitalmente.',
+      },
+      {
+        icon: '✨',
+        title: 'Invisalign',
+        description:
+          'Tratamento com alinhadores transparentes Invisalign para alinhar o sorriso com previsibilidade e estética durante todo o processo.',
       },
       {
         icon: '🔎',
@@ -229,7 +247,7 @@ export const SITE_CONFIG = {
       'Condição exclusiva para quem busca harmonização de alto padrão, com benefícios reais de deslocamento, acompanhamento próximo e atendimento premium.',
     benefits: [
       'Benefícios válidos em serviços de harmonização selecionados',
-      'Desconto Ouro ou pagamos o seu Uber, apenas em serviços de harmonização selecionados com valor total acima de R$300. Não aplicado para produtos.',
+      'Desconto Ouro ou pagamos o seu Uber (limite de até 10 km), apenas em serviços de harmonização selecionados com valor total acima de R$300. Não aplicado para produtos.',
       'Acesso preferencial para avaliação e acompanhamento',
       'Planejamento personalizado por fase de tratamento',
       'Atendimento premium com foco em naturalidade',
@@ -247,7 +265,7 @@ export const SITE_CONFIG = {
     benefits: [
       'Benefício válido para retorno em até 12 meses',
       'Elegível para pacientes por indicação via cartão ouro físico',
-      'Desconto Ouro ou pagamos o seu Uber, apenas em serviços de odontologia selecionados e com valor total acima de R$300. Não aplicado para produtos.',
+      'Desconto Ouro ou pagamos o seu Uber (limite de até 10 km), apenas em serviços de odontologia selecionados e com valor total acima de R$300. Não aplicado para produtos.',
     ],
     ctaText: 'Quero meu Cartão Ouro',
     whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Ouro da Odontologia e as regras do desconto Ouro.',
@@ -264,6 +282,7 @@ export const SITE_CONFIG = {
     copyright: `© ${new Date().getFullYear()} Dra. Daiana Ferraz`,
     lastUpdated: '26/02/2026',
     technicalResponsible: 'Wesley Silva · wesley.zilva@gmail.com',
+    technicalResponsibleEmail: 'wesley.zilva@gmail.com',
     disclaimer: 'Procedimentos realizados por dentista habilitada. Resultados podem variar.',
   },
 };

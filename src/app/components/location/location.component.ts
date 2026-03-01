@@ -46,7 +46,7 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <span class="info-icon">✉️</span>
                 <div>
                   <strong>E-mail</strong>
-                  <p>{{ config.location.email }}</p>
+                  <a [href]="locationEmailMailto" class="email-link">{{ config.location.email }}</a>
                 </div>
               </li>
               <li>
@@ -73,6 +73,7 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <i class="fab fa-uber"></i> Chamar Uber
               </a>
             </div>
+            <p class="uber-limit-note">Cobertura de deslocamento Uber limitada a até 10 km.</p>
           </div>
         </div>
       </div>
@@ -159,6 +160,18 @@ import { SITE_CONFIG } from '../../config/site-config';
       margin: 0;
       line-height: 1.5;
     }
+    .email-link {
+      color: rgba(255,255,255,0.82);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .email-link:hover {
+      color: var(--gold-light);
+      text-decoration: underline;
+    }
     .address-link {
       text-decoration: none;
       display: inline-block;
@@ -187,6 +200,11 @@ import { SITE_CONFIG } from '../../config/site-config';
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
+    }
+    .uber-limit-note {
+      margin: 0.85rem 0 0;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.8rem;
     }
     .btn-uber {
       display: inline-flex;
@@ -246,6 +264,7 @@ export class LocationComponent {
   config = SITE_CONFIG;
   directionsUrl: string;
   uberUrl: string;
+  locationEmailMailto: string;
   readonly uberDiscountGlow = signal(false);
   private uberGlowTimeoutId: number | undefined;
 
@@ -255,6 +274,7 @@ export class LocationComponent {
     );
     this.directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
     this.uberUrl = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${destination}`;
+    this.locationEmailMailto = `mailto:${this.config.location.email}?subject=${encodeURIComponent('Contato pela landing page [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pela landing page.\n\nTag: viaLandPage\n')}`;
   }
 
   highlightUberDiscount(): void {

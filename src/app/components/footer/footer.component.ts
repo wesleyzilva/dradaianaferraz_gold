@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { MiniAnalyticsComponent } from '../mini-analytics/mini-analytics.component';
 import { SITE_CONFIG } from '../../config/site-config';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
+  imports: [MiniAnalyticsComponent],
   template: `
     <footer class="footer">
       <div class="footer-top">
@@ -20,9 +22,12 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <i class="fab fa-google"></i>
               </a>
             </div>
+            <app-mini-analytics></app-mini-analytics>
             <p class="copyright">{{ config.footer.copyright }}</p>
             <span class="footer-tag">Última atualização: {{ config.footer.lastUpdated }}</span>
-            <span class="footer-tag">{{ config.footer.technicalResponsible }}</span>
+            <a [href]="technicalResponsibleMailto" class="footer-tag footer-email" aria-label="Enviar e-mail para responsável técnico">
+              {{ config.footer.technicalResponsibleEmail }}
+            </a>
           </div>
         </div>
       </div>
@@ -92,7 +97,21 @@ import { SITE_CONFIG } from '../../config/site-config';
       padding: 0.34rem 0.7rem;
       font-size: 0.75rem;
       line-height: 1;
-      white-space: nowrap;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      text-align: center;
+      max-width: 100%;
+    }
+    .footer-email {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-email:hover {
+      background: rgba(201,168,76,0.14);
+      border-color: rgba(201,168,76,0.45);
     }
     .disclaimer {
       color: rgba(255,255,255,0.3);
@@ -113,4 +132,6 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class FooterComponent {
   config = SITE_CONFIG;
+
+  readonly technicalResponsibleMailto = `mailto:${this.config.footer.technicalResponsibleEmail}?subject=${encodeURIComponent('Contato pelo site [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pelo site.\n\nTag: viaLandPage\n')}`;
 }
