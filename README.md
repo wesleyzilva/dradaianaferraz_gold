@@ -8,6 +8,10 @@ Acesse a versão publicada em produção:
 
 - https://wesleyzilva.github.io/dradaianaferraz_gold/
 
+## Créditos
+
+Desenvolvimento: **Wesley Silva**
+
 ## Development server
 
 To start a local development server, run:

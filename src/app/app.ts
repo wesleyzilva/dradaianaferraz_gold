@@ -1,3 +1,4 @@
+// Aplicação desenvolvida por Wesley Silva.
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { HeroComponent } from './components/hero/hero.component';
 import { ServicesComponent } from './components/services/services.component';

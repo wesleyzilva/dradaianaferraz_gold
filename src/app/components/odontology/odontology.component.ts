@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 
 @Component({
@@ -6,7 +6,7 @@ import { SITE_CONFIG } from '../../config/site-config';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section class="odontology-section" id="services">
+    <section class="odontology-section" [id]="sectionId()">
       <div class="section-container">
         <div class="section-header">
           <p class="section-eyebrow">Saúde bucal e sorriso</p>
@@ -206,6 +206,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class OdontologyComponent {
   config = SITE_CONFIG;
+  readonly sectionId = input('services-odontologia');
   readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma avaliação com dentista.')}`;
 
   readonly orthodonticsService = this.config.odontology.services.find((service) =>

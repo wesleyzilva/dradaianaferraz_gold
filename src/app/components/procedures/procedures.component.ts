@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
+import type { AppArea } from '../../app';
 
 @Component({
   selector: 'app-procedures',
   standalone: true,
   template: `
-    <section class="procedures-section" id="procedures">
+    <section class="procedures-section" [id]="sectionId()">
       <div class="section-container">
         <div class="section-header">
           <p class="section-eyebrow">Resultados Reais</p>
@@ -39,7 +40,7 @@ import { SITE_CONFIG } from '../../config/site-config';
               <i class="fas fa-chevron-left"></i>
             </button>
             <div class="carousel-dots">
-              @for (procedure of config.procedures; track procedure.name; let i = $index) {
+              @for (procedure of procedures(); track procedure.name; let i = $index) {
                 <button
                   class="dot"
                   [class.active]="i === currentIndex"
@@ -53,7 +54,7 @@ import { SITE_CONFIG } from '../../config/site-config';
             </button>
           </div>
 
-          <p class="carousel-counter">{{ currentIndex + 1 }} / {{ config.procedures.length }}</p>
+          <p class="carousel-counter">{{ currentIndex + 1 }} / {{ procedures().length }}</p>
         </div>
       </div>
     </section>
@@ -222,18 +223,24 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class ProceduresComponent {
   config = SITE_CONFIG;
+  readonly area = input<AppArea>('harmonizacao');
+  readonly sectionId = input('procedures-harmonizacao');
   currentIndex = 0;
 
+  readonly procedures = computed(() =>
+    this.area() === 'odontologia' ? this.config.proceduresOdontologia : this.config.proceduresHarmonizacao,
+  );
+
   get currentProcedure() {
-    return this.config.procedures[this.currentIndex];
+    return this.procedures()[this.currentIndex];
   }
 
   prev() {
-    this.currentIndex = (this.currentIndex - 1 + this.config.procedures.length) % this.config.procedures.length;
+    this.currentIndex = (this.currentIndex - 1 + this.procedures().length) % this.procedures().length;
   }
 
   next() {
-    this.currentIndex = (this.currentIndex + 1) % this.config.procedures.length;
+    this.currentIndex = (this.currentIndex + 1) % this.procedures().length;
   }
 
   goTo(index: number) {

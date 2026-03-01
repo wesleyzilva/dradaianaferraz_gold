@@ -4,12 +4,13 @@
 ></app-hero>
 
 @if (selectedArea() === 'harmonizacao') {
-	<app-services></app-services>
+	<app-services sectionId="services-harmonizacao"></app-services>
 	<app-products></app-products>
-	<app-procedures></app-procedures>
+	<app-procedures [area]="selectedArea()" sectionId="procedures-harmonizacao"></app-procedures>
 	<app-gold-card cardType="gold"></app-gold-card>
 } @else {
-	<app-odontology></app-odontology>
+	<app-odontology sectionId="services-odontologia"></app-odontology>
+	<app-procedures [area]="selectedArea()" sectionId="procedures-odontologia"></app-procedures>
 	<app-gold-card cardType="fidelity"></app-gold-card>
 }
 

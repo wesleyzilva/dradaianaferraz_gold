@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 
 @Component({
   selector: 'app-services',
   standalone: true,
   template: `
-    <section class="services-section" id="services">
+    <section class="services-section" [id]="sectionId()">
       <div class="section-container">
         <div class="section-header">
           <p class="section-eyebrow">O que oferecemos</p>
@@ -132,5 +132,6 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class ServicesComponent {
   config = SITE_CONFIG;
+  readonly sectionId = input('services-harmonizacao');
   readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma avaliação de harmonização.')}`;
 }

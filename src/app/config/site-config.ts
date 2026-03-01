@@ -1,3 +1,4 @@
+// Configuração principal do site desenvolvida por Wesley Silva.
 export const SITE_CONFIG = {
   professional: {
     name: 'Dra. Daiana Ferraz',
@@ -147,7 +148,7 @@ export const SITE_CONFIG = {
     hours: 'Seg: 09h30–19h | Ter: 07h30–19h | Qua: 09h30–19h | Qui: 07h30–19h | Sex: 09h30–19h | Sáb: 09h30–12h',
   },
 
-  procedures: [
+  proceduresHarmonizacao: [
     {
       name: 'Harmonização Facial Completa',
       beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
@@ -165,6 +166,29 @@ export const SITE_CONFIG = {
     },
     {
       name: 'Bioestimuladores de Colágeno',
+      beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
+      afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
+    },
+  ],
+
+  proceduresOdontologia: [
+    {
+      name: 'Clareamento Dental',
+      beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
+      afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
+    },
+    {
+      name: 'Facetas de Resina',
+      beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
+      afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
+    },
+    {
+      name: 'Implantes Dentários',
+      beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
+      afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
+    },
+    {
+      name: 'Prótese Dentária',
       beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
       afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
     },
@@ -235,7 +259,7 @@ export const SITE_CONFIG = {
   footer: {
     copyright: `© ${new Date().getFullYear()} Dra. Daiana Ferraz`,
     lastUpdated: '26/02/2026',
-    technicalResponsible: 'wesley.zilva@gmail.com',
+    technicalResponsible: 'Wesley Silva · wesley.zilva@gmail.com',
     disclaimer: 'Procedimentos realizados por dentista habilitada. Resultados podem variar.',
   },
 };

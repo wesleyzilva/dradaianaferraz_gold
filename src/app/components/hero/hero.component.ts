@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, input, output, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  computed,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 import type { AppArea } from '../../app';
 
@@ -39,7 +48,7 @@ type BottomMenuLink = {
       </div>
     </nav>
 
-    @if (showBottomMenu()) {
+    @if (showBottomMenu() && !isFooterVisible()) {
       <div class="bottom-nav">
         <button
           type="button"
@@ -173,18 +182,19 @@ type BottomMenuLink = {
       align-items: center;
       justify-content: center;
       margin: 0 auto 0.55rem;
-      border: 1px solid rgba(201, 168, 76, 0.35);
-      background: rgba(26, 26, 26, 0.96);
-      color: var(--gold-light);
+      border: 1px solid var(--gold-light);
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--dark);
       border-radius: 999px;
       padding: 0.45rem 0.85rem;
       font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
     }
     .bottom-menu-toggle:hover {
-      background: rgba(201, 168, 76, 0.14);
-      color: var(--gold);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: var(--dark);
     }
     .bottom-dropdown {
       width: max-content;
@@ -436,9 +446,11 @@ type BottomMenuLink = {
     }
   `],
 })
-export class HeroComponent {
+export class HeroComponent implements AfterViewInit, OnDestroy {
   config = SITE_CONFIG;
   readonly isBottomMenuMinimized = signal(false);
+  readonly isFooterVisible = signal(false);
+  private footerObserver?: IntersectionObserver;
 
   readonly selectedArea = input<AppArea>('harmonizacao');
   readonly selectedAreaChange = output<AppArea>();
@@ -470,13 +482,23 @@ export class HeroComponent {
   );
 
   readonly bottomMenuLinks = computed<BottomMenuLink[]>(() => {
-    const anchors = this.selectedArea() === 'odontologia'
-      ? ['services', 'reviews', 'fidelity-card', 'location']
-      : ['services', 'products', 'procedures', 'gold-card', 'location'];
+    if (this.selectedArea() === 'odontologia') {
+      return [
+        { label: 'Serviços', anchor: 'services-odontologia' },
+        { label: 'Antes e Depois', anchor: 'procedures-odontologia' },
+        { label: 'Avaliações', anchor: 'reviews' },
+        { label: 'Cartão Ouro', anchor: 'fidelity-card' },
+        { label: 'Localização', anchor: 'location' },
+      ];
+    }
 
-    return this.config.navigation
-      .filter((item) => anchors.includes(item.anchor))
-      .map((item) => ({ label: item.label, anchor: item.anchor }));
+    return [
+      { label: 'Serviços', anchor: 'services-harmonizacao' },
+      { label: 'Linha Anna Pegova', anchor: 'products' },
+      { label: 'Procedimentos', anchor: 'procedures-harmonizacao' },
+      { label: 'Cartão Ouro', anchor: 'gold-card' },
+      { label: 'Localização', anchor: 'location' },
+    ];
   });
 
   readonly discountEligibleServices = computed<string[]>(() =>
@@ -502,7 +524,7 @@ export class HeroComponent {
   );
 
   readonly secondaryCtaHref = computed(() =>
-    this.selectedArea() === 'odontologia' ? '#services' : '#procedures',
+    this.selectedArea() === 'odontologia' ? '#services-odontologia' : '#procedures-harmonizacao',
   );
 
   readonly primaryCtaLabel = computed(() =>
@@ -525,5 +547,26 @@ export class HeroComponent {
 
   toggleBottomMenu(): void {
     this.isBottomMenuMinimized.update((value) => !value);
+  }
+
+  ngAfterViewInit(): void {
+    const footerElement = document.querySelector('app-footer .footer');
+    if (!footerElement) {
+      return;
+    }
+
+    this.footerObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((entry) => entry.isIntersecting);
+        this.isFooterVisible.set(visible);
+      },
+      { threshold: 0.05 },
+    );
+
+    this.footerObserver.observe(footerElement);
+  }
+
+  ngOnDestroy(): void {
+    this.footerObserver?.disconnect();
   }
 }
