@@ -2,10 +2,10 @@
 export const SITE_CONFIG = {
   professional: {
     name: 'Dra. Daiana Ferraz',
-    title: 'Dentista especialista em Harmonização Orofacial, Odontologia Estética e Perícia Judicial',
+    title: 'Harmonização Orofacial e Odontologia Estética em São Carlos/SP',
     crm: 'CRO/SP 15000',
     photo: 'https://placehold.co/400x400/C9A84C/FFFFFF?text=Dra+Daiana',
-    bio: 'Excelência em harmonização orofacial e odontologia estética com atendimento premium, planejamento estratégico e foco em resultados naturais, seguros e duradouros para valorizar sua melhor versão.',
+    bio: 'Atendimento premium em harmonização orofacial e odontologia estética em São Carlos/SP, com foco em Botox, preenchimento labial, peeling coreano, facetas e clareamento dental para resultados naturais e seguros.',
     whatsapp: 'https://wa.me/5516991400423',
   },
 
@@ -81,15 +81,15 @@ export const SITE_CONFIG = {
       },
       {
         icon: '😁',
-        title: 'Facetas de Resina',
+        title: 'Facetas',
         description:
           'Transformação estética rápida de cor, formato e alinhamento com acabamento natural e sofisticado.',
       },
       {
-        icon: '🔩',
-        title: 'Implantes Dentários',
+        icon: '🪥',
+        title: 'Profilaxia e Limpeza Profissional',
         description:
-          'Recupere função, segurança e autoestima com implantes planejados para conforto, estabilidade e estética impecável.',
+          'Limpeza técnica com remoção de biofilme e manchas para manutenção da saúde bucal e prevenção contínua.',
       },
       {
         icon: '🦷',
@@ -98,10 +98,10 @@ export const SITE_CONFIG = {
           'Reabilitação oral com próteses planejadas para devolver mastigação, conforto e estética do sorriso com adaptação personalizada.',
       },
       {
-        icon: '📐',
-        title: 'Ortodontia',
+        icon: '🔎',
+        title: 'Check-up Odontológico Preventivo',
         description:
-          'Alinhamento estratégico para melhorar mordida, função e estética, elevando o resultado final do seu sorriso.',
+          'Avaliação preventiva completa para identificar necessidades, planejar tratamentos e aumentar previsibilidade de resultados.',
       },
       {
         icon: '⚖️',
@@ -178,17 +178,17 @@ export const SITE_CONFIG = {
       afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
     },
     {
-      name: 'Facetas de Resina',
+      name: 'Facetas',
       beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
       afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
     },
     {
-      name: 'Implantes Dentários',
+      name: 'Profilaxia e Limpeza Profissional',
       beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
       afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
     },
     {
-      name: 'Prótese Dentária',
+      name: 'Check-up Odontológico Preventivo',
       beforeImage: 'https://placehold.co/400x500/888888/FFFFFF?text=Antes',
       afterImage: 'https://placehold.co/400x500/C9A84C/FFFFFF?text=Depois',
     },

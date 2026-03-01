@@ -409,7 +409,12 @@ type BottomMenuLink = {
       }
       .bottom-nav {
         width: calc(100vw - 1.25rem);
-        max-width: 420px;
+        max-width: 360px;
+      }
+      .bottom-menu-toggle {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.74rem;
+        margin-bottom: 0.45rem;
       }
       .bottom-dropdown {
         width: 100%;
@@ -426,6 +431,8 @@ type BottomMenuLink = {
         display: block;
         width: 100%;
         text-align: center;
+        padding: 0.48rem 0.7rem;
+        font-size: 0.8rem;
         border-right: 0;
         border-bottom: 1px solid rgba(201, 168, 76, 0.15);
       }
@@ -441,6 +448,18 @@ type BottomMenuLink = {
       .navbar { padding: 0 1rem; }
       .nav-container { min-height: 60px; }
       .switch-btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
+      .bottom-nav {
+        width: calc(100vw - 1rem);
+        max-width: 320px;
+      }
+      .bottom-menu-toggle {
+        padding: 0.3rem 0.65rem;
+        font-size: 0.7rem;
+      }
+      .bottom-menu-link {
+        padding: 0.42rem 0.6rem;
+        font-size: 0.76rem;
+      }
       .hero-content { padding: 2rem 1rem; }
 
     }
@@ -461,8 +480,8 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   readonly heroTitle = computed(() =>
     this.selectedArea() === 'odontologia'
-      ? 'Dentista em Odontologia Estética e Perícia Judicial Odontológica'
-      : 'Especialista em Harmonização Orofacial',
+      ? 'Odontologia Estética em São Carlos: Facetas, Clareamento e Prevenção'
+      : 'Harmonização Orofacial em São Carlos: Botox, Preenchimento e Peeling',
   );
 
   readonly heroBio = computed(() =>
@@ -495,7 +514,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     return [
       { label: 'Serviços', anchor: 'services-harmonizacao' },
       { label: 'Linha Anna Pegova', anchor: 'products' },
-      { label: 'Procedimentos', anchor: 'procedures-harmonizacao' },
+      { label: 'Antes e Depois', anchor: 'procedures-harmonizacao' },
       { label: 'Cartão Ouro', anchor: 'gold-card' },
       { label: 'Localização', anchor: 'location' },
     ];
