@@ -272,7 +272,7 @@ export class LocationComponent {
     const destination = encodeURIComponent(
       `${this.config.location.address}, ${this.config.location.neighborhood}, ${this.config.location.city}, ${this.config.location.cep}`,
     );
-    this.directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
+    this.directionsUrl = 'https://www.google.com/maps/dir/-22.0193407,-47.8610045/Dra.+Daiana+Ferraz+-+Dentista+-+Odontologia+e+est%C3%A9tica+facial,+Bal%C3%A3o+do+Bonde+-+Av.+Cap.+Lu%C3%ADz+Brand%C3%A3o,+26+-+Vila+Nery,+S%C3%A3o+Carlos+-+SP,+13568-450/@-22.0111719,-47.8752257,15z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x94b87a644aeab935:0xa1a9250e71d0aad2!2m2!1d-47.8728271!2d-22.0126285!3e0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D';
     this.uberUrl = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${destination}`;
     this.locationEmailMailto = `mailto:${this.config.location.email}?subject=${encodeURIComponent('Contato pela landing page [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pela landing page.\n\nTag: viaLandPage\n')}`;
   }
