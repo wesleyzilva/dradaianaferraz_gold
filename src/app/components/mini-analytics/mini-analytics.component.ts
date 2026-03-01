@@ -2,9 +2,16 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, signal
 
 type ClickStatsMap = Record<string, number>;
 
+type TrackingMeta = {
+  key: string;
+  eventName: string;
+  eventCategory: string;
+};
+
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
   }
 }
 
@@ -119,10 +126,12 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const key = this.resolveTrackingKey(trackedElement);
-      if (!key) {
+      const trackingMeta = this.resolveTrackingMeta(trackedElement);
+      if (!trackingMeta) {
         return;
       }
+
+      const key = trackingMeta.key;
 
       const stats = this.readClickStats();
       stats[key] = (stats[key] ?? 0) + 1;
@@ -130,9 +139,19 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
       this.clickStats.set(stats);
 
       if (window.gtag) {
-        window.gtag('event', 'click', {
-          event_category: 'engagement',
+        window.gtag('event', trackingMeta.eventName, {
+          event_category: trackingMeta.eventCategory,
           event_label: key,
+          value: 1,
+        });
+      }
+
+      if (window.dataLayer) {
+        window.dataLayer.push({
+          event: trackingMeta.eventName,
+          event_category: trackingMeta.eventCategory,
+          event_label: key,
+          event_value: stats[key],
         });
       }
     };
@@ -141,20 +160,41 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
     this.removeClickListener = () => document.removeEventListener('click', listener);
   }
 
-  private resolveTrackingKey(element: HTMLElement): string | null {
+  private resolveTrackingMeta(element: HTMLElement): TrackingMeta | null {
     const customTrack = element.dataset['track'];
     if (customTrack) {
-      return customTrack;
+      if (customTrack.includes('whatsapp')) {
+        return { key: customTrack, eventName: 'generate_lead', eventCategory: 'lead' };
+      }
+      if (customTrack.includes('route')) {
+        return { key: customTrack, eventName: 'route_click', eventCategory: 'location' };
+      }
+      if (customTrack.includes('uber')) {
+        return { key: customTrack, eventName: 'uber_click', eventCategory: 'location' };
+      }
+      return { key: customTrack, eventName: 'engagement_click', eventCategory: 'engagement' };
     }
 
     if (element.tagName === 'A') {
+      const href = element.getAttribute('href') ?? '';
+      if (href.includes('wa.me')) {
+        return { key: 'link_whatsapp', eventName: 'generate_lead', eventCategory: 'lead' };
+      }
+      if (href.includes('uber.com')) {
+        return { key: 'link_uber', eventName: 'uber_click', eventCategory: 'location' };
+      }
+      if (href.includes('google.com/maps/dir')) {
+        return { key: 'link_route_maps', eventName: 'route_click', eventCategory: 'location' };
+      }
       const text = (element.textContent ?? '').trim().slice(0, 40);
-      return text ? `Link: ${text}` : 'Link';
+      const key = text ? `Link: ${text}` : 'Link';
+      return { key, eventName: 'engagement_click', eventCategory: 'engagement' };
     }
 
     if (element.tagName === 'BUTTON') {
       const text = (element.textContent ?? '').trim().slice(0, 40);
-      return text ? `Botão: ${text}` : 'Botão';
+      const key = text ? `Botão: ${text}` : 'Botão';
+      return { key, eventName: 'engagement_click', eventCategory: 'engagement' };
     }
 
     return null;

@@ -1,5 +1,9 @@
 // Configuração principal do site desenvolvida por Wesley Silva.
 export const SITE_CONFIG = {
+  analytics: {
+    googleTagId: 'G-XXXXXXXXXX',
+  },
+
   professional: {
     name: 'Dra. Daiana Ferraz',
     title: 'Harmonização Orofacial e Odontologia Estética em São Carlos/SP',

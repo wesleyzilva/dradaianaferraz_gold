@@ -27,7 +27,13 @@ import { SITE_CONFIG } from '../../config/site-config';
           }
         </div>
         <div class="services-cta" data-track="harmonizacao-whatsapp">
-          <a [href]="harmonizacaoWhatsappUrl" target="_blank" rel="noopener noreferrer" class="btn-harmo-wa">
+          <a
+            [href]="harmonizacaoWhatsappUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-harmo-wa"
+            data-track="conversion_whatsapp_harmonizacao"
+          >
             <i class="fab fa-whatsapp"></i>
             Solicitar avaliação de Harmonização
           </a>

@@ -47,7 +47,7 @@ import { SITE_CONFIG } from '../../config/site-config';
               }
             </ul>
 
-            <a [href]="whatsappUrl" target="_blank" class="btn-gold-cta">
+            <a [href]="whatsappUrl" target="_blank" class="btn-gold-cta" data-track="conversion_whatsapp_cartao_ouro">
               <i class="fab fa-whatsapp"></i>
               {{ activeCard().ctaText }}
             </a>

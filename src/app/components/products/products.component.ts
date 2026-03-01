@@ -23,7 +23,13 @@ import { SITE_CONFIG } from '../../config/site-config';
               demonstração personalizada. Fórmulas premium, seguras e eficazes para realçar o melhor da sua
               pele, inclusive as mais sensíveis.
             </p>
-            <a [href]="annaPegovaWhatsappUrl" target="_blank" rel="noopener noreferrer" class="anna-cta">
+            <a
+              [href]="annaPegovaWhatsappUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="anna-cta"
+              data-track="conversion_whatsapp_anna_pegova"
+            >
               <i class="fab fa-whatsapp"></i>
               Solicite amostras
             </a>

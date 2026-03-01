@@ -143,6 +143,29 @@ Para cada uma das 12 campanhas:
 3. Idioma: Português.
 4. Rede: desmarcar parceiros no início, (maior controle)
 
+### Público internacional (inglês)
+- Criar um conjunto adicional com idioma **Inglês** para captar residentes estrangeiros e turistas na região.
+- Segmentar por localização em São Carlos/SP, mantendo intenção local.
+- Exemplo de nome:
+   - `GA_Harmo_Botox_SaoCarlos_EN`
+   - `GA_Odonto_Whitening_SaoCarlos_EN`
+
+Palavras-chave iniciais em inglês:
+- botox in sao carlos
+- lip filler sao carlos
+- collagen biostimulator sao carlos
+- dental whitening sao carlos
+- veneers sao carlos
+
+Exemplo de títulos em inglês:
+- Botox in São Carlos - Book Your Evaluation
+- Lip Filler with Natural Results
+- Dental Whitening in São Carlos
+- Veneers for Smile Enhancement
+
+Exemplo de descrição em inglês:
+- Premium care in orofacial harmonization and aesthetic dentistry. Book your appointment via WhatsApp.
+
 ## Passo 4 — Criar 2 grupos de anúncios por campanha
 Em cada campanha criar:
 - `GA_[Serviço]_[SC]_Clientes`

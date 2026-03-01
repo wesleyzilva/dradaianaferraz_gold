@@ -26,6 +26,7 @@ import { SITE_CONFIG } from '../../config/site-config';
                     rel="noopener noreferrer"
                     class="address-link"
                     aria-label="Abrir rota no Google Maps"
+                    data-track="conversion_route_maps"
                   >
                     <p>{{ config.location.address }}</p>
                     <p>{{ config.location.neighborhood }}</p>
@@ -57,7 +58,7 @@ import { SITE_CONFIG } from '../../config/site-config';
               </li>
             </ul>
             <div class="location-actions">
-              <a [href]="config.professional.whatsapp" target="_blank" class="btn-whatsapp">
+              <a [href]="config.professional.whatsapp" target="_blank" class="btn-whatsapp" data-track="conversion_whatsapp_location">
                 <i class="fab fa-whatsapp"></i> Fale no WhatsApp
               </a>
               <a
@@ -67,6 +68,7 @@ import { SITE_CONFIG } from '../../config/site-config';
                 class="btn-uber"
                 [class.btn-uber-discount]="uberDiscountGlow()"
                 (click)="highlightUberDiscount()"
+                data-track="conversion_uber"
               >
                 <i class="fab fa-uber"></i> Chamar Uber
               </a>

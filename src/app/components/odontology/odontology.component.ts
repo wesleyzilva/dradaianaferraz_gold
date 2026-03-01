@@ -54,7 +54,13 @@ import { SITE_CONFIG } from '../../config/site-config';
         }
 
         <div class="odonto-cta" data-track="odontologia-whatsapp">
-          <a [href]="odontologiaWhatsappUrl" target="_blank" rel="noopener noreferrer" class="btn-odonto-wa">
+          <a
+            [href]="odontologiaWhatsappUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-odonto-wa"
+            data-track="conversion_whatsapp_odontologia"
+          >
             <i class="fab fa-whatsapp"></i>
             Solicitar avaliação com dentista
           </a>
