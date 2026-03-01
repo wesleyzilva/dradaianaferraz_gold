@@ -1,9 +1,21 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
+
+type ReputationData = {
+  google: {
+    rating: string;
+    totalReviews: number;
+  };
+  doctoralia: {
+    rating: string;
+    totalReviews: number;
+  };
+};
 
 @Component({
   selector: 'app-reviews',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="reviews-section" id="reviews">
       <div class="section-container">
@@ -11,9 +23,15 @@ import { SITE_CONFIG } from '../../config/site-config';
           <p class="section-eyebrow">Avaliações</p>
           <h2 class="section-title">O que Dizem Nossos Pacientes</h2>
           <div class="gold-line"></div>
-          <div class="google-badge">
-            <i class="fab fa-google"></i>
-            <span>Google 4,9 · 119 avaliações</span>
+          <div class="reputation-badges">
+            <a [href]="config.social.googleBusiness" target="_blank" rel="noopener noreferrer" class="google-badge" data-track="social_google_reviews">
+              <i class="fab fa-google"></i>
+              <span>Google {{ reputation().google.rating }} · {{ reputation().google.totalReviews }} avaliações</span>
+            </a>
+            <a [href]="config.social.doctoralia" target="_blank" rel="noopener noreferrer" class="doctoralia-badge" data-track="social_doctoralia_reviews">
+              <i class="fas fa-user-doctor"></i>
+              <span>Doctoralia {{ reputation().doctoralia.rating }} · {{ reputation().doctoralia.totalReviews }} avaliações</span>
+            </a>
           </div>
         </div>
 
@@ -41,8 +59,11 @@ import { SITE_CONFIG } from '../../config/site-config';
         </div>
 
         <div class="reviews-cta">
-          <a [href]="config.social.googleBusiness" target="_blank" class="btn-google">
+          <a [href]="config.social.googleBusiness" target="_blank" rel="noopener noreferrer" class="btn-google" data-track="social_google_reviews_cta">
             <i class="fab fa-google"></i> Ver todas as avaliações no Google
+          </a>
+          <a [href]="config.social.doctoralia" target="_blank" rel="noopener noreferrer" class="btn-doctoralia" data-track="social_doctoralia_reviews_cta">
+            <i class="fas fa-user-doctor"></i> Ver perfil e avaliações no Doctoralia
           </a>
         </div>
       </div>
@@ -81,7 +102,14 @@ import { SITE_CONFIG } from '../../config/site-config';
       margin: 0 auto 1.25rem;
       border-radius: 2px;
     }
-    .google-badge {
+    .reputation-badges {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .google-badge,
+    .doctoralia-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -91,8 +119,10 @@ import { SITE_CONFIG } from '../../config/site-config';
       padding: 0.4rem 1.2rem;
       color: rgba(255,255,255,0.75);
       font-size: 0.9rem;
+      text-decoration: none;
     }
     .google-badge i { color: #EA4335; }
+    .doctoralia-badge i { color: #00AEEF; }
 
     .reviews-grid {
       display: grid;
@@ -161,6 +191,10 @@ import { SITE_CONFIG } from '../../config/site-config';
 
     .reviews-cta {
       text-align: center;
+      display: flex;
+      gap: 0.7rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
     .btn-google {
       display: inline-flex;
@@ -179,6 +213,23 @@ import { SITE_CONFIG } from '../../config/site-config';
       background: rgba(234,67,53,0.1);
       border-color: #EA4335;
     }
+    .btn-doctoralia {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: 2px solid rgba(0,174,239,0.65);
+      color: rgba(255,255,255,0.85);
+      padding: 0.75rem 1.75rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .btn-doctoralia i { color: #00AEEF; }
+    .btn-doctoralia:hover {
+      background: rgba(0,174,239,0.1);
+      border-color: #00AEEF;
+    }
 
     @media (max-width: 600px) {
       .reviews-section { padding: 4rem 1rem; }
@@ -186,10 +237,41 @@ import { SITE_CONFIG } from '../../config/site-config';
     }
   `],
 })
-export class ReviewsComponent {
+export class ReviewsComponent implements OnInit {
   config = SITE_CONFIG;
+  readonly reputation = signal<ReputationData>({
+    google: this.config.reputation.google,
+    doctoralia: this.config.reputation.doctoralia,
+  });
+
+  ngOnInit(): void {
+    this.loadDynamicReputation();
+  }
 
   getStars(rating: number): number[] {
     return Array(rating).fill(0);
+  }
+
+  private async loadDynamicReputation(): Promise<void> {
+    try {
+      const response = await fetch(this.config.reputation.sourceUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        return;
+      }
+
+      const dynamicData = (await response.json()) as Partial<ReputationData>;
+      this.reputation.set({
+        google: {
+          rating: dynamicData.google?.rating ?? this.config.reputation.google.rating,
+          totalReviews: dynamicData.google?.totalReviews ?? this.config.reputation.google.totalReviews,
+        },
+        doctoralia: {
+          rating: dynamicData.doctoralia?.rating ?? this.config.reputation.doctoralia.rating,
+          totalReviews: dynamicData.doctoralia?.totalReviews ?? this.config.reputation.doctoralia.totalReviews,
+        },
+      });
+    } catch {
+      return;
+    }
   }
 }

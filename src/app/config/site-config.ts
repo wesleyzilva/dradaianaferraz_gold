@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   professional: {
     name: 'Dra. Daiana Ferraz',
     title: 'Harmonização Orofacial e Odontologia Estética em São Carlos/SP',
-    crm: 'CRO/SP 15000',
+    crm: 'CRO/SP 93910',
     photo: 'https://placehold.co/400x400/C9A84C/FFFFFF?text=Dra+Daiana',
     bio: 'Atendimento premium em harmonização orofacial e odontologia estética em São Carlos/SP, com foco em Botox, preenchimento labial, peeling coreano, facetas e clareamento dental para resultados naturais e seguros.',
     whatsapp: 'https://wa.me/5516991400423',
@@ -273,9 +273,22 @@ export const SITE_CONFIG = {
 
   social: {
     instagram: 'https://instagram.com/dradaianaferrazsc',
-    lattes: 'https://lattes.cnpq.br/',
+    lattes: 'https://lattes.cnpq.br/3596228528846662',
     linkedin: 'https://www.linkedin.com/',
     googleBusiness: 'https://g.page/r/CdKq0HEOJamhEAE/review',
+    doctoralia: 'https://www.doctoralia.com.br/daiana-ferraz/dentista/sao-carlos#profile-reviews',
+  },
+
+  reputation: {
+    sourceUrl: '/reputation.json',
+    google: {
+      rating: '4,9',
+      totalReviews: 119,
+    },
+    doctoralia: {
+      rating: '5,0',
+      totalReviews: 0,
+    },
   },
 
   footer: {

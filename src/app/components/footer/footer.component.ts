@@ -15,8 +15,14 @@ import { SITE_CONFIG } from '../../config/site-config';
               <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
                 <i class="fab fa-instagram"></i>
               </a>
+              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link">
+                <i class="fas fa-user-doctor"></i>
+              </a>
               <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
                 <i class="fab fa-linkedin"></i>
+              </a>
+              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link">
+                <i class="fas fa-graduation-cap"></i>
               </a>
               <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link">
                 <i class="fab fa-google"></i>
@@ -76,7 +82,9 @@ import { SITE_CONFIG } from '../../config/site-config';
       transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
     }
     .social-link[aria-label='Instagram'] { color: #E1306C; }
+    .social-link[aria-label='Doctoralia'] { color: #00AEEF; }
     .social-link[aria-label='LinkedIn'] { color: #0A66C2; }
+    .social-link[aria-label='Lattes'] { color: #5A6ACF; }
     .social-link[aria-label='Google Business'] { color: #EA4335; }
     .social-link:hover {
       background: rgba(255,255,255,0.08);
