@@ -36,15 +36,26 @@ import { SITE_CONFIG } from '../../config/site-config';
         </div>
 
         <div class="carousel-shell" role="region" aria-roledescription="carousel" aria-label="Carrossel de produtos Anna Pegova">
-          <button
-            type="button"
-            class="carousel-btn"
-            aria-label="Foto anterior"
-            [attr.aria-controls]="'products-carousel-track'"
-            (click)="previousSlide()"
-          >
-            ‹
-          </button>
+          <div class="carousel-controls" aria-label="Navegação superior do carrossel">
+            <button
+              type="button"
+              class="carousel-btn"
+              aria-label="Foto anterior"
+              [attr.aria-controls]="'products-carousel-track'"
+              (click)="previousSlide()"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              class="carousel-btn"
+              aria-label="Próxima foto"
+              [attr.aria-controls]="'products-carousel-track'"
+              (click)="nextSlide()"
+            >
+              ›
+            </button>
+          </div>
 
           <div class="carousel-frame">
             <div id="products-carousel-track" class="carousel-track" [style.transform]="carouselTransform()">
@@ -63,15 +74,26 @@ import { SITE_CONFIG } from '../../config/site-config';
             </div>
           </div>
 
-          <button
-            type="button"
-            class="carousel-btn"
-            aria-label="Próxima foto"
-            [attr.aria-controls]="'products-carousel-track'"
-            (click)="nextSlide()"
-          >
-            ›
-          </button>
+          <div class="carousel-controls" aria-label="Navegação inferior do carrossel">
+            <button
+              type="button"
+              class="carousel-btn"
+              aria-label="Foto anterior"
+              [attr.aria-controls]="'products-carousel-track'"
+              (click)="previousSlide()"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              class="carousel-btn"
+              aria-label="Próxima foto"
+              [attr.aria-controls]="'products-carousel-track'"
+              (click)="nextSlide()"
+            >
+              ›
+            </button>
+          </div>
         </div>
 
         <p class="sr-only" aria-live="polite">
@@ -168,10 +190,15 @@ import { SITE_CONFIG } from '../../config/site-config';
       font-weight: 700;
     }
     .carousel-shell {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
+    }
+    .carousel-controls {
+      display: flex;
       align-items: center;
+      justify-content: space-between;
+      width: 100%;
     }
     .carousel-frame {
       overflow: hidden;
@@ -272,12 +299,7 @@ import { SITE_CONFIG } from '../../config/site-config';
     }
     @media (max-width: 600px) {
       .products-section { padding: 4rem 1rem; }
-      .carousel-shell {
-        grid-template-columns: 1fr;
-      }
-      .carousel-btn {
-        justify-self: center;
-      }
+      .carousel-btn { justify-self: center; }
     }
   `],
 })

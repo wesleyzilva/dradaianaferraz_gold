@@ -324,6 +324,11 @@ import { SITE_CONFIG } from '../../config/site-config';
     @media (max-width: 600px) {
       .location-section { padding: 4rem 1rem; }
     }
+    @media (max-width: 500px) {
+      .location-section {
+        padding-bottom: 8rem;
+      }
+    }
   `],
 })
 export class LocationComponent {
