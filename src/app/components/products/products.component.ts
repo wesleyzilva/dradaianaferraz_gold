@@ -13,15 +13,14 @@ import { SITE_CONFIG } from '../../config/site-config';
           <h2 class="section-title">Linha Anna Pegova</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Priorizamos protocolos com foco na linha profissional Anna Pegova,
-            associando tecnologia dermocosmética, segurança e alta performance em cada atendimento.
+            Os produtos Anna Pegova são voltados a tratamentos não invasivos e podem atuar de forma
+            complementar aos procedimentos com equipamentos tecnológicos não invasivos, como o ultrassom.
           </p>
           <div class="anna-callout" data-track="anna-pegova-amostras">
             <i class="fas fa-vial"></i>
             <p>
-              Descubra a experiência Anna Pegova no conforto da sua casa: solicite amostras e uma
-              demonstração personalizada. Fórmulas premium, seguras e eficazes para realçar o melhor da sua
-              pele, inclusive as mais sensíveis.
+              A linha Anna Pegova integra protocolos de cuidado não invasivo, com foco em suporte diário e
+              manutenção dos resultados dos tratamentos indicados em avaliação profissional.
             </p>
             <a
               [href]="annaPegovaWhatsappUrl"
@@ -36,14 +35,20 @@ import { SITE_CONFIG } from '../../config/site-config';
           </div>
         </div>
 
-        <div class="carousel-shell">
-          <button type="button" class="carousel-btn" aria-label="Foto anterior" (click)="previousSlide()">
+        <div class="carousel-shell" role="region" aria-roledescription="carousel" aria-label="Carrossel de produtos Anna Pegova">
+          <button
+            type="button"
+            class="carousel-btn"
+            aria-label="Foto anterior"
+            [attr.aria-controls]="'products-carousel-track'"
+            (click)="previousSlide()"
+          >
             ‹
           </button>
 
           <div class="carousel-frame">
-            <div class="carousel-track" [style.transform]="carouselTransform()">
-              @for (product of config.products; track product.name) {
+            <div id="products-carousel-track" class="carousel-track" [style.transform]="carouselTransform()">
+              @for (product of config.products; track product.name; let i = $index) {
                 <article class="slide-card">
                   <div class="product-image-wrapper">
                     <img [src]="product.image" [alt]="product.name" class="product-image" />
@@ -58,10 +63,20 @@ import { SITE_CONFIG } from '../../config/site-config';
             </div>
           </div>
 
-          <button type="button" class="carousel-btn" aria-label="Próxima foto" (click)="nextSlide()">
+          <button
+            type="button"
+            class="carousel-btn"
+            aria-label="Próxima foto"
+            [attr.aria-controls]="'products-carousel-track'"
+            (click)="nextSlide()"
+          >
             ›
           </button>
         </div>
+
+        <p class="sr-only" aria-live="polite">
+          Produto {{ currentIndex() + 1 }} de {{ config.products.length }}: {{ config.products[currentIndex()].name }}
+        </p>
 
         <div class="carousel-dots" role="tablist" aria-label="Selecionar foto do produto">
           @for (product of config.products; track product.name; let i = $index) {
@@ -71,6 +86,7 @@ import { SITE_CONFIG } from '../../config/site-config';
               [class.dot-active]="currentIndex() === i"
               [attr.aria-label]="'Ver ' + product.name"
               [attr.aria-selected]="currentIndex() === i"
+              [attr.aria-current]="currentIndex() === i ? 'true' : null"
               (click)="goToSlide(i)"
             ></button>
           }
@@ -243,6 +259,17 @@ import { SITE_CONFIG } from '../../config/site-config';
     .dot-active {
       background: var(--gold);
     }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
     @media (max-width: 600px) {
       .products-section { padding: 4rem 1rem; }
       .carousel-shell {
@@ -257,7 +284,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 export class ProductsComponent {
   config = SITE_CONFIG;
   readonly currentIndex = signal(0);
-  readonly annaPegovaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar um papo sobre as amostras dos produtos Anna Pegova.')}`;
+  readonly annaPegovaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Linha Anna Pegova. Interesse: produtos Anna Pegova.')}`;
 
   readonly carouselTransform = computed(() => `translateX(-${this.currentIndex() * 100}%)`);
 

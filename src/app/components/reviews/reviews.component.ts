@@ -1,15 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 
-type ReputationData = {
-  google: {
-    rating: string;
-    totalReviews: number;
-  };
-  doctoralia: {
-    rating: string;
-    totalReviews: number;
-  };
+type ReviewItem = {
+  author: string;
+  avatar: string;
+  rating: number;
+  text: string;
+  date: string;
+  photo?: string;
 };
 
 @Component({
@@ -23,23 +21,17 @@ type ReputationData = {
           <p class="section-eyebrow">Avaliações</p>
           <h2 class="section-title">O que Dizem Nossos Pacientes</h2>
           <div class="gold-line"></div>
-          <div class="reputation-badges">
-            <a [href]="config.social.googleBusiness" target="_blank" rel="noopener noreferrer" class="google-badge" data-track="social_google_reviews">
-              <i class="fab fa-google"></i>
-              <span>Google {{ reputation().google.rating }} · {{ reputation().google.totalReviews }} avaliações</span>
-            </a>
-            <a [href]="config.social.doctoralia" target="_blank" rel="noopener noreferrer" class="doctoralia-badge" data-track="social_doctoralia_reviews">
-              <i class="fas fa-user-doctor"></i>
-              <span>Doctoralia {{ reputation().doctoralia.rating }} · {{ reputation().doctoralia.totalReviews }} avaliações</span>
-            </a>
-          </div>
         </div>
 
         <div class="reviews-grid">
-          @for (review of config.reviews; track review.author) {
+          @for (review of config.reviews; track trackReview(review, $index)) {
             <div class="review-card">
               <div class="review-header">
-                <div class="avatar">{{ review.avatar }}</div>
+                @if (review.photo) {
+                  <img class="avatar avatar-photo" [src]="review.photo" [alt]="'Foto de ' + review.author" loading="lazy" />
+                } @else {
+                  <div class="avatar">{{ review.avatar }}</div>
+                }
                 <div class="review-meta">
                   <span class="reviewer-name">{{ review.author }}</span>
                   <span class="review-date">{{ review.date }}</span>
@@ -63,7 +55,7 @@ type ReputationData = {
             <i class="fab fa-google"></i> Ver todas as avaliações no Google
           </a>
           <a [href]="config.social.doctoralia" target="_blank" rel="noopener noreferrer" class="btn-doctoralia" data-track="social_doctoralia_reviews_cta">
-            <i class="fas fa-user-doctor"></i> Ver perfil e avaliações no Doctoralia
+            <i class="fas fa-user-doctor"></i> Doctoralia: 21 opiniões · 5 estrelas
           </a>
         </div>
       </div>
@@ -102,28 +94,6 @@ type ReputationData = {
       margin: 0 auto 1.25rem;
       border-radius: 2px;
     }
-    .reputation-badges {
-      display: flex;
-      gap: 0.6rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .google-badge,
-    .doctoralia-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
-      padding: 0.4rem 1.2rem;
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9rem;
-      text-decoration: none;
-    }
-    .google-badge i { color: #EA4335; }
-    .doctoralia-badge i { color: #00AEEF; }
-
     .reviews-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -160,6 +130,12 @@ type ReputationData = {
       font-weight: 700;
       font-size: 0.85rem;
       flex-shrink: 0;
+    }
+    .avatar-photo {
+      object-fit: cover;
+      border: 1px solid rgba(201,168,76,0.45);
+      display: block;
+      background: #1a1a1a;
     }
     .review-meta {
       flex: 1;
@@ -237,41 +213,14 @@ type ReputationData = {
     }
   `],
 })
-export class ReviewsComponent implements OnInit {
+export class ReviewsComponent {
   config = SITE_CONFIG;
-  readonly reputation = signal<ReputationData>({
-    google: this.config.reputation.google,
-    doctoralia: this.config.reputation.doctoralia,
-  });
-
-  ngOnInit(): void {
-    this.loadDynamicReputation();
-  }
 
   getStars(rating: number): number[] {
     return Array(rating).fill(0);
   }
 
-  private async loadDynamicReputation(): Promise<void> {
-    try {
-      const response = await fetch(this.config.reputation.sourceUrl, { cache: 'no-store' });
-      if (!response.ok) {
-        return;
-      }
-
-      const dynamicData = (await response.json()) as Partial<ReputationData>;
-      this.reputation.set({
-        google: {
-          rating: dynamicData.google?.rating ?? this.config.reputation.google.rating,
-          totalReviews: dynamicData.google?.totalReviews ?? this.config.reputation.google.totalReviews,
-        },
-        doctoralia: {
-          rating: dynamicData.doctoralia?.rating ?? this.config.reputation.doctoralia.rating,
-          totalReviews: dynamicData.doctoralia?.totalReviews ?? this.config.reputation.doctoralia.totalReviews,
-        },
-      });
-    } catch {
-      return;
-    }
+  trackReview(review: ReviewItem, index: number): string {
+    return `${review.author}-${review.date}-${index}`;
   }
 }

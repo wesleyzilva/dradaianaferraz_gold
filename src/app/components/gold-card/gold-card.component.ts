@@ -378,7 +378,8 @@ export class GoldCardComponent {
   );
 
   get whatsappUrl(): string {
-    const msg = encodeURIComponent(this.activeCard().whatsappMessage);
+    const interest = this.cardType() === 'fidelity' ? 'Cartão Ouro Odontologia' : 'Cartão Ouro Harmonização';
+    const msg = encodeURIComponent(`Olá! Vim do site. Origem: Cartão Ouro. Interesse: ${interest}.`);
     return `${this.config.professional.whatsapp}?text=${msg}`;
   }
 

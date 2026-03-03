@@ -58,22 +58,46 @@ import { SITE_CONFIG } from '../../config/site-config';
               </li>
             </ul>
             <div class="location-actions">
-              <a [href]="config.professional.whatsapp" target="_blank" class="btn-whatsapp" data-track="conversion_whatsapp_location">
+              <a [href]="locationWhatsappUrl" target="_blank" class="btn-whatsapp" data-track="conversion_whatsapp_location">
                 <i class="fab fa-whatsapp"></i> Fale no WhatsApp
               </a>
-              <a
-                [href]="uberUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-uber"
-                [class.btn-uber-discount]="uberDiscountGlow()"
-                (click)="highlightUberDiscount()"
-                data-track="conversion_uber"
-              >
-                <i class="fab fa-uber"></i> Chamar Uber
+              <a [href]="uberUrl" target="_blank" rel="noopener noreferrer" class="btn-uber" data-track="conversion_uber">
+                <i class="fab fa-uber"></i> Abrir no Uber
               </a>
             </div>
-            <p class="uber-limit-note">Cobertura de deslocamento Uber limitada a até 10 km.</p>
+          </div>
+          <div class="location-photo-card" role="region" aria-roledescription="carousel" aria-label="Fotos internas do consultório">
+            <img [src]="currentClinicPhoto()" alt="Foto interna do consultório" class="location-photo" loading="lazy" />
+            <button
+              type="button"
+              class="photo-nav photo-nav-prev"
+              aria-label="Foto anterior"
+              [attr.aria-controls]="'clinic-photos-dots'"
+              (click)="previousPhoto()"
+            >‹</button>
+            <button
+              type="button"
+              class="photo-nav photo-nav-next"
+              aria-label="Próxima foto"
+              [attr.aria-controls]="'clinic-photos-dots'"
+              (click)="nextPhoto()"
+            >›</button>
+            <div class="photo-dots" role="tablist" aria-label="Fotos do consultório">
+              @for (photo of clinicPhotos; track photo; let i = $index) {
+                <button
+                  type="button"
+                  class="photo-dot"
+                  [class.photo-dot-active]="currentPhotoIndex() === i"
+                  [attr.aria-label]="'Ver foto ' + (i + 1)"
+                  [attr.aria-selected]="currentPhotoIndex() === i"
+                  [attr.aria-current]="currentPhotoIndex() === i ? 'true' : null"
+                  (click)="goToPhoto(i)"
+                ></button>
+              }
+            </div>
+            <p id="clinic-photos-dots" class="sr-only" aria-live="polite">
+              Foto {{ currentPhotoIndex() + 1 }} de {{ clinicPhotos.length }} do consultório.
+            </p>
           </div>
         </div>
       </div>
@@ -113,16 +137,86 @@ import { SITE_CONFIG } from '../../config/site-config';
       border-radius: 2px;
     }
     .location-content {
-      display: flex;
-      justify-content: center;
-      align-items: start;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
     }
     .location-info {
       background: var(--dark-light);
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 16px;
       padding: 2rem;
-      width: min(760px, 100%);
+      width: 100%;
+    }
+    .location-photo-card {
+      position: relative;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--dark-light);
+      min-height: 320px;
+    }
+    .location-photo {
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.6);
+      background: rgba(13,13,13,0.7);
+      color: var(--gold);
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-nav-prev { left: 10px; }
+    .photo-nav-next { right: 10px; }
+    .photo-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.45rem;
+      background: rgba(13,13,13,0.4);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 999px;
+      padding: 0.28rem 0.45rem;
+    }
+    .photo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.7);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+    }
+    .photo-dot-active {
+      background: var(--gold);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
     .info-title {
       font-family: 'Playfair Display', serif;
@@ -201,11 +295,6 @@ import { SITE_CONFIG } from '../../config/site-config';
       flex-wrap: wrap;
       gap: 0.75rem;
     }
-    .uber-limit-note {
-      margin: 0.85rem 0 0;
-      color: rgba(255,255,255,0.62);
-      font-size: 0.8rem;
-    }
     .btn-uber {
       display: inline-flex;
       align-items: center;
@@ -224,36 +313,13 @@ import { SITE_CONFIG } from '../../config/site-config';
       background: #111;
       transform: translateY(-2px);
     }
-    .btn-uber-discount {
-      border-color: rgba(201,168,76,0.95);
-      box-shadow:
-        0 0 0 2px rgba(201,168,76,0.35),
-        0 0 22px rgba(201,168,76,0.85),
-        0 0 38px rgba(201,168,76,0.55);
-      animation: uber-discount-glow 1.1s ease-out;
-    }
-    @keyframes uber-discount-glow {
-      0% {
-        transform: translateY(0) scale(1);
-        box-shadow: 0 0 0 0 rgba(201,168,76,0);
-      }
-      45% {
-        transform: translateY(-2px) scale(1.03);
-        box-shadow:
-          0 0 0 3px rgba(201,168,76,0.4),
-          0 0 30px rgba(201,168,76,0.95),
-          0 0 44px rgba(201,168,76,0.65);
-      }
-      100% {
-        transform: translateY(-2px) scale(1);
-        box-shadow:
-          0 0 0 2px rgba(201,168,76,0.35),
-          0 0 22px rgba(201,168,76,0.85),
-          0 0 38px rgba(201,168,76,0.55);
-      }
-    }
     @media (max-width: 900px) {
-      .location-content { display: block; }
+      .location-content {
+        grid-template-columns: 1fr;
+      }
+      .location-photo {
+        min-height: 260px;
+      }
     }
     @media (max-width: 600px) {
       .location-section { padding: 4rem 1rem; }
@@ -262,11 +328,12 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class LocationComponent {
   config = SITE_CONFIG;
+  readonly clinicPhotos = this.config.location.clinicPhotos;
+  readonly currentPhotoIndex = signal(0);
   directionsUrl: string;
   uberUrl: string;
   locationEmailMailto: string;
-  readonly uberDiscountGlow = signal(false);
-  private uberGlowTimeoutId: number | undefined;
+  locationWhatsappUrl: string;
 
   constructor() {
     const destination = encodeURIComponent(
@@ -274,17 +341,37 @@ export class LocationComponent {
     );
     this.directionsUrl = 'https://www.google.com/maps/dir/-22.0193407,-47.8610045/Dra.+Daiana+Ferraz+-+Dentista+-+Odontologia+e+est%C3%A9tica+facial,+Bal%C3%A3o+do+Bonde+-+Av.+Cap.+Lu%C3%ADz+Brand%C3%A3o,+26+-+Vila+Nery,+S%C3%A3o+Carlos+-+SP,+13568-450/@-22.0111719,-47.8752257,15z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x94b87a644aeab935:0xa1a9250e71d0aad2!2m2!1d-47.8728271!2d-22.0126285!3e0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D';
     this.uberUrl = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${destination}`;
+    this.locationWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Localização. Interesse: agendamento e endereço.')}`;
     this.locationEmailMailto = `mailto:${this.config.location.email}?subject=${encodeURIComponent('Contato pela landing page [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pela landing page.\n\nTag: viaLandPage\n')}`;
   }
 
-  highlightUberDiscount(): void {
-    if (this.uberGlowTimeoutId) {
-      window.clearTimeout(this.uberGlowTimeoutId);
+  currentClinicPhoto(): string {
+    if (!this.clinicPhotos?.length) {
+      return '/images/clinica/interior-clinica-1.jpg';
     }
 
-    this.uberDiscountGlow.set(true);
-    this.uberGlowTimeoutId = window.setTimeout(() => {
-      this.uberDiscountGlow.set(false);
-    }, 1200);
+    return this.clinicPhotos[this.currentPhotoIndex()];
+  }
+
+  previousPhoto(): void {
+    const total = this.clinicPhotos?.length ?? 0;
+    if (total <= 1) {
+      return;
+    }
+
+    this.currentPhotoIndex.update((index) => (index - 1 + total) % total);
+  }
+
+  nextPhoto(): void {
+    const total = this.clinicPhotos?.length ?? 0;
+    if (total <= 1) {
+      return;
+    }
+
+    this.currentPhotoIndex.update((index) => (index + 1) % total);
+  }
+
+  goToPhoto(index: number): void {
+    this.currentPhotoIndex.set(index);
   }
 }

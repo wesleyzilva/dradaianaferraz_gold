@@ -6,11 +6,9 @@
 @if (selectedArea() === 'harmonizacao') {
 	<app-services sectionId="services-harmonizacao"></app-services>
 	<app-products></app-products>
-	<app-procedures [area]="selectedArea()" sectionId="procedures-harmonizacao"></app-procedures>
 	<app-gold-card cardType="gold"></app-gold-card>
 } @else {
 	<app-odontology sectionId="services-odontologia"></app-odontology>
-	<app-procedures [area]="selectedArea()" sectionId="procedures-odontologia"></app-procedures>
 	<app-gold-card cardType="fidelity"></app-gold-card>
 }
 

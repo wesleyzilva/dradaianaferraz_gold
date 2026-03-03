@@ -78,7 +78,7 @@ type BottomMenuLink = {
 
                 @if (item.anchor === 'services') {
                   <div class="services-tooltip" role="note" aria-live="polite">
-                    <p class="services-tooltip-title">Serviços com desconto de deslocamento</p>
+                    <p class="services-tooltip-title">Serviços elegíveis do Cartão Ouro</p>
                     <ul class="services-tooltip-list">
                       @for (service of discountEligibleServices(); track service) {
                         <li>{{ service }}</li>
@@ -105,16 +105,15 @@ type BottomMenuLink = {
           <h1 class="hero-name">{{ config.professional.name }}</h1>
           <p class="hero-title">{{ heroTitle() }}</p>
           <p class="hero-crm">{{ config.professional.crm }}</p>
-          <p class="hero-bio-links">
-            <span class="hero-bio-label">BIO:</span>
-            <a [href]="config.social.lattes" target="_blank" rel="noopener noreferrer">Lattes</a>
-            <span>·</span>
-            <a [href]="config.social.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </p>
           <p class="hero-bio">{{ heroBio() }}</p>
+          <p class="hero-instagram">
+            Venha conhecer em
+            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer">@dradaianaferraz</a>
+            no Instagram.
+          </p>
           <div class="hero-cta">
-            <a [href]="primaryCtaHref()" class="btn-primary">{{ primaryCtaLabel() }}</a>
-            <a [href]="secondaryCtaHref()" class="btn-secondary">{{ secondaryCtaLabel() }}</a>
+            <a [href]="primaryCtaHref()" class="btn-primary" data-track="cta_primary_hero">{{ primaryCtaLabel() }}</a>
+            <a [href]="secondaryCtaHref()" class="btn-secondary" data-track="cta_secondary_hero">{{ secondaryCtaLabel() }}</a>
           </div>
         </div>
       </div>
@@ -333,33 +332,25 @@ type BottomMenuLink = {
       font-size: 0.9rem;
       margin-bottom: 0.45rem;
     }
-    .hero-bio-links {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin: 0 0 1.3rem;
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9rem;
-    }
-    .hero-bio-label {
-      color: var(--gold);
-      font-weight: 700;
-      letter-spacing: 0.4px;
-    }
-    .hero-bio-links a {
-      color: var(--gold-light);
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .hero-bio-links a:hover {
-      text-decoration: underline;
-    }
     .hero-bio {
       color: rgba(255,255,255,0.8);
       font-size: 1rem;
       line-height: 1.8;
       max-width: 520px;
-      margin-bottom: 2rem;
+      margin-bottom: 0.8rem;
+    }
+    .hero-instagram {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+      margin-bottom: 1.4rem;
+    }
+    .hero-instagram a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .hero-instagram a:hover {
+      text-decoration: underline;
     }
     .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary {
@@ -487,7 +478,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   readonly heroBio = computed(() =>
     this.selectedArea() === 'odontologia'
       ? 'Atendimento odontológico com foco em estética, prevenção e funcionalidade, incluindo atuação técnica em perícia judicial odontológica e utilizando o profissionalismo de perito judicial para um atendimento ético e personalizado.'
-      : 'Atendimento em harmonização orofacial com planejamento individual, técnicas avançadas e foco em resultados naturais, seguros e proporcionais ao perfil de cada paciente, seja com tecnologia não invasiva ou com produtos injetáveis.',
+      : 'Atendimento em harmonização orofacial com planejamento individual, técnicas atualizadas e conduta baseada em avaliação clínica para cuidado seguro e personalizado.',
   );
 
   readonly showBottomMenu = computed(() =>
@@ -504,7 +495,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     if (this.selectedArea() === 'odontologia') {
       return [
         { label: 'Serviços', anchor: 'services-odontologia' },
-        { label: 'Antes e Depois', anchor: 'procedures-odontologia' },
         { label: 'Avaliações', anchor: 'reviews' },
         { label: 'Cartão Ouro', anchor: 'fidelity-card' },
         { label: 'Localização', anchor: 'location' },
@@ -514,7 +504,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     return [
       { label: 'Serviços', anchor: 'services-harmonizacao' },
       { label: 'Linha Anna Pegova', anchor: 'products' },
-      { label: 'Antes e Depois', anchor: 'procedures-harmonizacao' },
       { label: 'Cartão Ouro', anchor: 'gold-card' },
       { label: 'Localização', anchor: 'location' },
     ];
@@ -543,7 +532,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   );
 
   readonly secondaryCtaHref = computed(() =>
-    this.selectedArea() === 'odontologia' ? '#services-odontologia' : '#procedures-harmonizacao',
+    this.selectedArea() === 'odontologia' ? '#services-odontologia' : '#services-harmonizacao',
   );
 
   readonly primaryCtaLabel = computed(() =>
@@ -551,7 +540,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   );
 
   readonly secondaryCtaLabel = computed(() =>
-    this.selectedArea() === 'odontologia' ? 'Conheça a Odontologia' : 'Ver Procedimentos',
+    this.selectedArea() === 'odontologia' ? 'Conheça a Odontologia' : 'Conheça os Serviços',
   );
 
   setArea(area: AppArea): void {

@@ -9,17 +9,23 @@ import { SITE_CONFIG } from '../../config/site-config';
       <div class="section-container">
         <div class="section-header">
           <p class="section-eyebrow">O que oferecemos</p>
-          <h2 class="section-title">Serviços de Alta Performance</h2>
+          <h2 class="section-title">Serviços de Harmonização Orofacial</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Procedimentos de harmonização realizados sem ingestão de produtos e com máquinas de
-            tecnologia dermatológica, em uma abordagem personalizada para valorizar sua beleza com
-            naturalidade e segurança.
+            Procedimentos de harmonização realizados com avaliação individual, indicação clínica e
+            foco em segurança no atendimento.
           </p>
         </div>
         <div class="services-grid">
           @for (service of config.services; track service.title) {
             <div class="service-card">
+              <span
+                class="service-tag"
+                [class.service-tag-invasive]="service.invasiveness === 'Invasivo'"
+                [class.service-tag-noninvasive]="service.invasiveness === 'Não invasivo'"
+              >
+                {{ service.invasiveness }}
+              </span>
               <span class="service-icon">{{ service.icon }}</span>
               <h3 class="service-title">{{ service.title }}</h3>
               <p class="service-desc">{{ service.description }}</p>
@@ -107,7 +113,29 @@ import { SITE_CONFIG } from '../../config/site-config';
       border-radius: 16px;
       padding: 2rem;
       text-align: center;
+      position: relative;
       transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .service-tag {
+      position: absolute;
+      top: 0.9rem;
+      right: 0.9rem;
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      border: 1px solid transparent;
+    }
+    .service-tag-invasive {
+      background: rgba(234,67,53,0.14);
+      color: #ffb1a9;
+      border-color: rgba(234,67,53,0.35);
+    }
+    .service-tag-noninvasive {
+      background: rgba(39,174,96,0.14);
+      color: #9ce8c1;
+      border-color: rgba(39,174,96,0.35);
     }
     .service-card:hover {
       transform: translateY(-6px);
@@ -139,5 +167,5 @@ import { SITE_CONFIG } from '../../config/site-config';
 export class ServicesComponent {
   config = SITE_CONFIG;
   readonly sectionId = input('services-harmonizacao');
-  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, quero marcar uma avaliação de harmonização.')}`;
+  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Serviços Harmonização. Interesse: avaliação de harmonização.')}`;
 }

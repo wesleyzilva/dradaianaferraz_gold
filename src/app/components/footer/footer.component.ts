@@ -29,11 +29,18 @@ import { SITE_CONFIG } from '../../config/site-config';
               </a>
             </div>
             <app-mini-analytics></app-mini-analytics>
+            <a [href]="config.footer.privacyUrl" class="footer-tag legal-link" data-track="legal_privacy_view">
+              Política de Privacidade
+            </a>
+            <a [href]="config.footer.termsUrl" class="footer-tag legal-link" data-track="legal_terms_view">
+              Termos de Uso
+            </a>
             <p class="copyright">{{ config.footer.copyright }}</p>
             <span class="footer-tag">Última atualização: {{ config.footer.lastUpdated }}</span>
             <a [href]="technicalResponsibleMailto" class="footer-tag footer-email" aria-label="Enviar e-mail para responsável técnico">
               {{ config.footer.technicalResponsibleEmail }}
             </a>
+            <span class="disclaimer">{{ config.footer.disclaimer }}</span>
           </div>
         </div>
       </div>
@@ -45,7 +52,7 @@ import { SITE_CONFIG } from '../../config/site-config';
       border-top: 1px solid rgba(201,168,76,0.2);
     }
     .footer-top {
-      padding: 0 2rem;
+      padding: 0.8rem 2rem;
     }
     .footer-container {
       max-width: 1200px;
@@ -55,6 +62,7 @@ import { SITE_CONFIG } from '../../config/site-config';
       justify-content: center;
       min-height: 86px;
       gap: 1rem;
+      overflow: hidden;
     }
     .footer-main-row {
       width: 100%;
@@ -63,11 +71,14 @@ import { SITE_CONFIG } from '../../config/site-config';
       justify-content: center;
       flex-wrap: wrap;
       gap: 0.75rem;
+      overflow: hidden;
     }
     .social-links {
       display: flex;
       gap: 0.75rem;
       justify-content: center;
+      flex-wrap: wrap;
+      max-width: 100%;
     }
     .social-link {
       width: 40px;
@@ -121,20 +132,48 @@ import { SITE_CONFIG } from '../../config/site-config';
       background: rgba(201,168,76,0.14);
       border-color: rgba(201,168,76,0.45);
     }
+    .legal-link {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .legal-link:hover {
+      background: rgba(201,168,76,0.14);
+      border-color: rgba(201,168,76,0.45);
+    }
     .disclaimer {
       color: rgba(255,255,255,0.3);
       font-size: 0.75rem;
+      text-align: center;
     }
 
     @media (max-width: 900px) {
       .footer-container { min-height: 90px; }
+      .footer-main-row { gap: 0.65rem; }
     }
     @media (max-width: 500px) {
       .footer-top { padding: 0 1rem; }
       .footer-container { min-height: 96px; }
-      .footer-main-row { gap: 0.55rem; }
+      .footer-main-row {
+        gap: 0.55rem;
+        flex-direction: column;
+      }
+      .social-links { width: 100%; }
       .footer-tag { font-size: 0.72rem; }
       .copyright { font-size: 0.78rem; }
+
+      .footer-main-row > :not(.social-links) {
+        display: none;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-container {
+        min-height: 72px;
+      }
     }
   `],
 })
