@@ -1,9 +1,11 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
+
+type Invasiveness = 'Invasivo' | 'Não invasivo';
 
 @Component({
   selector: 'app-services',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="services-section" [id]="sectionId()">
       <div class="section-container">
@@ -15,17 +17,32 @@ import { SITE_CONFIG } from '../../config/site-config';
             Procedimentos de harmonização realizados com avaliação individual, indicação clínica e
             foco em segurança no atendimento.
           </p>
+
+          <div class="services-filter" role="group" aria-label="Filtrar procedimentos por tipo">
+            <button
+              type="button"
+              class="filter-btn"
+              [class.filter-btn-active]="selectedInvasiveness() === 'Não invasivo'"
+              [attr.aria-pressed]="selectedInvasiveness() === 'Não invasivo'"
+              (click)="setInvasiveness('Não invasivo')"
+            >
+              Não invasivo
+            </button>
+            <button
+              type="button"
+              class="filter-btn"
+              [class.filter-btn-active]="selectedInvasiveness() === 'Invasivo'"
+              [attr.aria-pressed]="selectedInvasiveness() === 'Invasivo'"
+              (click)="setInvasiveness('Invasivo')"
+            >
+              Invasivo
+            </button>
+          </div>
+          <p class="filter-description">{{ invasivenessDescription() }}</p>
         </div>
         <div class="services-grid">
-          @for (service of config.services; track service.title) {
+          @for (service of filteredServices(); track service.title) {
             <div class="service-card">
-              <span
-                class="service-tag"
-                [class.service-tag-invasive]="service.invasiveness === 'Invasivo'"
-                [class.service-tag-noninvasive]="service.invasiveness === 'Não invasivo'"
-              >
-                {{ service.invasiveness }}
-              </span>
               <span class="service-icon">{{ service.icon }}</span>
               <h3 class="service-title">{{ service.title }}</h3>
               <p class="service-desc">{{ service.description }}</p>
@@ -86,6 +103,37 @@ import { SITE_CONFIG } from '../../config/site-config';
       margin: 0 auto;
       line-height: 1.8;
     }
+    .services-filter {
+      margin: 1rem auto 0.6rem;
+      display: inline-flex;
+      gap: 0.35rem;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 999px;
+      padding: 0.2rem;
+      background: rgba(255,255,255,0.03);
+    }
+    .filter-btn {
+      border: 0;
+      background: transparent;
+      color: rgba(255,255,255,0.82);
+      border-radius: 999px;
+      padding: 0.38rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .filter-btn-active {
+      background: var(--gold);
+      color: var(--dark);
+    }
+    .filter-description {
+      margin: 0.25rem auto 0;
+      max-width: 760px;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -113,29 +161,7 @@ import { SITE_CONFIG } from '../../config/site-config';
       border-radius: 16px;
       padding: 2rem;
       text-align: center;
-      position: relative;
       transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    }
-    .service-tag {
-      position: absolute;
-      top: 0.9rem;
-      right: 0.9rem;
-      border-radius: 999px;
-      padding: 0.2rem 0.6rem;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      border: 1px solid transparent;
-    }
-    .service-tag-invasive {
-      background: rgba(234,67,53,0.14);
-      color: #ffb1a9;
-      border-color: rgba(234,67,53,0.35);
-    }
-    .service-tag-noninvasive {
-      background: rgba(39,174,96,0.14);
-      color: #9ce8c1;
-      border-color: rgba(39,174,96,0.35);
     }
     .service-card:hover {
       transform: translateY(-6px);
@@ -167,5 +193,23 @@ import { SITE_CONFIG } from '../../config/site-config';
 export class ServicesComponent {
   config = SITE_CONFIG;
   readonly sectionId = input('services-harmonizacao');
+  readonly selectedInvasiveness = signal<Invasiveness>('Não invasivo');
+
+  readonly filteredServices = computed(() =>
+    this.config.services.filter(
+      (service) => service.invasiveness === this.selectedInvasiveness(),
+    ),
+  );
+
+  readonly invasivenessDescription = computed(() =>
+    this.selectedInvasiveness() === 'Não invasivo'
+      ? 'Procedimentos não invasivos atuam na pele sem cortes, com recuperação mais rápida e foco em melhora progressiva de textura, viço e sustentação.'
+      : 'Procedimentos invasivos envolvem aplicação injetável ou técnica minimamente invasiva, com planejamento clínico para correções estruturais e resultados mais direcionados.',
+  );
+
   readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Serviços Harmonização. Interesse: avaliação de harmonização.')}`;
+
+  setInvasiveness(value: Invasiveness): void {
+    this.selectedInvasiveness.set(value);
+  }
 }
