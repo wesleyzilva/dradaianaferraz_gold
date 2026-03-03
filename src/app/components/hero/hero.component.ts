@@ -48,7 +48,7 @@ type BottomMenuLink = {
       </div>
     </nav>
 
-    @if (showBottomMenu() && !isFooterVisible()) {
+    @if (showBottomMenu() && (!isFooterVisible() || isMobileViewport())) {
       <div class="bottom-nav">
         <button
           type="button"
@@ -108,7 +108,7 @@ type BottomMenuLink = {
           <p class="hero-bio">{{ heroBio() }}</p>
           <p class="hero-instagram">
             Venha conhecer em
-            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer">@dradaianaferraz</a>
+            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer">@dradaianaferrazsc</a>
             no Instagram.
           </p>
           <div class="hero-cta">
@@ -460,6 +460,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   config = SITE_CONFIG;
   readonly isBottomMenuMinimized = signal(false);
   readonly isFooterVisible = signal(false);
+  readonly isMobileViewport = signal(false);
   private footerObserver?: IntersectionObserver;
 
   readonly selectedArea = input<AppArea>('harmonizacao');
@@ -558,17 +559,24 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.isMobileViewport.set(window.matchMedia('(max-width: 900px)').matches);
+
     const footerElement = document.querySelector('app-footer .footer');
     if (!footerElement) {
       return;
     }
+
+    const rootMarginBottom = this.isMobileViewport() ? '0px' : '180px';
 
     this.footerObserver = new IntersectionObserver(
       (entries) => {
         const visible = entries.some((entry) => entry.isIntersecting);
         this.isFooterVisible.set(visible);
       },
-      { threshold: 0.05 },
+      {
+        threshold: 0,
+        rootMargin: `0px 0px ${rootMarginBottom} 0px`,
+      },
     );
 
     this.footerObserver.observe(footerElement);

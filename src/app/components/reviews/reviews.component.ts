@@ -52,7 +52,7 @@ type ReviewItem = {
 
         <div class="reviews-cta">
           <a [href]="config.social.googleBusiness" target="_blank" rel="noopener noreferrer" class="btn-google" data-track="social_google_reviews_cta">
-            <i class="fab fa-google"></i> Ver todas as avaliações no Google
+            <i class="fab fa-google"></i> Google: 119 opiniões · 4.9 estrelas
           </a>
           <a [href]="config.social.doctoralia" target="_blank" rel="noopener noreferrer" class="btn-doctoralia" data-track="social_doctoralia_reviews_cta">
             <i class="fas fa-user-doctor"></i> Doctoralia: 21 opiniões · 5 estrelas
