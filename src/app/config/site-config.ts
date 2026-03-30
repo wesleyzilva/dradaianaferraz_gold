@@ -292,8 +292,8 @@ export const SITE_CONFIG = {
     lastUpdated: '03/03/2026 14:00',
     technicalResponsible: 'Wesley Silva · wesley.zilva@gmail.com',
     technicalResponsibleEmail: 'wesley.zilva@gmail.com',
-    privacyUrl: '/politica-de-privacidade.html',
-    termsUrl: '/termos-de-uso.html',
+    privacyUrl: '/dradaianaferraz_gold/politica-de-privacidade.html',
+    termsUrl: '/dradaianaferraz_gold/termos-de-uso.html',
     disclaimer: 'Procedimentos realizados por dentista habilitada. Resultados podem variar.',
   },
 };
