@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
     name: 'Dra. Daiana Ferraz',
     title: 'Harmonização Orofacial e Odontologia Estética em São Carlos/SP',
     crm: 'CRO/SP 93910',
-    photo: '/images/daiana/daiana1.jpg',
+    photo: 'assets/daiana/daiana.jpg',
     bio: 'Atendimento em harmonização orofacial e odontologia estética em São Carlos/SP, com avaliação individual, planejamento clínico e foco em segurança do paciente.',
     whatsapp: 'https://wa.me/5516991400423',
   },
