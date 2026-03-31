@@ -20,6 +20,8 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <span class="info-icon">📍</span>
                 <div>
                   <strong>Rota da sua localização até nosso endereço</strong>
+                  <br />
+                  <span class="address-hint">(clique no endereço abaixo)</span>
                   <a
                     [href]="directionsUrl"
                     target="_blank"
@@ -39,7 +41,7 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <span class="info-icon">📞</span>
                 <div>
                   <strong>Telefone / WhatsApp</strong>
-                  <p>{{ config.location.phone }}</p>
+                  <a [href]="'tel:+5516991400423'" class="phone-link" style="color:#f3f3f3; text-decoration:none;">+55 16 99140-0423</a>
                 </div>
               </li>
               <li>

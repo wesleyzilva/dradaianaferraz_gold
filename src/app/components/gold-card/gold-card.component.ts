@@ -350,7 +350,7 @@ export class GoldCardComponent {
         ]
       : [
           'Ultrassom Microfocado',
-          'Toxina Botulínica (Botox)',
+          'Toxina Botulínica',
           'Preenchimento Labial',
           'Skinbooster',
           'Bioestimuladores de Colágeno',

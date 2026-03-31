@@ -1,0 +1,13 @@
+.phone-link,
+.phone-link:visited,
+.phone-link:active,
+.phone-link:hover {
+  color: #c24040 !important;
+  text-decoration: none !important;
+  outline: none;
+}
+.address-hint {
+  font-size: 0.5em;
+  color: #888;
+  font-weight: normal;
+}

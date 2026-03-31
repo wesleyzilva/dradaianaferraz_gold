@@ -473,7 +473,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   readonly heroTitle = computed(() =>
     this.selectedArea() === 'odontologia'
       ? 'Odontologia Estética em São Carlos: Facetas, Clareamento e Prevenção'
-      : 'Harmonização Orofacial em São Carlos: Botox, Preenchimento e Peeling',
+      : 'Harmonização Orofacial em São Carlos: Toxina Botulínica, Preenchimento e Peeling',
   );
 
   readonly heroBio = computed(() =>
@@ -521,7 +521,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
         ]
       : [
           'Ultrassom Microfocado',
-          'Toxina Botulínica (Botox)',
+          'Toxina Botulínica',
           'Preenchimento Labial',
           'Skinbooster',
           'Bioestimuladores de Colágeno',

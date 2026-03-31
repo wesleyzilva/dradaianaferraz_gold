@@ -31,7 +31,7 @@ export const SITE_CONFIG = {
     },
     {
       icon: '💉',
-      title: 'Toxina Botulínica (Botox)',
+      title: 'Toxina Botulínica',
       invasiveness: 'Invasivo',
       description: 'Aplicação com indicação clínica para manejo de linhas de expressão, com planejamento conforme características de cada paciente.',
     },
@@ -289,11 +289,11 @@ export const SITE_CONFIG = {
 
   footer: {
     copyright: `© ${new Date().getFullYear()} Dra. Daiana Ferraz`,
-    lastUpdated: '03/03/2026 14:00',
+    lastUpdated: '31/03/2026 23:00',
     technicalResponsible: 'Wesley Silva · wesley.zilva@gmail.com',
     technicalResponsibleEmail: 'wesley.zilva@gmail.com',
-    privacyUrl: '/dradaianaferraz_gold/politica-de-privacidade.html',
-    termsUrl: '/dradaianaferraz_gold/termos-de-uso.html',
+    privacyUrl: 'politica-de-privacidade.html',
+    termsUrl: 'termos-de-uso.html',
     disclaimer: 'Procedimentos realizados por dentista habilitada. Resultados podem variar.',
   },
 };
