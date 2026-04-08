@@ -58,6 +58,8 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
   private readonly visitsKey = 'ddf_total_visits';
   private readonly clickStatsKey = 'ddf_click_stats';
   private readonly sessionKey = 'ddf_session_counted';
+  private readonly firstVisitKey = 'ddf_first_visit';
+  private readonly visitLogKey = 'ddf_visit_log';
 
   readonly visits = signal(0);
   readonly clickStats = signal<ClickStatsMap>({});
@@ -96,13 +98,24 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
   }
 
   private initVisits(): void {
+    const now = new Date().toISOString();
     const currentVisits = Number(localStorage.getItem(this.visitsKey) ?? '0');
     let updatedVisits = currentVisits;
+
+    if (!localStorage.getItem(this.firstVisitKey)) {
+      localStorage.setItem(this.firstVisitKey, now);
+    }
 
     if (!sessionStorage.getItem(this.sessionKey)) {
       updatedVisits += 1;
       localStorage.setItem(this.visitsKey, String(updatedVisits));
       sessionStorage.setItem(this.sessionKey, '1');
+
+      const rawLog = localStorage.getItem(this.visitLogKey);
+      const log: string[] = rawLog ? (JSON.parse(rawLog) as string[]) : [];
+      log.push(now);
+      if (log.length > 100) { log.splice(0, log.length - 100); }
+      localStorage.setItem(this.visitLogKey, JSON.stringify(log));
     }
 
     this.visits.set(updatedVisits);

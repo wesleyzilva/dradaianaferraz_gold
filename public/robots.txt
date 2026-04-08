@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /dradaianaferraz_gold/painel.html
+Disallow: /painel.html
+Allow: /

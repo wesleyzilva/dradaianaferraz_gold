@@ -1,4 +1,7 @@
-﻿pontuacao,categoria,numero,nome,genero_inferido,idade,data_nasc_str,sexo,doc,ultima_evolucao,ultima_consulta_data,ultima_consulta_status,orcamento_aberto,orcamento_valor,fonte,notas_resumo,mensagem
+﻿agora preciso de um sistema que execute e chame o whatapp web ou via json ou qq outra forma mais sistemica e envie todas estas mensagens e tenha um log para eviarmos duplicidade de envio erros de aplicação e um resumo do que rolou e se deu problemas evidencia-los.
+
+
+pontuacao,categoria,numero,nome,genero_inferido,idade,data_nasc_str,sexo,doc,ultima_evolucao,ultima_consulta_data,ultima_consulta_status,orcamento_aberto,orcamento_valor,fonte,notas_resumo,mensagem
 61,aniversario,11979690955,Amanda Lemos de Almeida,F,39 anos,14 de abr. de 1987,F,35917451893,,19/06/2018,Agendada,,,pacientes_csv,,"🎂 *Parabéns, Amanda!*
 
 Querida Amanda, soubemos que você faz aniversário este mês e queríamos celebrar junto com você! 🥳
