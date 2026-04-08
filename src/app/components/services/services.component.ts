@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
+import { ImageCarouselComponent } from '../image-carousel/image-carousel.component';
 
 type Invasiveness = 'Invasivo' | 'Não invasivo';
 
 @Component({
   selector: 'app-services',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [ImageCarouselComponent],
   template: `
     <section class="services-section" [id]="sectionId()">
       <div class="section-container">
@@ -72,6 +75,16 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
             </div>
           }
         </div>
+
+        <!-- Carrossel de imagens por tipo -->
+        <div class="carousel-block">
+          <app-image-carousel
+            [images]="carouselImages()"
+            [title]="carouselTitle()"
+            ariaLabel="Imagens dos procedimentos de harmonização"
+          ></app-image-carousel>
+        </div>
+
         <div class="faq-strip" aria-label="Dúvidas frequentes sobre harmonização">
           <div class="faq-item">
             <span class="faq-q">💊 Dói?</span>
@@ -273,6 +286,9 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
       padding-top: 1.2rem;
       flex-shrink: 0;
     }
+    .carousel-block {
+      margin-top: 1rem;
+    }
     /* FAQ Strip harmonização */
     .faq-strip {
       display: grid;
@@ -315,6 +331,16 @@ export class ServicesComponent {
     this.config.services.filter(
       (service) => service.invasiveness === this.selectedInvasiveness(),
     ),
+  );
+
+  readonly carouselImages = computed(() =>
+    this.selectedInvasiveness() === 'Invasivo'
+      ? this.config.imagesHarmonizacaoInvasivo
+      : this.config.imagesHarmonizacaoNaoInvasivo,
+  );
+
+  readonly carouselTitle = computed(() =>
+    this.selectedInvasiveness() === 'Invasivo' ? 'Procedimentos Invasivos' : 'Procedimentos Não Invasivos',
   );
 
   readonly invasivenessDescription = computed(() =>

@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
+import { ImageCarouselComponent } from '../image-carousel/image-carousel.component';
 
 @Component({
   selector: 'app-odontology',
   standalone: true,
+  imports: [ImageCarouselComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="odontology-section" [id]="sectionId()">
@@ -44,6 +46,14 @@ import { SITE_CONFIG } from '../../config/site-config';
               <p class="odontology-description">{{ service.description }}</p>
             </article>
           }
+        </div>
+
+        <div class="carousel-block">
+          <app-image-carousel
+            [images]="config.imagesOdontologia"
+            title="Conheça os Procedimentos"
+            ariaLabel="Imagens dos procedimentos odontológicos"
+          ></app-image-carousel>
         </div>
 
         @if (orthodonticsService) {
@@ -175,6 +185,10 @@ import { SITE_CONFIG } from '../../config/site-config';
         color: rgba(255, 255, 255, 0.72);
         line-height: 1.7;
         font-size: 0.92rem;
+      }
+
+      .carousel-block {
+        margin-top: 0.75rem;
       }
 
       .specialty-section {

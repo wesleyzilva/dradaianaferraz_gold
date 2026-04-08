@@ -352,6 +352,33 @@ export const SITE_CONFIG = {
     },
   },
 
+  imagesHarmonizacaoInvasivo: [
+    { src: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp',               label: 'Toxina Botulínica' },
+    { src: 'assets/servicosHarmonizacao/invasivo/Preenchimento.webp',            label: 'Preenchimento Labial' },
+    { src: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp', label: 'Preenchimento com AH' },
+    { src: 'assets/servicosHarmonizacao/invasivo/MicroAgulhamento.webp',         label: 'Microagulhamento' },
+  ],
+
+  imagesHarmonizacaoNaoInvasivo: [
+    { src: 'assets/servicosHarmonizacao/naoInvasivo/UltrassomMicrofocado.webp',  label: 'Ultrassom Microfocado' },
+    { src: 'assets/servicosHarmonizacao/naoInvasivo/Peeling.webp',               label: 'Peeling Coreano' },
+    { src: 'assets/servicosHarmonizacao/naoInvasivo/laser-EmBreve.webp',         label: 'Laser', comingSoon: true },
+    { src: 'assets/servicosHarmonizacao/naoInvasivo/RadioFrequencia-EmBreve.webp', label: 'Radiofrequência', comingSoon: true },
+  ],
+
+  imagesOdontologia: [
+    { src: 'assets/servicosDentista/cameraIntraOral.webp',       label: 'Câmera Intraoral' },
+    { src: 'assets/servicosDentista/clareamentoCOnsultorio.jpg', label: 'Clareamento de Consultório' },
+    { src: 'assets/servicosDentista/clareamentoCaseiro.jpg',     label: 'Clareamento Caseiro' },
+    { src: 'assets/servicosDentista/facetasCeramica.webp',       label: 'Facetas de Cerâmica' },
+    { src: 'assets/servicosDentista/facetasResina.webp',         label: 'Facetas de Resina' },
+    { src: 'assets/servicosDentista/ProtesePonteFixa.jpg',       label: 'Prótese / Ponte Fixa' },
+    { src: 'assets/servicosDentista/ProteseProtocolo.webp',      label: 'Prótese Protocolo' },
+    { src: 'assets/servicosDentista/bruximoPlaca.png',           label: 'Placa para Bruxismo' },
+    { src: 'assets/servicosDentista/BruxismoAcido.webp',         label: 'Bruxismo e Erosão' },
+    { src: 'assets/servicosDentista/ortodontia.jpg',             label: 'Ortodontia' },
+  ],
+
   beforeAfterHarmonizacao: [
     { label: 'Preenchimento Labial', before: null, after: 'assets/servicosHarmonizacao/Preenchimento.webp' },
     { label: 'Bioestimulador de Colágeno', before: null, after: 'assets/servicosHarmonizacao/MicroAgulhamento.webp' },
