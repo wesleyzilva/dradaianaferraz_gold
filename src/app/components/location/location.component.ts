@@ -61,7 +61,7 @@ import { SITE_CONFIG } from '../../config/site-config';
             </ul>
             <div class="location-actions">
               <a [href]="locationWhatsappUrl" target="_blank" class="btn-whatsapp" data-track="conversion_whatsapp_location">
-                <i class="fab fa-whatsapp"></i> Fale no WhatsApp
+                <i class="fab fa-whatsapp"></i> Ainda com dúvidas?
               </a>
               <a [href]="uberUrl" target="_blank" rel="noopener noreferrer" class="btn-uber" data-track="conversion_uber">
                 <i class="fab fa-uber"></i> Solicitar Uber
@@ -348,7 +348,7 @@ export class LocationComponent {
     );
     this.directionsUrl = 'https://www.google.com/maps/dir/-22.0193407,-47.8610045/Dra.+Daiana+Ferraz+-+Dentista+-+Odontologia+e+est%C3%A9tica+facial,+Bal%C3%A3o+do+Bonde+-+Av.+Cap.+Lu%C3%ADz+Brand%C3%A3o,+26+-+Vila+Nery,+S%C3%A3o+Carlos+-+SP,+13568-450/@-22.0111719,-47.8752257,15z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x94b87a644aeab935:0xa1a9250e71d0aad2!2m2!1d-47.8728271!2d-22.0126285!3e0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D';
     this.uberUrl = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${destination}`;
-    this.locationWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Localização. Interesse: agendamento e endereço.')}`;
+    this.locationWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Vim da página e meu nome é ')}`;
     this.locationEmailMailto = `mailto:${this.config.location.email}?subject=${encodeURIComponent('Contato pela landing page [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pela landing page.\n\nTag: viaLandPage\n')}`;
   }
 
