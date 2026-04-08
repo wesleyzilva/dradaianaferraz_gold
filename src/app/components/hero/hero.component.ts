@@ -98,7 +98,7 @@ type BottomMenuLink = {
       <div class="hero-overlay"></div>
       <div class="hero-content" id="hero-content">
         <div class="hero-photo-wrapper">
-          <img [src]="config.professional.photo" [alt]="config.professional.name" class="hero-photo" />
+          <img [src]="heroPhoto()" [alt]="config.professional.name" class="hero-photo" />
         </div>
         <div class="hero-text">
           <p class="hero-eyebrow">{{ heroEyebrow() }}</p>
@@ -458,6 +458,12 @@ type BottomMenuLink = {
 })
 export class HeroComponent implements AfterViewInit, OnDestroy {
   config = SITE_CONFIG;
+  readonly heroPhoto = signal(
+    (() => {
+      const photos = this.config.professional.photos;
+      return photos[Math.floor(Math.random() * photos.length)];
+    })(),
+  );
   readonly isBottomMenuMinimized = signal(false);
   readonly isFooterVisible = signal(false);
   readonly isMobileViewport = signal(false);
