@@ -9,29 +9,30 @@ import type { AppArea } from '../../app';
     <section class="procedures-section" [id]="sectionId()">
       <div class="section-container">
         <div class="section-header">
-          <p class="section-eyebrow">Resultados Reais</p>
-          <h2 class="section-title">Antes & Depois</h2>
+          <p class="section-eyebrow">Nossos Tratamentos</p>
+          <h2 class="section-title">Conheça os Procedimentos</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Veja transformações reais que combinam técnica, precisão e naturalidade para revelar a melhor versão de cada paciente.
+            Técnica, precisão e cuidado em cada procedimento para revelar a melhor versão de você.
           </p>
         </div>
 
         <div class="carousel-wrapper">
           <div class="carousel-slide">
-            <div class="procedure-name">{{ currentProcedure.name }}</div>
-            <div class="comparison-grid">
-              <div class="comparison-item">
-                <span class="comparison-label">Antes</span>
-                <img [src]="currentProcedure.beforeImage" [alt]="'Antes - ' + currentProcedure.name" class="comparison-img" />
-              </div>
-              <div class="comparison-divider">
-                <span class="divider-text">VS</span>
-              </div>
-              <div class="comparison-item">
-                <span class="comparison-label after">Depois</span>
-                <img [src]="currentProcedure.afterImage" [alt]="'Depois - ' + currentProcedure.name" class="comparison-img" />
-              </div>
+            <div class="procedure-name">
+              {{ currentProcedure.name }}
+              @if (currentProcedure.comingSoon) {
+                <span class="badge-em-breve">Em Breve</span>
+              }
+            </div>
+            <div class="image-wrapper">
+              <img [src]="currentProcedure.image" [alt]="currentProcedure.name" class="procedure-img" />
+              @if (currentProcedure.comingSoon) {
+                <div class="overlay-em-breve">
+                  <i class="fas fa-clock"></i>
+                  <span>Em Breve</span>
+                </div>
+              }
             </div>
           </div>
 
@@ -109,59 +110,55 @@ import type { AppArea } from '../../app';
       font-size: 1.3rem;
       text-align: center;
       margin-bottom: 1.5rem;
-    }
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-    .comparison-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .comparison-label {
-      background: rgba(136,136,136,0.8);
-      color: var(--white);
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.3rem 1.2rem;
-      border-radius: 20px;
-    }
-    .comparison-label.after {
-      background: rgba(201,168,76,0.85);
-      color: var(--dark);
-    }
-    .comparison-img {
-      width: 100%;
-      max-width: 380px;
-      height: 440px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid rgba(201,168,76,0.25);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    .comparison-divider {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      border-radius: 50%;
-      flex-shrink: 0;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
-    .divider-text {
+    .badge-em-breve {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
       color: var(--dark);
-      font-size: 0.75rem;
-      font-weight: 800;
-      letter-spacing: 1px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      vertical-align: middle;
     }
+    .image-wrapper {
+      position: relative;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+    .procedure-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 2px solid rgba(201,168,76,0.3);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.5);
+      display: block;
+    }
+    .overlay-em-breve {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      backdrop-filter: blur(2px);
+    }
+    .overlay-em-breve i { font-size: 2rem; }
 
     .carousel-controls {
       display: flex;
@@ -208,16 +205,7 @@ import type { AppArea } from '../../app';
 
     @media (max-width: 700px) {
       .procedures-section { padding: 4rem 1rem; }
-      .comparison-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-      }
-      .comparison-divider {
-        width: 40px;
-        height: 40px;
-        margin: 0 auto;
-      }
-      .comparison-img { height: 260px; }
+      .procedure-img { height: 280px; }
     }
   `],
 })
@@ -231,8 +219,8 @@ export class ProceduresComponent {
     this.area() === 'odontologia' ? this.config.proceduresOdontologia : this.config.proceduresHarmonizacao,
   );
 
-  get currentProcedure() {
-    return this.procedures()[this.currentIndex];
+  get currentProcedure(): { name: string; image: string; comingSoon?: boolean } {
+    return this.procedures()[this.currentIndex] as { name: string; image: string; comingSoon?: boolean };
   }
 
   prev() {
