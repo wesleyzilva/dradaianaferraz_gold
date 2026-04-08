@@ -16,9 +16,6 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
           <p class="section-eyebrow">O que oferecemos</p>
           <h2 class="section-title">Serviços de Harmonização Orofacial</h2>
           <div class="gold-line"></div>
-          <p class="section-subtitle">
-            Avaliação individualizada, planejamento junto com você e acompanhamento do início ao fim — do primeiro contato ao retorno pós-procedimento.
-          </p>
 
           <!-- Planejamento junto com você: Antes, Durante e Depois -->
           <div class="jornada-wrapper" aria-label="Etapas do atendimento de harmonização">
@@ -65,15 +62,6 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
             </button>
           </div>
           <p class="filter-description">{{ invasivenessDescription() }}</p>
-        </div>
-        <div class="services-grid">
-          @for (service of filteredServices(); track service.title) {
-            <div class="service-card">
-              <span class="service-icon">{{ service.icon }}</span>
-              <h3 class="service-title">{{ service.title }}</h3>
-              <p class="service-desc">{{ service.description }}</p>
-            </div>
-          }
         </div>
 
         <!-- Carrossel de imagens por tipo -->
@@ -151,12 +139,6 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
       margin: 0 auto 1.5rem;
       border-radius: 2px;
     }
-    .section-subtitle {
-      color: rgba(255,255,255,0.65);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
     .services-filter {
       margin: 1rem auto 0.6rem;
       display: inline-flex;
@@ -188,11 +170,6 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
       font-size: 0.88rem;
       line-height: 1.65;
     }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
     .services-cta {
       margin-top: 1.4rem;
       text-align: center;
@@ -208,35 +185,6 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
       font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
-    }
-    .service-card {
-      background: var(--dark);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    }
-    .service-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--gold);
-      box-shadow: 0 12px 40px rgba(201,168,76,0.15);
-    }
-    .service-icon {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 1rem;
-    }
-    .service-title {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold);
-      font-size: 1.15rem;
-      margin-bottom: 0.75rem;
-    }
-    .service-desc {
-      color: rgba(255,255,255,0.7);
-      font-size: 0.92rem;
-      line-height: 1.7;
     }
     /* Jornada Antes / Durante / Depois */
     .jornada-wrapper {
@@ -316,7 +264,6 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
     }
     @media (max-width: 600px) {
       .services-section { padding: 4rem 1rem; }
-      .services-grid { grid-template-columns: 1fr; }
       .jornada-steps { flex-direction: column; align-items: center; gap: 0.25rem; }
       .jornada-connector { padding-top: 0; transform: rotate(90deg); }
     }
@@ -326,12 +273,6 @@ export class ServicesComponent {
   config = SITE_CONFIG;
   readonly sectionId = input('services-harmonizacao');
   readonly selectedInvasiveness = signal<Invasiveness>('Não invasivo');
-
-  readonly filteredServices = computed(() =>
-    this.config.services.filter(
-      (service) => service.invasiveness === this.selectedInvasiveness(),
-    ),
-  );
 
   readonly carouselImages = computed(() =>
     this.selectedInvasiveness() === 'Invasivo'

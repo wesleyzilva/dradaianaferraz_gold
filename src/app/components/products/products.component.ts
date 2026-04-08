@@ -15,8 +15,7 @@ import { SITE_CONFIG } from '../../config/site-config';
           <div class="anna-callout" data-track="anna-pegova-amostras">
             <i class="fas fa-vial"></i>
             <p>
-              Produtos Anna Pegova para uso diário como complemento aos procedimentos — suporte contínuo
-              entre as sessões para manutenção e potencialização dos resultados.
+              Produtos Anna Pegova para uso diário como complemento aos procedimentos, mantendo e potencializando resultados.
             </p>
             <a
               [href]="annaPegovaWhatsappUrl"
