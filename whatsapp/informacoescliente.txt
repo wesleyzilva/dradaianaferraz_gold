@@ -25099,26 +25099,3 @@ Mensagens
 Você ainda não enviou nenhuma mensagem para este paciente
 Comunicação
 Permitir o envio de:
-
-Você me pediu para criar uma solução de engenharia de dados e automação de marketing para a Dra. Daiana Ferraz. O objetivo principal é gerar uma lista unificada de contatos para disparos personalizados de WhatsApp.
-
-Aqui está o resumo dos requisitos que você definiu e que eu implementei no código:
-
-Unificação de Fontes: Cruzar os dados do arquivo contacts.csv (Google Contatos) com a Listagem_pacientes...csv (seu sistema de gestão), priorizando as informações mais ricas da lista de pacientes.
-Filtros de Segmentação:
-Campanha Letra A: Incluir apenas pessoas cujo nome começa com a letra "A".
-Exclusão Profissional: Identificar e remover "Dentistas" e "Protesistas" para não enviar propaganda para concorrentes/parceiros técnicos.
-Matriz de Priorização de Mensagens:
-Aniversariantes: Quem fez aniversário nos últimos 15 dias ou fará este mês ganha um voucher de serviço.
-Agenda Ativa: Clientes atuais recebem dicas de cuidados (mencionando produtos Ana Pegova).
-Orçamentos em Aberto: Mensagem de reaquecimento para converter o tratamento.
-Pacientes Antigos: Convite para retorno, visitas ao novo site ou redes sociais, com foco em acolhimento e família.
-Humanização e Tom de Voz:
-Gênero: Tom mais próximo/afetuoso para mulheres e mais profissional para homens.
-Dia da Semana: Inserção de um comentário descontraído sobre ser "quarta-feira" e o hábito de se organizar para a semana seguinte.
-Assinatura: Padronizada como Dra. Daiana Ferraz, incluindo links para Instagram, Site (GitHub) e Google Maps.
-Entrega Técnica:
-Um script em Python que automatiza tudo isso.
-A criação de uma pasta separada para organizar os resultados.
-Um arquivo CSV final pronto com as colunas: numero, nome e mensagem.
-Em resumo, você pediu um "motor de mensagens" que transforme planilhas brutas em uma lista de conversas altamente personalizadas e prontas para converter.
