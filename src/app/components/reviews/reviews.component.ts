@@ -57,7 +57,7 @@ type SentimentGroup = {
 
                 <div class="card-back" (click)="$event.stopPropagation()">
                   <div class="back-topbar">
-                    <span class="back-group-name" aria-hidden="true">{{ group.emoji }} {{ group.label }}</span>
+                     <span class="back-group-name" aria-hidden="true">{{ group.emoji }} {{ group.label }}</span>
                     <button
                       class="btn-voltar"
                       (click)="flipClose(group.id)"

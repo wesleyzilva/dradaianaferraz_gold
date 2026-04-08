@@ -301,7 +301,7 @@ export const SITE_CONFIG = {
     title: 'Voucher Ouro · Harmonização',
     subtitle: 'Indique alguém e ganhe um serviço exclusivo',
     description:
-      'Pacientes de harmonização podem indicar amigos e familiares. Quando a pessoa indicada fechar um procedimento, você ganha um serviço exclusivo — tudo a combinar diretamente com a Dra. Daiana.',
+      'Pacientes de harmonização podem indicar amigos e familiares. Quando a pessoa indicada fechar um procedimento, você ganha um serviço exclusivo — tudo a combinar diretamente com a Dra. Daiana (Até sua corrida do Uber?) !',
     benefits: [
       'Voucher válido em serviços de harmonização selecionados',
       'Quem indica e fecha: ganha um serviço exclusivo à combinar',

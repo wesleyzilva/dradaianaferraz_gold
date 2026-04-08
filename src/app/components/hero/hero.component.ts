@@ -464,7 +464,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       return photos[Math.floor(Math.random() * photos.length)];
     })(),
   );
-  readonly isBottomMenuMinimized = signal(false);
+  readonly isBottomMenuMinimized = signal(true);
   readonly isFooterVisible = signal(false);
   readonly isMobileViewport = signal(false);
   private footerObserver?: IntersectionObserver;
@@ -501,17 +501,16 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   readonly bottomMenuLinks = computed<BottomMenuLink[]>(() => {
     if (this.selectedArea() === 'odontologia') {
       return [
-        { label: 'Serviços', anchor: 'services-odontologia' },
+        { label: 'Odontologia', anchor: 'services-odontologia', description: 'Odontologia Estética em São Carlos: Facetas, Clareamento e Prevenção apenas Odontologia para saúde bucal e estética.' },
         { label: 'Avaliações', anchor: 'reviews' },
-        { label: 'Voucher Ouro', anchor: 'fidelity-card' },
         { label: 'Localização', anchor: 'location' },
       ];
     }
 
     return [
-      { label: 'Serviços', anchor: 'services-harmonizacao' },
+      { label: 'Serviços', anchor: 'services-harmonizacao', description: 'Harmonização Orofacial em São Carlos: Toxina Botulínica, Preenchimento e Peeling conheça nossos serviços.' },
+      { label: 'Avaliações', anchor: 'reviews' },
       { label: 'Linha Anna Pegova', anchor: 'products' },
-      { label: 'Voucher Ouro', anchor: 'gold-card' },
       { label: 'Localização', anchor: 'location' },
     ];
   });

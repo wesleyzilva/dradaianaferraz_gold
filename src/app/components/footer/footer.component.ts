@@ -12,11 +12,21 @@ import { SITE_CONFIG } from '../../config/site-config';
         <div class="footer-container">
           <div class="footer-main-row">
             <div class="social-links">
-              <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">Instagram</a>
-              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link" data-track="social_doctoralia">Doctoralia</a>
-              <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link" data-track="social_linkedin">LinkedIn</a>
-              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link" data-track="social_lattes">Lattes</a>
-              <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link" data-track="social_google_business">Google</a>
+              <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#E1306C"/><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8A4.8 4.8 0 1 0 12 7.2Z" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg>
+              </a>
+              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link" data-track="social_doctoralia">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#00C6AE"/><path d="M12 6.5C13.933 6.5 15.5 8.067 15.5 10C15.5 11.933 13.933 13.5 12 13.5C10.067 13.5 8.5 11.933 8.5 10C8.5 8.067 10.067 6.5 12 6.5ZM12 15C14.4853 15 17 16.1193 17 17.5V18.5H7V17.5C7 16.1193 9.51472 15 12 15Z" fill="#fff"/></svg>
+              </a>
+              <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link" data-track="social_linkedin">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0A66C2"/><path d="M7.5 8.5V16H10V8.5H7.5ZM8.75 7.25C9.44036 7.25 10 6.69036 10 6C10 5.30964 9.44036 4.75 8.75 4.75C8.05964 4.75 7.5 5.30964 7.5 6C7.5 6.69036 8.05964 7.25 8.75 7.25ZM12 10.5V16H14.5V13.25C14.5 12.2835 15.2835 11.5 16.25 11.5C17.2165 11.5 18 12.2835 18 13.25V16H20.5V13.25C20.5 11.1789 18.8211 9.5 16.75 9.5C15.6789 9.5 14.75 10.1789 14.5 11.125V10.5H12Z" fill="#fff"/></svg>
+              </a>
+              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link" data-track="social_lattes">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#F5C518"/><path d="M12 7C13.6569 7 15 8.34315 15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7ZM12 14C14.4853 14 17 15.1193 17 16.5V17.5H7V16.5C7 15.1193 9.51472 14 12 14Z" fill="#fff"/></svg>
+              </a>
+              <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link" data-track="social_google_business">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#4285F4"/><path d="M12 7.5C13.933 7.5 15.5 9.067 15.5 11C15.5 12.933 13.933 14.5 12 14.5C10.067 14.5 8.5 12.933 8.5 11C8.5 9.067 10.067 7.5 12 7.5ZM12 16C14.4853 16 17 17.1193 17 18.5V19.5H7V18.5C7 17.1193 9.51472 16 12 16Z" fill="#fff"/></svg>
+              </a>
             </div>
             <app-mini-analytics></app-mini-analytics>
             <a [href]="config.footer.privacyUrl" class="footer-tag legal-link" data-track="legal_privacy_view">
