@@ -13,12 +13,8 @@ export const SITE_CONFIG = {
       'assets/daiana/Daiana1.jpeg',
       'assets/daiana/Daiana2.jpeg',
       'assets/daiana/Daiana3.jpeg',
-      'assets/daiana/Daiana4.jpeg',
-      'assets/daiana/Daiana5.jpeg',
-      'assets/daiana/Daiana6.jpeg',
-      'assets/daiana/Daiana7.webp',
-      'assets/daiana/Daiana8.jpg',
-      'assets/daiana/Daiana10.jpeg',
+      'assets/daiana/Daiana4.webp',
+      'assets/daiana/Daiana5.jpg',
     ],
     bio: 'Atendimento em harmonização orofacial e odontologia estética em São Carlos/SP, com avaliação individual, planejamento clínico e foco em segurança do paciente.',
     whatsapp: 'https://wa.me/5516991400423',
@@ -27,8 +23,8 @@ export const SITE_CONFIG = {
   navigation: [
     { label: 'Serviços', anchor: 'services' },
     { label: 'Linha Anna Pegova', anchor: 'products' },
-    { label: 'Cartão Ouro', anchor: 'gold-card' },
-    { label: 'Cartão Fidelidade', anchor: 'fidelity-card' },
+    { label: 'Voucher Ouro', anchor: 'gold-card' },
+    { label: 'Voucher Fidelidade', anchor: 'fidelity-card' },
     { label: 'Avaliações', anchor: 'reviews' },
     { label: 'Localização', anchor: 'location' },
   ],
@@ -389,23 +385,23 @@ export const SITE_CONFIG = {
   //   Não Invasivo: assets/servicosHarmonizacao/naoInvasivo/antesDepoisNaoInvasivo/
   //   Odontologia:  assets/servicosDentista/antesDepois/
   beforeAfterHarmonizacaoInvasivo: [
-    { label: 'Preenchimento Labial',       before: null as string | null, after: null as string | null },
-    { label: 'Toxina Botulínica',           before: null as string | null, after: null as string | null },
-    { label: 'Preenchimento com AH',       before: null as string | null, after: null as string | null },
-    { label: 'Microagulhamento',           before: null as string | null, after: null as string | null },
+    { label: 'Preenchimento Labial',       before: null as string | null, after: null as string | null, description: 'Procedimento com ácido hialurônico para definição e volume labial com resultado natural e harmônico.' },
+    { label: 'Toxina Botulínica',           before: null as string | null, after: null as string | null, description: 'Aplicação com indicação clínica para suavização de linhas de expressão, com resultado sutil e personalizado.' },
+    { label: 'Preenchimento com AH',       before: null as string | null, after: null as string | null, description: 'Ácido hialurônico para restaurar volume e hidratação profunda com efeito natural e duradouro.' },
+    { label: 'Microagulhamento',           before: null as string | null, after: null as string | null, description: 'Estimulação de colágeno com agulhas finas para melhora de textura, poros e cicatrizes.' },
   ],
 
   beforeAfterHarmonizacaoNaoInvasivo: [
-    { label: 'Ultrassom Microfocado',      before: null as string | null, after: null as string | null },
-    { label: 'Peeling Coreano',            before: null as string | null, after: null as string | null },
-    { label: 'Bioestimulador de Colágeno', before: null as string | null, after: null as string | null },
+    { label: 'Ultrassom Microfocado',      before: null as string | null, after: null as string | null, description: 'Tecnologia de ultrassom para lifting e sustentação sem cortes, com resultado progressivo.' },
+    { label: 'Peeling Coreano',            before: null as string | null, after: null as string | null, description: 'Protocolo de renovação celular para uniformidade de tom, textura e luminosidade da pele.' },
+    { label: 'Bioestimulador de Colágeno', before: null as string | null, after: null as string | null, description: 'Estimulação profunda de colágeno para firmeza e rejuvenescimento gradual e natural.' },
   ],
 
   beforeAfterOdontologia: [
-    { label: 'Clareamento Dental',         before: null as string | null, after: null as string | null },
-    { label: 'Facetas de Cerâmica',        before: null as string | null, after: null as string | null },
-    { label: 'Prótese Dentária',          before: null as string | null, after: null as string | null },
-    { label: 'Tratamento para Bruxismo',   before: null as string | null, after: null as string | null },
+    { label: 'Clareamento Dental',         before: null as string | null, after: null as string | null, description: 'Clareamento com acompanhamento profissional e indicação individual, preservando a saúde bucal.' },
+    { label: 'Facetas de Cerâmica',        before: null as string | null, after: null as string | null, description: 'Reabilitação estética de cor e formato com planejamento clínico e indicação individual.' },
+    { label: 'Prótese Dentária',          before: null as string | null, after: null as string | null, description: 'Reabilitação oral com próteses planejadas para devolver mastigação, conforto e estética.' },
+    { label: 'Tratamento para Bruxismo',   before: null as string | null, after: null as string | null, description: 'Diagnóstico e manejo do bruxismo para proteger os dentes e melhorar a qualidade do sono.' },
   ],
 
   footer: {

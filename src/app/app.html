@@ -14,6 +14,8 @@
 	<app-gold-card cardType="fidelity"></app-gold-card>
 }
 
-<app-reviews></app-reviews>
-<app-location></app-location>
-<app-footer></app-footer>
+@defer (on idle) {
+	<app-reviews></app-reviews>
+	<app-location></app-location>
+	<app-footer></app-footer>
+}

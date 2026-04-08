@@ -12,21 +12,11 @@ import { SITE_CONFIG } from '../../config/site-config';
         <div class="footer-container">
           <div class="footer-main-row">
             <div class="social-links">
-              <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link" data-track="social_doctoralia">
-                <i class="fas fa-user-doctor"></i>
-              </a>
-              <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link" data-track="social_linkedin">
-                <i class="fab fa-linkedin"></i>
-              </a>
-              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link" data-track="social_lattes">
-                <i class="fas fa-graduation-cap"></i>
-              </a>
-              <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link" data-track="social_google_business">
-                <i class="fab fa-google"></i>
-              </a>
+              <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">Instagram</a>
+              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link" data-track="social_doctoralia">Doctoralia</a>
+              <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link" data-track="social_linkedin">LinkedIn</a>
+              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link" data-track="social_lattes">Lattes</a>
+              <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link" data-track="social_google_business">Google</a>
             </div>
             <app-mini-analytics></app-mini-analytics>
             <a [href]="config.footer.privacyUrl" class="footer-tag legal-link" data-track="legal_privacy_view">

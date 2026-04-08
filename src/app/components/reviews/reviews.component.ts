@@ -73,10 +73,10 @@ type SentimentGroup = {
                             <span class="mini-name">{{ review.author }}</span>
                             <div class="mini-stars">
                               @for (s of getStars(review.rating); track s) {
-                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <span class="star-icon" aria-hidden="true">★</span>
                               }
                               @if (review.date.includes('Doctoralia')) {
-                                <span class="doctoralia-badge"><i class="fas fa-user-doctor" aria-hidden="true"></i></span>
+                                <span class="doctoralia-badge" aria-hidden="true">🩺</span>
                               }
                             </div>
                           </div>
@@ -94,10 +94,10 @@ type SentimentGroup = {
 
         <div class="reviews-cta">
           <a [href]="config.social.googleBusiness" target="_blank" rel="noopener noreferrer" class="btn-google" data-track="social_google_reviews_cta">
-            <i class="fab fa-google"></i> Google: 119 opiniões · 4.9 estrelas
+            Google: 119 opiniões · 4.9 estrelas
           </a>
           <a [href]="config.social.doctoralia" target="_blank" rel="noopener noreferrer" class="btn-doctoralia" data-track="social_doctoralia_reviews_cta">
-            <i class="fas fa-user-doctor"></i> Doctoralia: 21 opiniões · 5 estrelas
+            Doctoralia: 21 opiniões · 5 estrelas
           </a>
         </div>
       </div>
@@ -146,9 +146,10 @@ type SentimentGroup = {
     .mini-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; color: var(--dark); font-weight: 700; font-size: 0.68rem; flex-shrink: 0; }
     .mini-meta { flex: 1; min-width: 0; }
     .mini-name { display: block; color: var(--white); font-weight: 600; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .mini-stars { color: #FBBC04; font-size: 0.68rem; display: flex; align-items: center; gap: 1px; }
+    .mini-stars { color: #FBBC04; font-size: 0.85rem; display: flex; align-items: center; gap: 1px; }
+    .star-icon { color: #FBBC04; }
     .doctoralia-badge { color: #00AEEF; margin-left: 3px; }
-    .mini-date { color: rgba(255,255,255,0.35); font-size: 0.68rem; white-space: nowrap; flex-shrink: 0; }
+    .mini-date { color: rgba(255,255,255,0.55); font-size: 0.75rem; white-space: nowrap; flex-shrink: 0; }
     .mini-text { color: rgba(255,255,255,0.65); font-size: 0.8rem; line-height: 1.55; margin: 0; }
 
     /* ── CTA ── */

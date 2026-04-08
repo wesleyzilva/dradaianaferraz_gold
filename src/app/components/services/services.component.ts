@@ -99,8 +99,7 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
             class="btn-harmo-wa"
             data-track="conversion_whatsapp_harmonizacao"
           >
-            <i class="fab fa-whatsapp"></i>
-            Solicitar avaliação de Harmonização
+            WhatsApp · Solicitar avaliação de Harmonização
           </a>
         </div>
       </div>

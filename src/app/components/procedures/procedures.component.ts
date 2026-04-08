@@ -29,7 +29,7 @@ import type { AppArea } from '../../app';
               <img [src]="currentProcedure.image" [alt]="currentProcedure.name" class="procedure-img" />
               @if (currentProcedure.comingSoon) {
                 <div class="overlay-em-breve">
-                  <i class="fas fa-clock"></i>
+                  <span aria-hidden="true">⏱</span>
                   <span>Em Breve</span>
                 </div>
               }
@@ -38,7 +38,7 @@ import type { AppArea } from '../../app';
 
           <div class="carousel-controls">
             <button class="carousel-btn" (click)="prev()" aria-label="Anterior">
-              <i class="fas fa-chevron-left"></i>
+              <span aria-hidden="true">‹</span>
             </button>
             <div class="carousel-dots">
               @for (procedure of procedures(); track procedure.name; let i = $index) {
@@ -51,7 +51,7 @@ import type { AppArea } from '../../app';
               }
             </div>
             <button class="carousel-btn" (click)="next()" aria-label="Próximo">
-              <i class="fas fa-chevron-right"></i>
+              <span aria-hidden="true">›</span>
             </button>
           </div>
 

@@ -78,7 +78,7 @@ type BottomMenuLink = {
 
                 @if (item.anchor === 'services') {
                   <div class="services-tooltip" role="note" aria-live="polite">
-                    <p class="services-tooltip-title">Serviços elegíveis do Cartão Ouro</p>
+                    <p class="services-tooltip-title">Serviços elegíveis do Voucher Ouro</p>
                     <ul class="services-tooltip-list">
                       @for (service of discountEligibleServices(); track service) {
                         <li>{{ service }}</li>
@@ -503,7 +503,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
       return [
         { label: 'Serviços', anchor: 'services-odontologia' },
         { label: 'Avaliações', anchor: 'reviews' },
-        { label: 'Cartão Ouro', anchor: 'fidelity-card' },
+        { label: 'Voucher Ouro', anchor: 'fidelity-card' },
         { label: 'Localização', anchor: 'location' },
       ];
     }
@@ -511,7 +511,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     return [
       { label: 'Serviços', anchor: 'services-harmonizacao' },
       { label: 'Linha Anna Pegova', anchor: 'products' },
-      { label: 'Cartão Ouro', anchor: 'gold-card' },
+      { label: 'Voucher Ouro', anchor: 'gold-card' },
       { label: 'Localização', anchor: 'location' },
     ];
   });

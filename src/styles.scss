@@ -90,3 +90,50 @@ ul { list-style: none; }
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ========================================
+   Focus Accessibility
+   ======================================== */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ========================================
+   SVG Icon helper (replaces Font Awesome)
+   ======================================== */
+.icon-svg {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.125em;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Performance: content-visibility for off-screen sections
+   ======================================== */
+app-services,
+app-before-after,
+app-products,
+app-gold-card,
+app-odontology,
+app-reviews,
+app-location {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 700px;
+}
+
+/* ========================================
+   Accessibility: disable animations for users who prefer it
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

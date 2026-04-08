@@ -38,16 +38,6 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
           </div>
         </div>
 
-        <div class="odontology-grid">
-          @for (service of generalServices; track service.title) {
-            <article class="odontology-card">
-              <span class="odontology-icon" aria-hidden="true">{{ service.icon }}</span>
-              <h3 class="odontology-title">{{ service.title }}</h3>
-              <p class="odontology-description">{{ service.description }}</p>
-            </article>
-          }
-        </div>
-
         <div class="carousel-block">
           <app-image-carousel
             [images]="config.imagesOdontologia"
@@ -55,34 +45,6 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
             ariaLabel="Imagens dos procedimentos odontológicos"
           ></app-image-carousel>
         </div>
-
-        @if (orthodonticsService) {
-          <div class="specialty-section">
-            <div class="specialty-header">
-              <p class="section-eyebrow">Especialidade</p>
-              <h3 class="specialty-title">Ortodontia</h3>
-            </div>
-            <article class="specialty-card">
-              <span class="odontology-icon" aria-hidden="true">{{ orthodonticsService.icon }}</span>
-              <h4 class="odontology-title">{{ orthodonticsService.title }}</h4>
-              <p class="odontology-description">{{ orthodonticsService.description }}</p>
-            </article>
-          </div>
-        }
-
-        @if (forensicService) {
-          <div class="specialty-section">
-            <div class="specialty-header">
-              <p class="section-eyebrow">Especialidade</p>
-              <h3 class="specialty-title">Perícia Judicial</h3>
-            </div>
-            <article class="specialty-card">
-              <span class="odontology-icon" aria-hidden="true">{{ forensicService.icon }}</span>
-              <h4 class="odontology-title">{{ forensicService.title }}</h4>
-              <p class="odontology-description">{{ forensicService.description }}</p>
-            </article>
-          </div>
-        }
 
         <div class="odonto-cta" data-track="odontologia-whatsapp">
           <a
@@ -92,8 +54,7 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
             class="btn-odonto-wa"
             data-track="conversion_whatsapp_odontologia"
           >
-            <i class="fab fa-whatsapp"></i>
-            Solicitar avaliação com dentista
+            WhatsApp · Solicitar avaliação com dentista
           </a>
         </div>
       </div>
@@ -146,73 +107,8 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
         line-height: 1.8;
       }
 
-      .odontology-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2.25rem;
-      }
-
-      .odontology-card {
-        background: var(--dark-light);
-        border: 1px solid rgba(201, 168, 76, 0.2);
-        border-radius: 16px;
-        padding: 1.8rem;
-        text-align: center;
-        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-      }
-
-      .odontology-card:hover {
-        transform: translateY(-6px);
-        border-color: var(--gold);
-        box-shadow: 0 12px 40px rgba(201, 168, 76, 0.15);
-      }
-
-      .odontology-icon {
-        font-size: 2rem;
-        display: block;
-        margin-bottom: 0.85rem;
-      }
-
-      .odontology-title {
-        font-family: 'Playfair Display', serif;
-        color: var(--gold);
-        font-size: 1.1rem;
-        margin-bottom: 0.75rem;
-      }
-
-      .odontology-description {
-        color: rgba(255, 255, 255, 0.72);
-        line-height: 1.7;
-        font-size: 0.92rem;
-      }
-
       .carousel-block {
         margin-top: 0.75rem;
-      }
-
-      .specialty-section {
-        margin-top: 2rem;
-      }
-
-      .specialty-header {
-        text-align: center;
-        margin-bottom: 1rem;
-      }
-
-      .specialty-title {
-        font-family: 'Playfair Display', serif;
-        color: var(--white);
-        font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-        margin: 0;
-      }
-
-      .specialty-card {
-        background: var(--dark-light);
-        border: 1px solid rgba(201, 168, 76, 0.25);
-        border-radius: 16px;
-        padding: 1.8rem;
-        text-align: center;
       }
 
       .odonto-cta {
@@ -288,10 +184,6 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
         .odontology-section {
           padding: 4rem 1rem;
         }
-
-        .odontology-grid {
-          grid-template-columns: 1fr;
-        }
       }
     `,
   ],
@@ -300,16 +192,4 @@ export class OdontologyComponent {
   config = SITE_CONFIG;
   readonly sectionId = input('services-odontologia');
   readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Serviços Odontologia. Interesse: avaliação odontológica.')}`;
-
-  readonly orthodonticsService = this.config.odontology.services.find((service) =>
-    service.title.toLowerCase().includes('ortodontia'),
-  );
-
-  readonly forensicService = this.config.odontology.services.find((service) =>
-    service.title.toLowerCase().includes('perícia judicial'),
-  );
-
-  readonly generalServices = this.config.odontology.services.filter(
-    (service) => service !== this.orthodonticsService && service !== this.forensicService,
-  );
 }

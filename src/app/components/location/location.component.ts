@@ -61,10 +61,10 @@ import { SITE_CONFIG } from '../../config/site-config';
             </ul>
             <div class="location-actions">
               <a [href]="locationWhatsappUrl" target="_blank" class="btn-whatsapp" data-track="conversion_whatsapp_location">
-                <i class="fab fa-whatsapp"></i> Ainda com dúvidas?
+                WhatsApp · Ainda com dúvidas?
               </a>
               <a [href]="uberUrl" target="_blank" rel="noopener noreferrer" class="btn-uber" data-track="conversion_uber">
-                <i class="fab fa-uber"></i> Solicitar Uber
+                Uber · Solicitar corrida
               </a>
             </div>
           </div>

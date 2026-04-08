@@ -14,7 +14,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 
           <div class="card-content">
             <div class="card-badge">
-              <i class="fas fa-crown"></i> Exclusivo
+              <span aria-hidden="true">&#9813;</span> Exclusivo
             </div>
             <h2 class="card-title">{{ activeCard().title }}</h2>
             <p class="card-subtitle">{{ activeCard().subtitle }}</p>
@@ -23,7 +23,7 @@ import { SITE_CONFIG } from '../../config/site-config';
             <ul class="benefits-list">
               @for (benefit of activeCard().benefits; track benefit) {
                 <li class="benefit-item">
-                  <span class="benefit-check"><i class="fas fa-check"></i></span>
+                  <span class="benefit-check" aria-hidden="true">✓</span>
                   @if (benefit.includes(hoverTriggerText())) {
                     <span>
                       {{ benefitBeforeTrigger(benefit) }}
@@ -48,15 +48,14 @@ import { SITE_CONFIG } from '../../config/site-config';
             </ul>
 
             <a [href]="whatsappUrl" target="_blank" class="btn-gold-cta" [attr.data-track]="whatsappTrackId">
-              <i class="fab fa-whatsapp"></i>
-              {{ activeCard().ctaText }}
+              WhatsApp · {{ activeCard().ctaText }}
             </a>
           </div>
 
           <div class="card-visual">
             <div class="gold-card-visual">
               <div class="gc-top">
-                <i class="fas fa-crown gc-crown"></i>
+                <span class="gc-crown" aria-hidden="true">&#9813;</span>
                 <span class="gc-label">{{ visualLabel() }}</span>
               </div>
               <div class="gc-tagline">{{ visualTagline() }}</div>

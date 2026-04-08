@@ -13,7 +13,7 @@ import { SITE_CONFIG } from '../../config/site-config';
           <h2 class="section-title">Linha Anna Pegova</h2>
           <div class="gold-line"></div>
           <div class="anna-callout" data-track="anna-pegova-amostras">
-            <i class="fas fa-vial"></i>
+            <span aria-hidden="true"></span>
             <p>
               Produtos Anna Pegova para uso diário como complemento aos procedimentos, mantendo e potencializando resultados.
             </p>
@@ -24,8 +24,7 @@ import { SITE_CONFIG } from '../../config/site-config';
               class="anna-cta"
               data-track="conversion_whatsapp_anna_pegova"
             >
-              <i class="fab fa-whatsapp"></i>
-              Solicite amostras
+              WhatsApp · Solicite amostras
             </a>
           </div>
         </div>
