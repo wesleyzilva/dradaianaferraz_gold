@@ -195,26 +195,23 @@ export const SITE_CONFIG = {
   },
 
   proceduresHarmonizacao: [
+    { name: 'Toxina Botulínica', image: 'assets/servicosHarmonizacao/Injetaveis.webp' },
     { name: 'Preenchimento Labial', image: 'assets/servicosHarmonizacao/Preenchimento.webp' },
-    { name: 'Preenchimento com Ácido Hialurônico', image: 'assets/servicosHarmonizacao/PreencimentoAcidoHialuronico.webp' },
-    { name: 'Toxina Botulínica (Injetáveis)', image: 'assets/servicosHarmonizacao/Injetaveis.webp' },
-    { name: 'Peeling Químico', image: 'assets/servicosHarmonizacao/Peeling.webp' },
-    { name: 'Microagulhamento', image: 'assets/servicosHarmonizacao/MicroAgulhamento.webp' },
+    { name: 'Skinbooster', image: 'assets/servicosHarmonizacao/PreencimentoAcidoHialuronico.webp' },
+    { name: 'Bioestimuladores de Colágeno', image: 'assets/servicosHarmonizacao/MicroAgulhamento.webp' },
+    { name: 'Fios de PDO', image: 'assets/servicosHarmonizacao/Injetaveis.webp' },
+    { name: 'Rinomodelação', image: 'assets/servicosHarmonizacao/PreencimentoAcidoHialuronico.webp' },
     { name: 'Ultrassom Microfocado', image: 'assets/servicosHarmonizacao/UltrassomMicrofocado.webp' },
-    { name: 'Laser', image: 'assets/servicosHarmonizacao/laser-EmBreve.webp', comingSoon: true },
-    { name: 'Radiofrequência', image: 'assets/servicosHarmonizacao/RadioFrequencia-EmBreve.webp', comingSoon: true },
+    { name: 'Peeling Coreano', image: 'assets/servicosHarmonizacao/Peeling.webp' },
   ],
 
   proceduresOdontologia: [
-    { name: 'Clareamento de Consultório', image: 'assets/servicosDentista/clareamentoCOnsultorio.jpg' },
-    { name: 'Clareamento Caseiro', image: 'assets/servicosDentista/clareamentoCaseiro.jpg' },
-    { name: 'Facetas de Cerâmica', image: 'assets/servicosDentista/facetasCeramica.webp' },
-    { name: 'Facetas de Resina', image: 'assets/servicosDentista/facetasResina.webp' },
-    { name: 'Prótese / Ponte Fixa', image: 'assets/servicosDentista/ProtesePonteFixa.jpg' },
-    { name: 'Prótese Protocolo', image: 'assets/servicosDentista/ProteseProtocolo.webp' },
-    { name: 'Placa para Bruxismo', image: 'assets/servicosDentista/bruximoPlaca.png' },
-    { name: 'Bruxismo e Erosão Ácida', image: 'assets/servicosDentista/BruxismoAcido.webp' },
-    { name: 'Câmera Intraoral', image: 'assets/servicosDentista/cameraIntraOral.webp' },
+    { name: 'Prevenção Bucal com Câmera Intraoral', image: 'assets/servicosDentista/cameraIntraOral.webp' },
+    { name: 'Clareamento Dental', image: 'assets/servicosDentista/clareamentoCOnsultorio.jpg' },
+    { name: 'Facetas', image: 'assets/servicosDentista/facetasCeramica.webp' },
+    { name: 'Profilaxia e Limpeza Profissional', image: 'assets/servicosDentista/clareamentoCaseiro.jpg' },
+    { name: 'Prótese Dentária', image: 'assets/servicosDentista/ProtesePonteFixa.jpg' },
+    { name: 'Tratamento para Bruxismo', image: 'assets/servicosDentista/bruximoPlaca.png' },
   ],
 
   reviews: [
