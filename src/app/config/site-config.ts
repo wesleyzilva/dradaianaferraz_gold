@@ -195,14 +195,14 @@ export const SITE_CONFIG = {
   },
 
   proceduresHarmonizacao: [
-    { name: 'Toxina Botulínica', image: 'assets/servicosHarmonizacao/Injetaveis.webp' },
-    { name: 'Preenchimento Labial', image: 'assets/servicosHarmonizacao/Preenchimento.webp' },
-    { name: 'Skinbooster', image: 'assets/servicosHarmonizacao/PreencimentoAcidoHialuronico.webp' },
-    { name: 'Bioestimuladores de Colágeno', image: 'assets/servicosHarmonizacao/MicroAgulhamento.webp' },
-    { name: 'Fios de PDO', image: 'assets/servicosHarmonizacao/Injetaveis.webp' },
-    { name: 'Rinomodelação', image: 'assets/servicosHarmonizacao/PreencimentoAcidoHialuronico.webp' },
-    { name: 'Ultrassom Microfocado', image: 'assets/servicosHarmonizacao/UltrassomMicrofocado.webp' },
-    { name: 'Peeling Coreano', image: 'assets/servicosHarmonizacao/Peeling.webp' },
+    { name: 'Toxina Botulínica',           image: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp' },
+    { name: 'Preenchimento Labial',       image: 'assets/servicosHarmonizacao/invasivo/Preenchimento.webp' },
+    { name: 'Skinbooster',                image: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp' },
+    { name: 'Bioestimuladores de Colágeno', image: 'assets/servicosHarmonizacao/invasivo/MicroAgulhamento.webp' },
+    { name: 'Fios de PDO',                image: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp' },
+    { name: 'Rinomodelação',              image: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp' },
+    { name: 'Ultrassom Microfocado',      image: 'assets/servicosHarmonizacao/naoInvasivo/UltrassomMicrofocado.webp' },
+    { name: 'Peeling Coreano',            image: 'assets/servicosHarmonizacao/naoInvasivo/Peeling.webp' },
   ],
 
   proceduresOdontologia: [
@@ -379,18 +379,29 @@ export const SITE_CONFIG = {
     { src: 'assets/servicosDentista/ortodontia.jpg',             label: 'Ortodontia' },
   ],
 
-  beforeAfterHarmonizacao: [
-    { label: 'Preenchimento Labial', before: null, after: 'assets/servicosHarmonizacao/Preenchimento.webp' },
-    { label: 'Bioestimulador de Colágeno', before: null, after: 'assets/servicosHarmonizacao/MicroAgulhamento.webp' },
-    { label: 'Ultrassom Microfocado', before: null, after: 'assets/servicosHarmonizacao/UltrassomMicrofocado.webp' },
-    { label: 'Peeling Coreano', before: null, after: 'assets/servicosHarmonizacao/Peeling.webp' },
+  // ── ANTES & DEPOIS ──
+  // Adicione as fotos nas pastas abaixo e preencha os campos before/after:
+  //   Invasivo:   assets/servicosHarmonizacao/invasivo/antesDepois/
+  //   Não Invasivo: assets/servicosHarmonizacao/naoInvasivo/antesDepoisNaoInvasivo/
+  //   Odontologia:  assets/servicosDentista/antesDepois/
+  beforeAfterHarmonizacaoInvasivo: [
+    { label: 'Preenchimento Labial',       before: null as string | null, after: null as string | null },
+    { label: 'Toxina Botulínica',           before: null as string | null, after: null as string | null },
+    { label: 'Preenchimento com AH',       before: null as string | null, after: null as string | null },
+    { label: 'Microagulhamento',           before: null as string | null, after: null as string | null },
+  ],
+
+  beforeAfterHarmonizacaoNaoInvasivo: [
+    { label: 'Ultrassom Microfocado',      before: null as string | null, after: null as string | null },
+    { label: 'Peeling Coreano',            before: null as string | null, after: null as string | null },
+    { label: 'Bioestimulador de Colágeno', before: null as string | null, after: null as string | null },
   ],
 
   beforeAfterOdontologia: [
-    { label: 'Clareamento Dental', before: null, after: 'assets/servicosDentista/clareamentoCOnsultorio.jpg' },
-    { label: 'Facetas de Cerâmica', before: null, after: 'assets/servicosDentista/facetasCeramica.webp' },
-    { label: 'Prótese Dentária', before: null, after: 'assets/servicosDentista/ProtesePonteFixa.jpg' },
-    { label: 'Tratamento para Bruxismo', before: null, after: 'assets/servicosDentista/bruximoPlaca.png' },
+    { label: 'Clareamento Dental',         before: null as string | null, after: null as string | null },
+    { label: 'Facetas de Cerâmica',        before: null as string | null, after: null as string | null },
+    { label: 'Prótese Dentária',          before: null as string | null, after: null as string | null },
+    { label: 'Tratamento para Bruxismo',   before: null as string | null, after: null as string | null },
   ],
 
   footer: {
