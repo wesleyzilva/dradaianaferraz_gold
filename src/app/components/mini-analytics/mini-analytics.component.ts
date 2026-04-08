@@ -60,6 +60,7 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
   private readonly sessionKey = 'ddf_session_counted';
   private readonly firstVisitKey = 'ddf_first_visit';
   private readonly visitLogKey = 'ddf_visit_log';
+  private readonly ipLogKey = 'ddf_ip_log';
 
   readonly visits = signal(0);
   readonly clickStats = signal<ClickStatsMap>({});
@@ -80,6 +81,7 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
     this.initVisits();
     this.initClickStats();
     this.attachClickTracking();
+    this.fetchAndStoreIp();
   }
 
   ngOnDestroy(): void {
@@ -123,6 +125,38 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
 
   private initClickStats(): void {
     this.clickStats.set(this.readClickStats());
+  }
+
+  /** Obtém o IP público do visitante (via ipify.org) e salva no localStorage. */
+  private fetchAndStoreIp(): void {
+    const sessionIpKey = 'ddf_session_ip';
+    if (sessionStorage.getItem(sessionIpKey)) return;
+
+    fetch('https://api.ipify.org?format=json')
+      .then(r => r.json())
+      .then((data: { ip: string }) => {
+        const rawLog = localStorage.getItem(this.ipLogKey);
+        const log: Array<{ ip: string; ts: string; ua: string }> = rawLog
+          ? (JSON.parse(rawLog) as Array<{ ip: string; ts: string; ua: string }>)
+          : [];
+
+        const now = new Date().toISOString();
+        const ua  = navigator.userAgent.slice(0, 140);
+        const lastIp = log.length > 0 ? log[log.length - 1].ip : null;
+
+        if (lastIp !== data.ip) {
+          log.push({ ip: data.ip, ts: now, ua });
+          if (log.length > 50) log.splice(0, log.length - 50);
+          localStorage.setItem(this.ipLogKey, JSON.stringify(log));
+        }
+
+        sessionStorage.setItem(sessionIpKey, data.ip);
+
+        if (window.dataLayer) {
+          window.dataLayer.push({ event: 'visitor_ip', visitor_ip: data.ip });
+        }
+      })
+      .catch(() => { /* ipify indisponível — falha silenciosa */ });
   }
 
   private attachClickTracking(): void {
@@ -183,6 +217,18 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
       if (customTrack.includes('uber')) {
         return { key: customTrack, eventName: 'uber_click', eventCategory: 'location' };
       }
+      if (customTrack.includes('phone')) {
+        return { key: customTrack, eventName: 'generate_lead', eventCategory: 'lead' };
+      }
+      if (customTrack.includes('email')) {
+        return { key: customTrack, eventName: 'contact_click', eventCategory: 'contact' };
+      }
+      if (customTrack.startsWith('social_')) {
+        return { key: customTrack, eventName: 'social_click', eventCategory: 'social' };
+      }
+      if (customTrack.startsWith('legal_')) {
+        return { key: customTrack, eventName: 'page_view_legal', eventCategory: 'legal' };
+      }
       return { key: customTrack, eventName: 'engagement_click', eventCategory: 'engagement' };
     }
 
@@ -196,6 +242,24 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
       }
       if (href.includes('google.com/maps/dir')) {
         return { key: 'link_route_maps', eventName: 'route_click', eventCategory: 'location' };
+      }
+      if (href.includes('linkedin.com')) {
+        return { key: 'social_linkedin', eventName: 'social_click', eventCategory: 'social' };
+      }
+      if (href.includes('instagram.com')) {
+        return { key: 'social_instagram', eventName: 'social_click', eventCategory: 'social' };
+      }
+      if (href.includes('doctoralia')) {
+        return { key: 'social_doctoralia', eventName: 'social_click', eventCategory: 'social' };
+      }
+      if (href.includes('business.google') || href.includes('g.page')) {
+        return { key: 'social_google_business', eventName: 'social_click', eventCategory: 'social' };
+      }
+      if (href.startsWith('tel:')) {
+        return { key: 'conversion_phone', eventName: 'generate_lead', eventCategory: 'lead' };
+      }
+      if (href.startsWith('mailto:')) {
+        return { key: 'conversion_email', eventName: 'contact_click', eventCategory: 'contact' };
       }
       const text = (element.textContent ?? '').trim().slice(0, 40);
       const key = text ? `Link: ${text}` : 'Link';

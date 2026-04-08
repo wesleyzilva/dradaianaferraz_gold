@@ -108,7 +108,7 @@ type BottomMenuLink = {
           <p class="hero-bio">{{ heroBio() }}</p>
           <p class="hero-instagram">
             Venha conhecer em
-            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer">@dradaianaferrazsc</a>
+            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer" data-track="social_instagram_hero">@dradaianaferrazsc</a>
             no Instagram.
           </p>
           <div class="hero-cta">

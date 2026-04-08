@@ -12,19 +12,19 @@ import { SITE_CONFIG } from '../../config/site-config';
         <div class="footer-container">
           <div class="footer-main-row">
             <div class="social-links">
-              <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+              <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">
                 <i class="fab fa-instagram"></i>
               </a>
-              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link">
+              <a [href]="config.social.doctoralia" target="_blank" rel="noopener" aria-label="Doctoralia" class="social-link" data-track="social_doctoralia">
                 <i class="fas fa-user-doctor"></i>
               </a>
-              <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link">
+              <a [href]="config.social.linkedin" target="_blank" rel="noopener" aria-label="LinkedIn" class="social-link" data-track="social_linkedin">
                 <i class="fab fa-linkedin"></i>
               </a>
-              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link">
+              <a [href]="config.social.lattes" target="_blank" rel="noopener" aria-label="Lattes" class="social-link" data-track="social_lattes">
                 <i class="fas fa-graduation-cap"></i>
               </a>
-              <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link">
+              <a [href]="config.social.googleBusiness" target="_blank" rel="noopener" aria-label="Google Business" class="social-link" data-track="social_google_business">
                 <i class="fab fa-google"></i>
               </a>
             </div>

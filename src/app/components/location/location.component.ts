@@ -41,14 +41,14 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <span class="info-icon">📞</span>
                 <div>
                   <strong>Telefone / WhatsApp</strong>
-                  <a [href]="'tel:+5516991400423'" class="phone-link" style="color:#f3f3f3; text-decoration:none;">+55 16 99140-0423</a>
+                  <a [href]="'tel:+5516991400423'" class="phone-link" data-track="conversion_phone_location" style="color:#f3f3f3; text-decoration:none;">+55 16 99140-0423</a>
                 </div>
               </li>
               <li>
                 <span class="info-icon">✉️</span>
                 <div>
                   <strong>E-mail</strong>
-                  <a [href]="locationEmailMailto" class="email-link">{{ config.location.email }}</a>
+                  <a [href]="locationEmailMailto" class="email-link" data-track="conversion_email_location">{{ config.location.email }}</a>
                 </div>
               </li>
               <li>

@@ -89,6 +89,9 @@
       const totalInter = topClicks.reduce((acc, [, v]) => acc + Number(v), 0);
       const lastVisit  = visitLog.length > 0 ? visitLog[visitLog.length - 1] : null;
 
+      const ipLog     = JSON.parse(localStorage.getItem('ddf_ip_log') ?? '[]');
+      const uniqueIps = [...new Set(ipLog.map(e => e.ip))];
+
       function fmt(iso) {
         if (!iso) return '—';
         return new Date(iso).toLocaleString('pt-BR', {
@@ -98,6 +101,19 @@
       }
 
       const today = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+      const ipHTML = ipLog.length === 0
+        ? '<p class="empty">Nenhum IP registrado ainda — aguarda próximo acesso ao site.</p>'
+        : `<table class="clicks">
+            <thead><tr><th>IP Público</th><th>Data / Hora</th><th>User Agent</th></tr></thead>
+            <tbody>${[...ipLog].reverse().slice(0, 20).map(e => `
+              <tr>
+                <td><strong style="color:var(--gold-light)">${e.ip}</strong></td>
+                <td style="color:rgba(255,255,255,0.5)">${fmt(e.ts)}</td>
+                <td style="font-size:0.72rem;color:rgba(255,255,255,0.3);max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${e.ua}">${e.ua}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>`;
 
       // ── Status dos serviços ───────────────────────────────────────────────
       const services = [
@@ -174,6 +190,10 @@
             <div class="card-val">${visitLog.length}</div>
             <div class="card-lbl">Sessões no log</div>
           </div>
+          <div class="card">
+            <div class="card-val">${uniqueIps.length}</div>
+            <div class="card-lbl">IPs únicos (local)</div>
+          </div>
         </div>
 
         <div class="section">
@@ -203,6 +223,12 @@
         </div>
 
         <div class="section">
+          <div class="sec-title">IPs registrados neste dispositivo (máx. 20 recentes)</div>
+          ${ipHTML}
+          <p style="font-size:0.73rem;color:rgba(255,255,255,0.28);margin-top:0.6rem">⚠️ Dados locais — registra apenas os IPs acessados <strong style="color:rgba(255,255,255,0.45)">neste navegador</strong>. Para rastreamento global de todos os visitantes configure o <strong style="color:var(--gold)">GA4</strong> no GTM.</p>
+        </div>
+
+        <div class="section">
           <div class="sec-title">Painéis externos</div>
           <div class="ext-links">
             <a href="https://analytics.google.com/" target="_blank" class="ext-btn">📊 Google Analytics</a>
@@ -216,7 +242,7 @@
 
         <footer>
           <span>PIN padrão: <strong style="color:var(--gold)">0423</strong> · Altere a variável <code>PAINEL_PIN</code> em <code>public/painel.html</code></span>
-          <button class="clear-btn" onclick="if(confirm('Apagar todos os dados locais deste dispositivo?')){['ddf_total_visits','ddf_first_visit','ddf_visit_log','ddf_click_stats','ddf_session_counted'].forEach(k=>localStorage.removeItem(k));location.reload();}">🗑 Limpar dados locais</button>
+          <button class="clear-btn" onclick="if(confirm('Apagar todos os dados locais deste dispositivo?')){['ddf_total_visits','ddf_first_visit','ddf_visit_log','ddf_click_stats','ddf_session_counted','ddf_ip_log','ddf_session_ip'].forEach(k=>localStorage.removeItem(k));location.reload();}">🗑 Limpar dados locais</button>
         </footer>
       `;
     })();
