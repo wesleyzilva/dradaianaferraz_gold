@@ -514,12 +514,10 @@ def msg_paciente_antigo(nome: str, genero: str) -> str:
     return (
         f"Oi, {pn}!\n\n"
         "Já faz um tempinho que não nos vemos — sinto falta do seu sorriso!\n\n"
-        "Temos novidades incríveis: novos tratamentos de harmonização "
-        "orofacial, clareamento dental e muito mais. "
-        "Que tal uma *avaliação gratuita*?\n\n"
-        f"*Dá uma olhada no nosso novo site e me conta o que achou:*\n"
-        f"{SITE}\n\n"
-        "*Estamos na Vila Nery, São Carlos — adoraríamos te receber (e à sua família)!*"
+        "Temos novidades incríveis e adoraríamos te contar pessoalmente. "
+        "Quando tiver um tempinho, passa aqui na clínica — será um prazer te receber!\n\n"
+        f"*Dá uma olhada no nosso novo site:*\n"
+        f"{SITE}"
         f"{COMENTARIO_QUARTA}"
         f"{ASSINATURA}"
     )
