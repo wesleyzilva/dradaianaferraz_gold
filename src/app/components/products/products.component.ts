@@ -12,15 +12,11 @@ import { SITE_CONFIG } from '../../config/site-config';
           <p class="section-eyebrow">Qualidade & Excelência</p>
           <h2 class="section-title">Linha Anna Pegova</h2>
           <div class="gold-line"></div>
-          <p class="section-subtitle">
-            Os produtos Anna Pegova são voltados a tratamentos não invasivos e podem atuar de forma
-            complementar aos procedimentos com equipamentos tecnológicos não invasivos, como o ultrassom.
-          </p>
           <div class="anna-callout" data-track="anna-pegova-amostras">
             <i class="fas fa-vial"></i>
             <p>
-              A linha Anna Pegova integra protocolos de cuidado não invasivo, com foco em suporte diário e
-              manutenção dos resultados dos tratamentos indicados em avaliação profissional.
+              Produtos Anna Pegova para uso diário como complemento aos procedimentos — suporte contínuo
+              entre as sessões para manutenção e potencialização dos resultados.
             </p>
             <a
               [href]="annaPegovaWhatsappUrl"
