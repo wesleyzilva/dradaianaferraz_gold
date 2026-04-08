@@ -554,10 +554,14 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
     this.selectedAreaChange.emit(area);
     this.isBottomMenuMinimized.set(false);
 
-    const heroContent = document.getElementById('hero-content');
-    if (heroContent) {
-      heroContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Troca para uma foto aleatória diferente da atual
+    const photos = this.config.professional.photos;
+    const current = this.heroPhoto();
+    const others = photos.filter((p) => p !== current);
+    const pool = others.length > 0 ? others : photos;
+    this.heroPhoto.set(pool[Math.floor(Math.random() * pool.length)]);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   toggleBottomMenu(): void {

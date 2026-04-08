@@ -15,9 +15,25 @@ import { SITE_CONFIG } from '../../config/site-config';
           <p class="section-subtitle">{{ config.odontology.subtitle }}</p>
         </div>
 
-        <div class="odonto-intro-callout">
-          <span class="callout-icon" aria-hidden="true">🦷</span>
-          <p>O atendimento começa com uma <strong>consulta preventiva com câmera intraoral</strong> — sem pressa, sem pressão. Você vê em tempo real o que a Dra. Daiana vê, recebe um diagnóstico detalhado e um plano de cuidado com todas as opções antes de qualquer decisão.</p>
+        <div class="odonto-intro-callout" aria-label="Como funciona a consulta">
+          <div class="callout-main">
+            <span class="callout-icon" aria-hidden="true">🦷</span>
+            <p>Cada consulta começa com <strong>câmera intraoral</strong>: você vê em tempo real o que a Dra. Daiana vê, recebe um diagnóstico visual e um plano de cuidado completo — com todas as opções e valores — antes de qualquer decisão.</p>
+          </div>
+          <div class="callout-faq">
+            <div class="faq-item">
+              <span class="faq-q">🪥 Com que frequência?</span>
+              <p>A cada 6 meses para limpeza e prevenção. Tratamentos têm retorno definido no seu plano individual.</p>
+            </div>
+            <div class="faq-item">
+              <span class="faq-q">✨ Clareamento é seguro?</span>
+              <p>Sim, quando indicado. A Dra. Daiana avalia sua saúde bucal antes de qualquer protocolo estético.</p>
+            </div>
+            <div class="faq-item">
+              <span class="faq-q">💳 Como é o pagamento?</span>
+              <p>Orçamento apresentado antes de qualquer procedimento, sem surpresas. Parcelamento disponível.</p>
+            </div>
+          </div>
         </div>
 
         <div class="odontology-grid">
@@ -57,25 +73,6 @@ import { SITE_CONFIG } from '../../config/site-config';
             </article>
           </div>
         }
-
-        <div class="faq-strip" aria-label="Dúvidas frequentes sobre odontologia">
-          <div class="faq-item">
-            <span class="faq-q">🪥 Com que frequência ir?</span>
-            <p>A cada 6 meses para limpeza e avaliação preventiva. Tratamentos específicos têm retorno definido no plano individual.</p>
-          </div>
-          <div class="faq-item">
-            <span class="faq-q">✨ Clareamento é seguro?</span>
-            <p>Sim, quando indicado por profissional. A Dra. Daiana avalia a saúde bucal antes de qualquer protocolo estético.</p>
-          </div>
-          <div class="faq-item">
-            <span class="faq-q">📷 O que é câmera intraoral?</span>
-            <p>Uma câmera pequena que mostra o interior da boca em tempo real — diagnóstico mais visual, transparente e fácil de entender.</p>
-          </div>
-          <div class="faq-item">
-            <span class="faq-q">💳 Como funciona o pagamento?</span>
-            <p>O orçamento é apresentado antes de qualquer procedimento, sem surpresas. Parcelamento disponível.</p>
-          </div>
-        </div>
 
         <div class="odonto-cta" data-track="odontologia-whatsapp">
           <a
@@ -224,52 +221,54 @@ import { SITE_CONFIG } from '../../config/site-config';
 
       /* Intro callout odontologia */
       .odonto-intro-callout {
+        background: rgba(201,168,76,0.07);
+        border: 1px solid rgba(201,168,76,0.25);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin: 0 auto 2rem;
+        max-width: 860px;
+      }
+      .callout-main {
         display: flex;
         align-items: flex-start;
         gap: 1rem;
-        background: rgba(201,168,76,0.07);
-        border: 1px solid rgba(201,168,76,0.25);
-        border-radius: 14px;
-        padding: 1.25rem 1.5rem;
-        margin: 0 auto 2rem;
-        max-width: 760px;
+        margin-bottom: 1.1rem;
+        padding-bottom: 1.1rem;
+        border-bottom: 1px solid rgba(201,168,76,0.18);
       }
       .callout-icon {
         font-size: 1.75rem;
         flex-shrink: 0;
         margin-top: 0.1rem;
       }
-      .odonto-intro-callout p {
-        color: rgba(255,255,255,0.8);
+      .callout-main p {
+        color: rgba(255,255,255,0.82);
         font-size: 0.95rem;
         line-height: 1.7;
         margin: 0;
       }
-      .odonto-intro-callout strong { color: var(--gold-light); }
-      /* FAQ Strip odontologia */
-      .faq-strip {
+      .callout-main strong { color: var(--gold-light); }
+      .callout-faq {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 0.75rem;
-        margin: 1.5rem 0 0;
-        padding: 1.25rem;
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(201,168,76,0.14);
-        border-radius: 14px;
       }
-      .faq-item { padding: 0.5rem 0.5rem 0.5rem 0; }
+      .faq-item { padding: 0; }
       .faq-q {
         display: block;
         color: var(--gold-light);
         font-weight: 700;
-        font-size: 0.88rem;
-        margin-bottom: 0.35rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.3rem;
       }
       .faq-item p {
-        color: rgba(255,255,255,0.65);
-        font-size: 0.84rem;
+        color: rgba(255,255,255,0.62);
+        font-size: 0.83rem;
         line-height: 1.6;
         margin: 0;
+      }
+      @media (max-width: 700px) {
+        .callout-faq { grid-template-columns: 1fr; }
       }
       @media (max-width: 600px) {
         .odontology-section {

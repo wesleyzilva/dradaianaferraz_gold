@@ -64,7 +64,7 @@ import { SITE_CONFIG } from '../../config/site-config';
                 <i class="fab fa-whatsapp"></i> Fale no WhatsApp
               </a>
               <a [href]="uberUrl" target="_blank" rel="noopener noreferrer" class="btn-uber" data-track="conversion_uber">
-                <i class="fab fa-uber"></i> Abrir no Uber
+                <i class="fab fa-uber"></i> Solicitar Uber
               </a>
             </div>
           </div>

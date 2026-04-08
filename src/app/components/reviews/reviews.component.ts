@@ -24,7 +24,7 @@ type ReviewItem = {
         </div>
 
         <div class="reviews-grid">
-          @for (review of config.reviews; track trackReview(review, $index)) {
+          @for (review of reviews; track trackReview(review, $index)) {
             <div class="review-card">
               <div class="review-header">
                 @if (review.photo) {
@@ -215,6 +215,7 @@ type ReviewItem = {
 })
 export class ReviewsComponent {
   config = SITE_CONFIG;
+  readonly reviews: ReviewItem[] = this.config.reviews.map((r) => ({ ...r, photo: undefined }));
 
   getStars(rating: number): number[] {
     return Array(rating).fill(0);
