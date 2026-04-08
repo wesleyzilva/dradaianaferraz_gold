@@ -28,8 +28,8 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
               <p>A cada 6 meses para limpeza e prevenção. Tratamentos têm retorno definido no seu plano individual.</p>
             </div>
             <div class="faq-item">
-              <span class="faq-q">✨ Clareamento é seguro?</span>
-              <p>Sim, quando indicado. A Dra. Daiana avalia sua saúde bucal antes de qualquer protocolo estético.</p>
+              <span class="faq-q">✅ Tratamento é seguro?</span>
+              <p>Sim, baseado na avaliação bucal e da saúde do paciente antes de qualquer protocolo.</p>
             </div>
             <div class="faq-item">
               <span class="faq-q">💳 Como é o pagamento?</span>
