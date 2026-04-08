@@ -14,9 +14,32 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
           <h2 class="section-title">Serviços de Harmonização Orofacial</h2>
           <div class="gold-line"></div>
           <p class="section-subtitle">
-            Procedimentos de harmonização realizados com avaliação individual, indicação clínica e
-            foco em segurança no atendimento.
+            Avaliação individualizada, planejamento junto com você e acompanhamento do início ao fim — do primeiro contato ao retorno pós-procedimento.
           </p>
+
+          <!-- Planejamento junto com você: Antes, Durante e Depois -->
+          <div class="jornada-wrapper" aria-label="Etapas do atendimento de harmonização">
+            <p class="jornada-heading">Seu atendimento: do planejamento ao acompanhamento</p>
+            <div class="jornada-steps">
+              <div class="jornada-step">
+                <div class="jornada-icon-wrap" aria-hidden="true">📋</div>
+                <h4 class="jornada-label">Antes</h4>
+                <p class="jornada-desc">Avaliação facial individualizada, escuta das suas expectativas e apresentação do plano com opções e valores. Nenhum procedimento é realizado sem a sua aprovação.</p>
+              </div>
+              <div class="jornada-connector" aria-hidden="true">›</div>
+              <div class="jornada-step">
+                <div class="jornada-icon-wrap" aria-hidden="true">✨</div>
+                <h4 class="jornada-label">Durante</h4>
+                <p class="jornada-desc">Procedimento realizado com técnica atualizada e materiais de qualidade. Você é informada de cada etapa em tempo real, com todo o cuidado e conforto.</p>
+              </div>
+              <div class="jornada-connector" aria-hidden="true">›</div>
+              <div class="jornada-step">
+                <div class="jornada-icon-wrap" aria-hidden="true">🩺</div>
+                <h4 class="jornada-label">Depois</h4>
+                <p class="jornada-desc">Retorno de acompanhamento, avaliação do resultado, orientações pós-procedimento e planejamento da próxima etapa quando indicado.</p>
+              </div>
+            </div>
+          </div>
 
           <div class="services-filter" role="group" aria-label="Filtrar procedimentos por tipo">
             <button
@@ -48,6 +71,24 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
               <p class="service-desc">{{ service.description }}</p>
             </div>
           }
+        </div>
+        <div class="faq-strip" aria-label="Dúvidas frequentes sobre harmonização">
+          <div class="faq-item">
+            <span class="faq-q">💊 Dói?</span>
+            <p>Procedimentos invasivos usam anestésico tópico ou local. O desconforto é mínimo e acompanhado em todo momento pela Dra. Daiana.</p>
+          </div>
+          <div class="faq-item">
+            <span class="faq-q">⏱️ Quanto tempo leva?</span>
+            <p>A maioria dos procedimentos dura 30–60 minutos. A consulta de avaliação é separada, sem compromisso imediato.</p>
+          </div>
+          <div class="faq-item">
+            <span class="faq-q">🌱 Quando vejo resultado?</span>
+            <p>Alguns resultados aparecem em dias, outros em semanas. No retorno, avaliamos juntos a evolução.</p>
+          </div>
+          <div class="faq-item">
+            <span class="faq-q">💳 E o pagamento?</span>
+            <p>O orçamento completo é apresentado antes do procedimento, sem surpresas. Parcelamento disponível.</p>
+          </div>
         </div>
         <div class="services-cta" data-track="harmonizacao-whatsapp">
           <a
@@ -184,9 +225,84 @@ type Invasiveness = 'Invasivo' | 'Não invasivo';
       font-size: 0.92rem;
       line-height: 1.7;
     }
+    /* Jornada Antes / Durante / Depois */
+    .jornada-wrapper {
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 16px;
+      padding: 1.5rem 1.25rem;
+      margin: 1.25rem auto 1rem;
+      max-width: 860px;
+      width: 100%;
+    }
+    .jornada-heading {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .jornada-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .jornada-step {
+      flex: 1 1 180px;
+      max-width: 240px;
+      text-align: center;
+    }
+    .jornada-icon-wrap { font-size: 1.8rem; margin-bottom: 0.4rem; }
+    .jornada-label {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .jornada-desc {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .jornada-connector {
+      font-size: 1.6rem;
+      color: rgba(201,168,76,0.45);
+      padding-top: 1.2rem;
+      flex-shrink: 0;
+    }
+    /* FAQ Strip harmonização */
+    .faq-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.75rem;
+      margin: 1.25rem 0 0;
+      padding: 1.25rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.14);
+      border-radius: 14px;
+    }
+    .faq-item { padding: 0.5rem 0.5rem 0.5rem 0; }
+    .faq-q {
+      display: block;
+      color: var(--gold-light);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 0.35rem;
+    }
+    .faq-item p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      margin: 0;
+    }
     @media (max-width: 600px) {
       .services-section { padding: 4rem 1rem; }
       .services-grid { grid-template-columns: 1fr; }
+      .jornada-steps { flex-direction: column; align-items: center; gap: 0.25rem; }
+      .jornada-connector { padding-top: 0; transform: rotate(90deg); }
     }
   `],
 })

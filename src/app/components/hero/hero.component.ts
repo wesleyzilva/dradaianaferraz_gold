@@ -484,8 +484,8 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
 
   readonly heroBio = computed(() =>
     this.selectedArea() === 'odontologia'
-      ? 'Atendimento odontológico com foco em estética, prevenção e funcionalidade, incluindo atuação técnica em perícia judicial odontológica e utilizando o profissionalismo de perito judicial para um atendimento ético e personalizado.'
-      : 'Atendimento em harmonização orofacial com planejamento individual, técnicas atualizadas e conduta baseada em avaliação clínica para cuidado seguro e personalizado.',
+      ? 'Da consulta preventiva com câmera intraoral ao tratamento estético, cada atendimento começa com diagnóstico detalhado e plano de cuidado claro. Sem pressão — você entende cada etapa e decide o ritmo junto com a Dra. Daiana.'
+      : 'Antes de qualquer procedimento, fazemos juntos um planejamento completo: análise facial, apresentação das opções e escuta das suas expectativas. Durante e depois, acompanhamento dedicado para resultados seguros e naturais.',
   );
 
   readonly showBottomMenu = computed(() =>

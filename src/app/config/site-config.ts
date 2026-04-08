@@ -87,7 +87,7 @@ export const SITE_CONFIG = {
   odontology: {
     title: 'Odontologia com foco em prevenção, função e estética',
     subtitle:
-      'Atendimento odontológico com protocolos atualizados, diagnóstico cuidadoso e planejamento individual para saúde bucal.',
+      'Consulta com diagnóstico detalhado e câmera intraoral, sem pressa e sem pressão. Você vê o que a Dra. Daiana vê, entende cada etapa e decide junto o melhor cuidado para o seu sorriso.',
     services: [
       {
         icon: '🦷',
