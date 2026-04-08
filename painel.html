@@ -92,6 +92,19 @@
       const ipLog     = JSON.parse(localStorage.getItem('ddf_ip_log') ?? '[]');
       const uniqueIps = [...new Set(ipLog.map(e => e.ip))];
 
+      const sentimentRaw = JSON.parse(localStorage.getItem('ddf_sentiment_clicks') ?? '{}');
+      const sentimentMeta = {
+        medo:          '😰 Fui com medo, saí confiante',
+        transparencia: '💬 Sem surpresas, sem letra miúda',
+        resultado:     '✨ O resultado foi além',
+        cuidado:       '🤍 Fui tratado como pessoa',
+      };
+      const sentimentEntries = Object.entries(sentimentMeta)
+        .map(([id, label]) => ({ id, label, count: sentimentRaw[id] || 0 }))
+        .sort((a, b) => b.count - a.count);
+      const maxSentiment = Math.max(...sentimentEntries.map(e => e.count), 1);
+      const totalSentiment = sentimentEntries.reduce((acc, e) => acc + e.count, 0);
+
       function fmt(iso) {
         if (!iso) return '—';
         return new Date(iso).toLocaleString('pt-BR', {
@@ -229,6 +242,25 @@
         </div>
 
         <div class="section">
+          <div class="sec-title">Sentimentos de avaliação — qual ressoou mais</div>
+          ${totalSentiment === 0
+            ? '<p class="empty">Nenhuma interação com os cards de sentimento registrada ainda — clique nos cards na seção de avaliações do site.</p>'
+            : `<table class="clicks">
+                <thead><tr><th>#</th><th>Sentimento</th><th>Cliques</th><th style="width:160px"></th></tr></thead>
+                <tbody>${sentimentEntries.map((e, i) => `
+                  <tr>
+                    <td style="color:rgba(255,255,255,0.3)">${i + 1}</td>
+                    <td>${e.label}</td>
+                    <td><strong style="color:var(--gold-light)">${e.count}</strong></td>
+                    <td><div class="bar-wrap"><span class="bar" style="width:${e.count > 0 ? Math.round((e.count / maxSentiment) * 120) : 4}px"></span><span style="color:rgba(255,255,255,0.3);font-size:0.72rem">${totalSentiment > 0 ? Math.round((e.count / totalSentiment) * 100) + '%' : '0%'}</span></div></td>
+                  </tr>`).join('')}
+                </tbody>
+              </table>`
+          }
+          <p style="font-size:0.73rem;color:rgba(255,255,255,0.28);margin-top:0.6rem">⚠️ Dados locais — registra apenas os cliques neste navegador. Para dados globais configure <strong style="color:var(--gold)">GA4</strong> no GTM.</p>
+        </div>
+
+        <div class="section">
           <div class="sec-title">Painéis externos</div>
           <div class="ext-links">
             <a href="https://analytics.google.com/" target="_blank" class="ext-btn">📊 Google Analytics</a>
@@ -242,7 +274,7 @@
 
         <footer>
           <span>PIN padrão: <strong style="color:var(--gold)">0423</strong> · Altere a variável <code>PAINEL_PIN</code> em <code>public/painel.html</code></span>
-          <button class="clear-btn" onclick="if(confirm('Apagar todos os dados locais deste dispositivo?')){['ddf_total_visits','ddf_first_visit','ddf_visit_log','ddf_click_stats','ddf_session_counted','ddf_ip_log','ddf_session_ip'].forEach(k=>localStorage.removeItem(k));location.reload();}">🗑 Limpar dados locais</button>
+          <button class="clear-btn" onclick="if(confirm('Apagar todos os dados locais deste dispositivo?')){['ddf_total_visits','ddf_first_visit','ddf_visit_log','ddf_click_stats','ddf_session_counted','ddf_ip_log','ddf_session_ip','ddf_sentiment_clicks'].forEach(k=>localStorage.removeItem(k));location.reload();}">🗑 Limpar dados locais</button>
         </footer>
       `;
     })();
