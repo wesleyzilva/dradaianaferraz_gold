@@ -8,6 +8,7 @@ import { LocationComponent } from './components/location/location.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { GoldCardComponent } from './components/gold-card/gold-card.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { BeforeAfterComponent } from './components/before-after/before-after.component';
 
 export type AppArea = 'odontologia' | 'harmonizacao';
 
@@ -22,6 +23,7 @@ export type AppArea = 'odontologia' | 'harmonizacao';
     ReviewsComponent,
     GoldCardComponent,
     FooterComponent,
+    BeforeAfterComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './app.html',

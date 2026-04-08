@@ -1,7 +1,7 @@
 // Configuração principal do site desenvolvida por Wesley Silva.
 export const SITE_CONFIG = {
   analytics: {
-    googleTagId: 'G-XXXXXXXXXX',
+    googleTagId: 'G-7T08P5CXYW',
   },
 
   professional: {
@@ -351,6 +351,20 @@ export const SITE_CONFIG = {
       totalReviews: 21,
     },
   },
+
+  beforeAfterHarmonizacao: [
+    { label: 'Preenchimento Labial', before: null, after: 'assets/servicosHarmonizacao/Preenchimento.webp' },
+    { label: 'Bioestimulador de Colágeno', before: null, after: 'assets/servicosHarmonizacao/MicroAgulhamento.webp' },
+    { label: 'Ultrassom Microfocado', before: null, after: 'assets/servicosHarmonizacao/UltrassomMicrofocado.webp' },
+    { label: 'Peeling Coreano', before: null, after: 'assets/servicosHarmonizacao/Peeling.webp' },
+  ],
+
+  beforeAfterOdontologia: [
+    { label: 'Clareamento Dental', before: null, after: 'assets/servicosDentista/clareamentoCOnsultorio.jpg' },
+    { label: 'Facetas de Cerâmica', before: null, after: 'assets/servicosDentista/facetasCeramica.webp' },
+    { label: 'Prótese Dentária', before: null, after: 'assets/servicosDentista/ProtesePonteFixa.jpg' },
+    { label: 'Tratamento para Bruxismo', before: null, after: 'assets/servicosDentista/bruximoPlaca.png' },
+  ],
 
   footer: {
     copyright: `© ${new Date().getFullYear()} Dra. Daiana Ferraz`,

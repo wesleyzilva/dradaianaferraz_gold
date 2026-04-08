@@ -5,10 +5,12 @@
 
 @if (selectedArea() === 'harmonizacao') {
 	<app-services sectionId="services-harmonizacao"></app-services>
+	<app-before-after area="harmonizacao" sectionId="before-after-harmonizacao"></app-before-after>
 	<app-products></app-products>
 	<app-gold-card cardType="gold"></app-gold-card>
 } @else {
 	<app-odontology sectionId="services-odontologia"></app-odontology>
+	<app-before-after area="odontologia" sectionId="before-after-odontologia"></app-before-after>
 	<app-gold-card cardType="fidelity"></app-gold-card>
 }
 
