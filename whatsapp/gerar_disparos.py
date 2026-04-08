@@ -39,11 +39,9 @@ LINKEDIN   = "https://www.linkedin.com/in/daiana-ferraz-87b678a8/"
 LATTES     = "https://buscatextual.cnpq.br/buscatextual/visualizacv.do?metodo=apresentar&id=K4736476U8"
 
 ASSINATURA = (
-    "\n\n━━━━━━━━━━━━━━━━━━━\n"
-    "🦷 *Dra. Daiana*\n"
-    "📍 Vila Nery — São Carlos/SP\n"
-    f"🌐 {SITE}\n"
-    "━━━━━━━━━━━━━━━━━━━"
+    "\n\n"
+    "*Dra. Daiana* na Vila Nery\n"
+    f"{SITE}"
 )
 
 # Termos que indicam profissional da área → excluir
@@ -447,20 +445,20 @@ DIA_SEMANA = dia_semana_pt()
 DATA_HOJE  = data_hoje_br()
 
 COMENTARIO_QUARTA = (
-    "\n\n💡 _(Aproveitando esta quarta-feira para organizar a agenda da semana "
-    "e já garantir os melhores horários para você! 😄)_"
+    "\n\n_(Aproveitando esta quarta-feira para organizar a agenda da semana "
+    "e já garantir os melhores horários para você! 😊)_"
     if date.today().weekday() == 2 else ""
 )
 
 # Dicas rotativas Ana Pegova — uma por mensagem (cicla pelo índice do contato)
 DICAS_ANA_PEGOVA = [
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *sérum facial* hidrata profundamente e dá aquela luminosidade que todo mundo pergunta o segredo! ✨",
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *protetor solar* deixa a pele protegida e com um acabamento lindo, perfeito para o dia a dia! ☀️",
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *hidratante corporal* tem textura incrível e aquele cheiro que fica na pele o dia inteiro! 💧",
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *tônico facial* é um dos queridinhos das pacientes da Dra. Daiana — a pele fica outra! 🌸",
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *creme para área dos olhos* é perfeito para complementar qualquer tratamento de harmonização! 👁️",
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *esfoliante facial* remove as células mortas e prepara a pele para absorver melhor os outros produtos! 🍃",
-    "🌿 *Dica:* experimente nossos produtos da linha Ana Pegova — o *óleo facial noturno* faz o skincare trabalhar enquanto você dorme, e a diferença aparece em dias! 🌙",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *sérum facial* hidrata profundamente e dá aquela luminosidade que todo mundo pergunta o segredo!",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *protetor solar* deixa a pele protegida e com um acabamento lindo, perfeito para o dia a dia!",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *hidratante corporal* tem textura incrível e aquele cheiro que fica na pele o dia inteiro!",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *tônico facial* é um dos queridinhos das pacientes da Dra. Daiana — a pele fica outra!",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *creme para área dos olhos* é perfeito para complementar qualquer tratamento de harmonização!",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *esfoliante facial* remove as células mortas e prepara a pele para absorver melhor os outros produtos!",
+    "Dica: experimente nossos produtos da linha Ana Pegova — o *óleo facial noturno* faz o skincare trabalhar enquanto você dorme, e a diferença aparece em dias!",
 ]
 _dica_idx = 0
 
@@ -472,30 +470,28 @@ def proxima_dica() -> str:
 
 def msg_aniversario(nome: str, genero: str, fez: bool) -> str:
     pn = primeiro_nome(nome)
-    saudacao = "Querida" if genero == "F" else "Prezado" if genero == "M" else "Olá,"
     periodo  = "recentemente" if fez else "este mês"
     return (
-        f"🎂 *Parabéns, {pn}!*\n\n"
-        f"{saudacao} {pn}, soubemos que você faz aniversário {periodo} e "
-        "queríamos celebrar junto com você! 🥳\n\n"
-        "Como presente especial, estamos enviando um *voucher exclusivo* para "
-        "você aproveitar em um de nossos serviços com a avaliação com a Dra. Daiana.\n\n"
-        "🎁 *Seu voucher já está reservado — basta responder esta mensagem!*"
+        f"*Parabéns, {pn}!*\n\n"
+        f"{pn}, soubemos que você faz aniversário {periodo} e "
+        "queríamos celebrar junto com você!\n\n"
+        "Temos um *voucher exclusivo* reservado para você aproveitar "
+        "em uma avaliação com a Dra. Daiana.\n\n"
+        "*Basta responder esta mensagem para garantir o seu!*"
         f"{COMENTARIO_QUARTA}"
         f"{ASSINATURA}"
     )
 
 def msg_orcamento_aberto(nome: str, genero: str, valor: str = "") -> str:
     pn = primeiro_nome(nome)
-    abertura = f"Oi, {pn}! Tudo bem?" if genero == "F" else f"Olá, {pn}! Como vai?"
     trecho_valor = f" de *R$ {valor}*" if valor else ""
     return (
-        f"{abertura} 😊\n\n"
+        f"Oi, {pn}! Tudo bem?\n\n"
         f"Passando para lembrar que você tem um orçamento{trecho_valor} em aberto "
-        "aqui na nossa clínica. 🦷\n\n"
-        "A Dra. Daiana está disponível para conversar sobre *condições especiais "
-        "de pagamento* e encontrar o melhor plano para o seu bolso. 💳\n\n"
-        "📅 *Que tal agendarmos esta semana?*\n"
+        "aqui na clínica.\n\n"
+        "A Dra. Daiana está disponível para conversar sobre *condições de pagamento* "
+        "e encontrar o melhor plano para você.\n\n"
+        "*Que tal agendarmos esta semana?*\n"
         "Basta responder esta mensagem!"
         f"{COMENTARIO_QUARTA}"
         f"{ASSINATURA}"
@@ -505,27 +501,25 @@ def msg_agenda_ativa(nome: str, genero: str) -> str:
     pn = primeiro_nome(nome)
     dica = proxima_dica()
     return (
-        f"Oi, {pn}! 😊\n\n"
-        "Tudo bem? Que ótimo saber que você está acompanhando seu "
-        "tratamento conosco! 🦷\n\n"
+        f"Oi, {pn}!\n\n"
+        "Tudo bem? Que bom saber que você está acompanhando o tratamento!\n\n"
         f"{dica}\n\n"
-        "Qualquer dúvida ou para agendar uma manutenção, é só falar!"
+        "Qualquer dúvida, é só falar!"
         f"{COMENTARIO_QUARTA}"
         f"{ASSINATURA}"
     )
 
 def msg_paciente_antigo(nome: str, genero: str) -> str:
     pn = primeiro_nome(nome)
-    saudacao = f"Oi, {pn}! 😊" if genero == "F" else f"Olá, {pn}!"
     return (
-        f"{saudacao}\n\n"
-        "Já faz um tempinho que não nos vemos — sinto falta do seu sorriso! 😄\n\n"
-        "A Dra. Daiana tem novidades incríveis: novos tratamentos de harmonização "
+        f"Oi, {pn}!\n\n"
+        "Já faz um tempinho que não nos vemos — sinto falta do seu sorriso!\n\n"
+        "Temos novidades incríveis: novos tratamentos de harmonização "
         "orofacial, clareamento dental e muito mais. "
         "Que tal uma *avaliação gratuita*?\n\n"
-        f"💻 *Dá uma olhada no nosso novo site e me conta o que achou:*\n"
+        f"*Dá uma olhada no nosso novo site e me conta o que achou:*\n"
         f"{SITE}\n\n"
-        "📍 *Estamos na Vila Nery, São Carlos — adoraríamos te receber (e à sua família 👨‍👩‍👧‍👦)!*"
+        "*Estamos na Vila Nery, São Carlos — adoraríamos te receber (e à sua família)!*"
         f"{COMENTARIO_QUARTA}"
         f"{ASSINATURA}"
     )
