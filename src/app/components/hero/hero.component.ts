@@ -112,7 +112,6 @@ type BottomMenuLink = {
             no Instagram.
           </p>
           <div class="hero-cta">
-            <a [href]="primaryCtaHref()" class="btn-primary" data-track="cta_primary_hero">{{ primaryCtaLabel() }}</a>
             <a [href]="secondaryCtaHref()" class="btn-secondary" data-track="cta_secondary_hero">{{ secondaryCtaLabel() }}</a>
           </div>
         </div>
