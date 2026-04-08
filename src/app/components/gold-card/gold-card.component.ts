@@ -47,7 +47,7 @@ import { SITE_CONFIG } from '../../config/site-config';
               }
             </ul>
 
-            <a [href]="whatsappUrl" target="_blank" class="btn-gold-cta" data-track="conversion_whatsapp_cartao_ouro">
+            <a [href]="whatsappUrl" target="_blank" class="btn-gold-cta" [attr.data-track]="whatsappTrackId">
               <i class="fab fa-whatsapp"></i>
               {{ activeCard().ctaText }}
             </a>
@@ -364,23 +364,30 @@ export class GoldCardComponent {
   readonly sectionId = computed(() => (this.cardType() === 'fidelity' ? 'fidelity-card' : 'gold-card'));
 
   readonly visualLabel = computed(() =>
-    this.cardType() === 'fidelity' ? 'Cartão Ouro' : 'Cartão Ouro',
+    this.cardType() === 'fidelity' ? 'Voucher Ouro' : 'Voucher Ouro',
   );
 
   readonly visualTagline = computed(() =>
-    this.cardType() === 'fidelity' ? 'Odontologia Premium' : 'Harmonização Orofacial Premium',
+    this.cardType() === 'fidelity' ? 'Odontologia · Indicação' : 'Harmonização · Indicação',
   );
 
   readonly visualFooter = computed(() =>
     this.cardType() === 'fidelity'
-      ? 'Retorno em até 12 meses ou indicação/família'
-      : 'Benefícios exclusivos.',
+      ? 'Indique · Feche · Ganhe um serviço exclusivo'
+      : 'Indique · Feche · Ganhe um serviço exclusivo',
   );
 
+  get whatsappTrackId(): string {
+    return this.cardType() === 'fidelity'
+      ? 'conversion_whatsapp_voucher_odontologia'
+      : 'conversion_whatsapp_voucher_harmonizacao';
+  }
+
   get whatsappUrl(): string {
-    const interest = this.cardType() === 'fidelity' ? 'Cartão Ouro Odontologia' : 'Cartão Ouro Harmonização';
-    const msg = encodeURIComponent(`Olá! Vim do site. Origem: Cartão Ouro. Interesse: ${interest}.`);
-    return `${this.config.professional.whatsapp}?text=${msg}`;
+    const msg = this.cardType() === 'fidelity'
+      ? 'Oi! Vi no site o Voucher Ouro de odontologia e quero saber mais. Tenho interesse em indicar alguém também! Origem: Voucher Ouro · Odontologia.'
+      : 'Oi! Vi no site o Voucher Ouro de harmonização e quero saber mais. Tenho interesse em indicar alguém também! Origem: Voucher Ouro · Harmonização.';
+    return `${this.config.professional.whatsapp}?text=${encodeURIComponent(msg)}`;
   }
 
   benefitBeforeTrigger(benefit: string): string {

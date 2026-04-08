@@ -543,7 +543,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   );
 
   readonly primaryCtaLabel = computed(() =>
-    this.selectedArea() === 'odontologia' ? 'Conheça o Cartão Ouro' : 'Conheça o Cartão Ouro',
+    this.selectedArea() === 'odontologia' ? 'Conheça o Voucher Ouro' : 'Conheça o Voucher Ouro',
   );
 
   readonly secondaryCtaLabel = computed(() =>

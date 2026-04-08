@@ -328,34 +328,34 @@ export const SITE_CONFIG = {
   ],
 
   goldCard: {
-    title: 'Conheça o Cartão Ouro',
-    subtitle: 'Seu acesso ao Cartão Ouro em Harmonização Orofacial',
+    title: 'Voucher Ouro · Harmonização',
+    subtitle: 'Indique alguém e ganhe um serviço exclusivo',
     description:
-      'Condição para pacientes de harmonização, com regras claras de elegibilidade em serviços selecionados.',
+      'Pacientes de harmonização podem indicar amigos e familiares. Quando a pessoa indicada fechar um procedimento, você ganha um serviço exclusivo — tudo a combinar diretamente com a Dra. Daiana.',
     benefits: [
-      'Benefícios válidos em serviços de harmonização selecionados',
-      'Condições do Cartão Ouro aplicáveis a serviços de harmonização elegíveis, conforme regras vigentes da clínica.',
-      'Acesso preferencial para avaliação e acompanhamento',
+      'Voucher válido em serviços de harmonização selecionados',
+      'Quem indica e fecha: ganha um serviço exclusivo à combinar',
       'Planejamento personalizado por fase de tratamento',
-      'Atendimento premium com foco em naturalidade',
-      'Ficou com dúvidas? Entre em contato.',
+      'Atendimento com foco em resultado natural e seguro',
+      'Dúvidas? Basta responder no WhatsApp.',
     ],
-    ctaText: 'Quero meu Cartão Ouro',
-    whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Ouro para Harmonização e os benefícios disponíveis.',
+    ctaText: 'Quero meu voucher e indicar alguém',
+    whatsappMessage: 'Oi! Vi no site o Voucher Ouro de harmonização e quero saber mais. Tenho interesse em indicar alguém também!',
   },
 
   fidelityCard: {
-    title: 'Conheça o Cartão Ouro',
-    subtitle: 'Programa Cartão Ouro para pacientes de Odontologia Premium',
+    title: 'Voucher Ouro · Odontologia',
+    subtitle: 'Indique alguém e ganhe um serviço exclusivo',
     description:
-      'Programa para pacientes de odontologia elegíveis, com regras específicas para retorno em até 12 meses.',
+      'Pacientes de odontologia podem indicar amigos e familiares. Quando a pessoa indicada fechar um procedimento, você ganha um serviço exclusivo — tudo a combinar diretamente com a Dra. Daiana.',
     benefits: [
-      'Benefício válido para retorno em até 12 meses',
-      'Elegível para pacientes por indicação via cartão ouro físico',
-      'Condições do Cartão Ouro aplicáveis a serviços odontológicos elegíveis, conforme regras vigentes da clínica.',
+      'Voucher válido para retorno em até 12 meses',
+      'Elegível por indicação via voucher ouro físico',
+      'Quem indica e fecha: ganha um serviço exclusivo à combinar',
+      'Dúvidas? Basta responder no WhatsApp.',
     ],
-    ctaText: 'Quero meu Cartão Ouro',
-    whatsappMessage: 'Olá! Gostaria de saber mais sobre o Cartão Ouro da Odontologia e as regras do desconto Ouro.',
+    ctaText: 'Quero meu voucher e indicar alguém',
+    whatsappMessage: 'Oi! Vi no site o Voucher Ouro de odontologia e quero saber mais. Tenho interesse em indicar alguém também!',
   },
 
   social: {
