@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Painel · Dra. Daiana Ferraz</title>
+  <style>
+    :root {
+      --gold: #C9A84C; --gold-light: #e2c97e;
+      --dark: #0d0d0d; --dark-card: #1a1a1a; --dark-card2: #222;
+      --white: #f0f0f0; --ok: #4caf50; --warn: #f0a500; --err: #e57373;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--dark); color: var(--white); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.88rem; line-height: 1.65; padding: 1.5rem; max-width: 1100px; margin: 0 auto; }
+    header { border-bottom: 1px solid rgba(201,168,76,0.25); padding-bottom: 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.5rem; }
+    .h-title { font-size: 1.2rem; font-weight: 700; color: var(--gold); }
+    .h-sub { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+    .badge-date { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); border-radius: 999px; padding: 0.25rem 0.75rem; font-size: 0.74rem; color: var(--gold-light); white-space: nowrap; }
+    .banner { background: rgba(240,165,0,0.08); border: 1px solid rgba(240,165,0,0.3); border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+    .banner strong { color: var(--warn); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-bottom: 2rem; }
+    .card { background: var(--dark-card); border: 1px solid rgba(201,168,76,0.2); border-radius: 14px; padding: 1.1rem; text-align: center; }
+    .card-val { font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1.1; }
+    .card-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 0.3rem; }
+    .section { margin-bottom: 2rem; }
+    .sec-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.5rem; }
+    .s-item { background: var(--dark-card2); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 0.65rem 0.85rem; display: flex; gap: 0.55rem; align-items: flex-start; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 0.3rem; }
+    .dot.ok { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
+    .dot.warn { background: var(--warn); box-shadow: 0 0 6px var(--warn); }
+    .s-lbl { font-weight: 600; font-size: 0.83rem; color: var(--white); }
+    .s-note { font-size: 0.74rem; color: rgba(255,255,255,0.4); }
+    .s-link { color: var(--gold); text-decoration: none; font-size: 0.74rem; }
+    .s-link:hover { text-decoration: underline; }
+    .dates-table { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; width: 100%; }
+    .dates-table td { padding: 0.55rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .dates-table td:first-child { color: rgba(255,255,255,0.45); width: 50%; }
+    .dates-table td:last-child { font-weight: 600; color: var(--gold-light); }
+    .dates-table tr:last-child td { border-bottom: 0; }
+    table.clicks { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    table.clicks thead th { text-align: left; color: rgba(255,255,255,0.35); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.4rem 0.6rem; border-bottom: 1px solid rgba(201,168,76,0.12); font-weight: 600; }
+    table.clicks tbody td { padding: 0.45rem 0.6rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: rgba(255,255,255,0.8); }
+    table.clicks tbody tr:last-child td { border-bottom: 0; }
+    .bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
+    .bar { display: inline-block; height: 6px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 3px; min-width: 4px; }
+    .log-box { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; max-height: 220px; overflow-y: auto; }
+    .log-row { padding: 0.32rem 0.85rem; font-size: 0.77rem; color: rgba(255,255,255,0.45); border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .log-row:last-child { border-bottom: 0; }
+    .ext-links { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .ext-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.28); color: var(--gold-light); border-radius: 999px; padding: 0.4rem 0.9rem; font-size: 0.8rem; text-decoration: none; transition: background 0.2s; }
+    .ext-btn:hover { background: rgba(201,168,76,0.18); }
+    .empty { color: rgba(255,255,255,0.28); font-style: italic; font-size: 0.82rem; padding: 0.5rem 0; }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; font-size: 0.73rem; color: rgba(255,255,255,0.25); }
+    .clear-btn { background: none; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.3); border-radius: 6px; padding: 0.25rem 0.65rem; cursor: pointer; font-size: 0.72rem; transition: border-color 0.2s, color 0.2s; }
+    .clear-btn:hover { border-color: var(--err); color: var(--err); }
+    @media (max-width: 500px) { .cards { grid-template-columns: repeat(2, 1fr); } body { padding: 1rem; } }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p style="color:rgba(255,255,255,0.3);padding:3rem;text-align:center">Carregando painel…</p>
+  </div>
+
+  <script>
+    (() => {
+      // ── PIN de acesso ─────────────────────────────────────────────────────
+      // Altere o valor abaixo para mudar o PIN de acesso ao painel
+      const PAINEL_PIN = '0423';
+
+      if (sessionStorage.getItem('ddf_painel_ok') !== '1') {
+        const pin = prompt('🔐 PIN de acesso ao painel:');
+        if (pin !== PAINEL_PIN) {
+          document.getElementById('app').innerHTML =
+            '<div style="color:#e57373;padding:4rem;text-align:center;font-size:1.1rem">⛔ Acesso negado.<br><small style="color:rgba(255,255,255,0.3);font-size:0.8rem;margin-top:0.5rem;display:block">Recarregue a página para tentar novamente.</small></div>';
+          return;
+        }
+        sessionStorage.setItem('ddf_painel_ok', '1');
+      }
+
+      // ── Leitura do localStorage ───────────────────────────────────────────
+      const visits     = Number(localStorage.getItem('ddf_total_visits') ?? 0);
+      const firstVisit = localStorage.getItem('ddf_first_visit');
+      const visitLog   = JSON.parse(localStorage.getItem('ddf_visit_log') ?? '[]');
+      const rawClicks  = JSON.parse(localStorage.getItem('ddf_click_stats') ?? '{}');
+      const topClicks  = Object.entries(rawClicks).sort((a, b) => b[1] - a[1]);
+      const maxClick   = topClicks.length > 0 ? Number(topClicks[0][1]) : 1;
+      const totalInter = topClicks.reduce((acc, [, v]) => acc + Number(v), 0);
+      const lastVisit  = visitLog.length > 0 ? visitLog[visitLog.length - 1] : null;
+
+      function fmt(iso) {
+        if (!iso) return '—';
+        return new Date(iso).toLocaleString('pt-BR', {
+          day: '2-digit', month: '2-digit', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+      }
+
+      const today = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+      // ── Status dos serviços ───────────────────────────────────────────────
+      const services = [
+        { ok: true,  label: 'Google Tag Manager', note: 'GTM-PG7CRPC7 · Ativo em index.html', link: 'https://tagmanager.google.com/' },
+        { ok: false, label: 'Google Analytics 4', note: 'G-XXXXXXXXXX é placeholder → configure tag GA4 dentro do GTM', link: 'https://analytics.google.com/' },
+        { ok: false, label: 'Google Ads / Conversões', note: 'Configure tag de conversão dentro do GTM', link: 'https://ads.google.com/' },
+        { ok: true,  label: 'Schema.org (Dentist)', note: 'Ativo · dentista, procedimentos, endereço', link: null },
+        { ok: true,  label: 'Open Graph + Twitter Card', note: 'Configurado · imagem OG usa placeholder', link: null },
+        { ok: true,  label: 'Canonical + hreflang', note: 'pt-BR e en configurados', link: null },
+        { ok: true,  label: 'Google Business · sameAs', note: 'g.page/r/CdKq0HEOJamhEAE configurado', link: 'https://business.google.com/' },
+        { ok: true,  label: 'Search Console', note: 'Envie o sitemap após conectar domínio próprio', link: 'https://search.google.com/search-console/' },
+        { ok: true,  label: 'data-track nos CTAs', note: 'Todos os botões e links principais rastreados', link: null },
+        { ok: true,  label: 'robots.txt + noindex painel', note: '/painel.html excluído da indexação', link: null },
+      ];
+
+      const statusHTML = services.map(s => `
+        <div class="s-item">
+          <span class="dot ${s.ok ? 'ok' : 'warn'}"></span>
+          <div>
+            <div class="s-lbl">${s.label}</div>
+            <div class="s-note">${s.note}${s.link ? ` <a href="${s.link}" target="_blank" class="s-link">Abrir →</a>` : ''}</div>
+          </div>
+        </div>`).join('');
+
+      const clicksHTML = topClicks.length === 0
+        ? '<p class="empty">Nenhum clique registrado neste dispositivo ainda.</p>'
+        : `<table class="clicks">
+            <thead><tr><th>#</th><th>Área / CTA</th><th>Cliques</th><th style="width:120px"></th></tr></thead>
+            <tbody>${topClicks.slice(0, 20).map(([key, count], i) => `
+              <tr>
+                <td style="color:rgba(255,255,255,0.3)">${i + 1}</td>
+                <td>${key}</td>
+                <td><strong style="color:var(--gold-light)">${count}</strong></td>
+                <td><div class="bar-wrap"><span class="bar" style="width:${Math.round((Number(count) / maxClick) * 100)}px"></span><span style="color:rgba(255,255,255,0.3);font-size:0.72rem">${Math.round((Number(count) / totalInter) * 100)}%</span></div></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>`;
+
+      const logHTML = visitLog.length === 0
+        ? '<p class="empty">Nenhuma sessão registrada neste dispositivo ainda.</p>'
+        : `<div class="log-box">${[...visitLog].reverse().slice(0, 60).map((ts, i) =>
+            `<div class="log-row">📅 ${fmt(ts)} ${i === 0 ? '<span style="color:var(--gold);font-size:0.7rem;margin-left:0.4rem">← mais recente</span>' : ''}</div>`
+          ).join('')}</div>`;
+
+      // ── Render ───────────────────────────────────────────────────────────
+      document.getElementById('app').innerHTML = `
+        <header>
+          <div>
+            <div class="h-title">🦷 Painel de Desempenho</div>
+            <div class="h-sub">Dra. Daiana Ferraz · wesleyzilva.github.io/dradaianaferraz_gold</div>
+          </div>
+          <span class="badge-date">📅 ${today}</span>
+        </header>
+
+        <div class="banner">
+          ⚠️ <strong>Atenção:</strong> Os dados de visitas e cliques abaixo são do <strong>localStorage deste navegador/dispositivo</strong> — não refletem todos os usuários.
+          Para métricas globais reais configure o <strong>Google Analytics 4</strong> dentro do GTM (veja status abaixo).
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <div class="card-val">${visits}</div>
+            <div class="card-lbl">Sessões neste dispositivo</div>
+          </div>
+          <div class="card">
+            <div class="card-val">${topClicks.length}</div>
+            <div class="card-lbl">CTAs com clique</div>
+          </div>
+          <div class="card">
+            <div class="card-val">${totalInter}</div>
+            <div class="card-lbl">Total de interações</div>
+          </div>
+          <div class="card">
+            <div class="card-val">${visitLog.length}</div>
+            <div class="card-lbl">Sessões no log</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="sec-title">Datas de acesso</div>
+          <table class="dates-table">
+            <tbody>
+              <tr><td>Primeira visita registrada</td><td>${fmt(firstVisit)}</td></tr>
+              <tr><td>Última visita registrada</td><td>${fmt(lastVisit)}</td></tr>
+              <tr><td>Total de sessões no log</td><td>${visitLog.length} ${visitLog.length >= 100 ? '(limite: 100)' : ''}</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="sec-title">Status dos serviços Google &amp; SEO</div>
+          <div class="status-grid">${statusHTML}</div>
+        </div>
+
+        <div class="section">
+          <div class="sec-title">Top interações — CTAs mais clicados neste dispositivo</div>
+          ${clicksHTML}
+        </div>
+
+        <div class="section">
+          <div class="sec-title">Histórico de sessões neste dispositivo (últimas 60)</div>
+          ${logHTML}
+        </div>
+
+        <div class="section">
+          <div class="sec-title">Painéis externos</div>
+          <div class="ext-links">
+            <a href="https://analytics.google.com/" target="_blank" class="ext-btn">📊 Google Analytics</a>
+            <a href="https://tagmanager.google.com/" target="_blank" class="ext-btn">🏷️ Tag Manager</a>
+            <a href="https://ads.google.com/" target="_blank" class="ext-btn">📣 Google Ads</a>
+            <a href="https://business.google.com/" target="_blank" class="ext-btn">🏢 Google Business</a>
+            <a href="https://search.google.com/search-console/" target="_blank" class="ext-btn">🔍 Search Console</a>
+            <a href="https://www.doctoralia.com.br/" target="_blank" class="ext-btn">🩺 Doctoralia</a>
+          </div>
+        </div>
+
+        <footer>
+          <span>PIN padrão: <strong style="color:var(--gold)">0423</strong> · Altere a variável <code>PAINEL_PIN</code> em <code>public/painel.html</code></span>
+          <button class="clear-btn" onclick="if(confirm('Apagar todos os dados locais deste dispositivo?')){['ddf_total_visits','ddf_first_visit','ddf_visit_log','ddf_click_stats','ddf_session_counted'].forEach(k=>localStorage.removeItem(k));location.reload();}">🗑 Limpar dados locais</button>
+        </footer>
+      `;
+    })();
+  </script>
+</body>
+</html>
