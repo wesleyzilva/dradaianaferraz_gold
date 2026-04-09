@@ -22,7 +22,6 @@ type BAItem = { label: string; before: string | null; after: string | null; desc
 
         @if (!hasImages()) {
           <div class="ba-coming-soon">
-            <div class="ba-cs-icon"><span aria-hidden="true" style="font-size:2.8rem;color:rgba(201,168,76,0.35)">🖼</span></div>
             <h3 class="ba-cs-title">Registros fotográficos em breve</h3>
             <p class="ba-cs-text">Estamos preparando os registros de antes e depois dos procedimentos.<br>Em breve você poderá acompanhar as transformações reais dos nossos pacientes.</p>
           </div>
@@ -45,7 +44,7 @@ type BAItem = { label: string; before: string | null; after: string | null; desc
                         @if (item.before) {
                           <img [src]="item.before" [alt]="'Antes: ' + item.label" class="ba-img" loading="lazy" />
                         } @else {
-                          <div class="ba-ph"><span aria-hidden="true">📷</span><span>Em breve</span></div>
+                            <div class="ba-ph"><span>Em breve</span></div>
                         }
                         <span class="ba-tag">Antes</span>
                       </div>
@@ -54,7 +53,7 @@ type BAItem = { label: string; before: string | null; after: string | null; desc
                         @if (item.after) {
                           <img [src]="item.after" [alt]="'Depois: ' + item.label" class="ba-img" loading="lazy" />
                         } @else {
-                          <div class="ba-ph"><span aria-hidden="true">📷</span><span>Em breve</span></div>
+                            <div class="ba-ph"><span>Em breve</span></div>
                         }
                         <span class="ba-tag ba-tag-depois">Depois</span>
                       </div>

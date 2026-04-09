@@ -101,15 +101,13 @@ type BottomMenuLink = {
           <img [src]="heroPhoto()" [alt]="config.professional.name" class="hero-photo" />
         </div>
         <div class="hero-text">
-          <p class="hero-eyebrow">{{ heroEyebrow() }}</p>
-          <h1 class="hero-name">{{ config.professional.name }}</h1>
-          <p class="hero-title">{{ heroTitle() }}</p>
-          <p class="hero-crm">{{ config.professional.crm }}</p>
-          <p class="hero-bio">{{ heroBio() }}</p>
+          <h1 class="hero-name">Dra. Daiana Ferraz</h1>
+          <p class="hero-bio">
+            Mais de 15 anos de experiência, sólida formação acadêmica, atuação clínica, perita judicial e diversas publicações científicas. <br>
+            <span class="cro">CRO/SP 93910</span>
+          </p>
           <p class="hero-instagram">
-            Venha conhecer em
-            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer" data-track="social_instagram_hero">@dradaianaferrazsc</a>
-            no Instagram.
+            <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer" data-track="social_instagram_hero">@dradaianaferrazsc</a> no Instagram
           </p>
           <div class="hero-cta">
             <a [href]="secondaryCtaHref()" class="btn-secondary" data-track="cta_secondary_hero">{{ secondaryCtaLabel() }}</a>
@@ -549,8 +547,9 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   );
 
   setArea(area: AppArea): void {
+
     this.selectedAreaChange.emit(area);
-    this.isBottomMenuMinimized.set(false);
+    this.isBottomMenuMinimized.set(true);
 
     // Troca para uma foto aleatória diferente da atual
     const photos = this.config.professional.photos;
