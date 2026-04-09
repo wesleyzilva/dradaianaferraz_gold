@@ -86,7 +86,22 @@ type BAItem = { label: string; before: string | null; after: string | null; desc
     </section>
   `,
   styles: [`
-    .ba-section { background: var(--dark); padding: 6rem 2rem; }
+    .ba-section {
+      background: #18132a;
+      padding: 6rem 2rem;
+    }
+    :host-context(#before-after-harmonizacao) .ba-section {
+      background: radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.12) 0%, transparent 70%), linear-gradient(135deg, #18132a 0%, #2a1f0a 50%, #18132a 100%);
+    }
+    :host-context(#before-after-odontologia) .ba-section {
+      background: linear-gradient(135deg, #18132a 0%, #1a2a2a 50%, #18132a 100%);
+    }
+    :host-context(#before-after-harmonizacao) .ba-section {
+      background: radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.12) 0%, transparent 70%), linear-gradient(135deg, var(--dark) 0%, #2a1f0a 50%, var(--dark) 100%);
+    }
+    :host-context(#before-after-odontologia) .ba-section {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a2a2a 50%, var(--dark) 100%);
+    }
     .section-container { max-width: 900px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 3rem; }
     .section-eyebrow { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }

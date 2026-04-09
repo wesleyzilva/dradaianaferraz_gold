@@ -18,15 +18,14 @@ import { SITE_CONFIG } from '../../config/site-config';
               <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">
                 <svg width="22" height="22" viewBox="0 0 448 448" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
-                    <radialGradient id="ig-gradient" cx="0.5" cy="0.5" r="0.8">
-                      <stop offset="0%" stop-color="#fdf497"/>
-                      <stop offset="45%" stop-color="#fdf497"/>
-                      <stop offset="60%" stop-color="#fd5949"/>
-                      <stop offset="90%" stop-color="#d6249f"/>
-                      <stop offset="100%" stop-color="#285AEB"/>
-                    </radialGradient>
+                    <linearGradient id="ig-gradient2" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#f58529"/>
+                      <stop offset="30%" stop-color="#dd2a7b"/>
+                      <stop offset="60%" stop-color="#8134af"/>
+                      <stop offset="100%" stop-color="#515bd4"/>
+                    </linearGradient>
                   </defs>
-                  <rect width="448" height="448" rx="90" fill="url(#ig-gradient)"/>
+                  <rect width="448" height="448" rx="90" fill="url(#ig-gradient2)"/>
                   <rect x="120" y="120" width="208" height="208" rx="62" fill="none" stroke="#fff" stroke-width="32"/>
                   <circle cx="224" cy="224" r="62" fill="none" stroke="#fff" stroke-width="32"/>
                   <circle cx="304" cy="144" r="20" fill="#fff"/>
@@ -52,9 +51,7 @@ import { SITE_CONFIG } from '../../config/site-config';
             <a [href]="config.footer.termsUrl" class="footer-tag legal-link" data-track="legal_terms_view">
               Termos de Uso
             </a>
-            <a [href]="config.professional.whatsapp" class="footer-tag" target="_blank" rel="noopener" data-track="footer_whatsapp">
-              WhatsApp para contato
-            </a>
+            <!-- WhatsApp link removido, apenas ícone permanece -->
             <p class="copyright">{{ config.footer.copyright }}</p>
             <span class="footer-tag">Última atualização: {{ config.footer.lastUpdated }}</span>
             <a [href]="technicalResponsibleMailto" class="footer-tag footer-email" aria-label="Enviar e-mail para responsável técnico">
