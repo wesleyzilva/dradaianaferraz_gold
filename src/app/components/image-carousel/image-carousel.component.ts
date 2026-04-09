@@ -13,68 +13,73 @@ export type CarouselImage = {
   standalone: true,
   template: `
     @if (images().length > 0) {
-      <div class="ic-wrapper" [attr.aria-label]="ariaLabel()">
+      <div class="ic-wrapper" [class.ic-wrapper-showcase]="variant() === 'showcase'" [attr.aria-label]="ariaLabel()">
         @if (title()) {
           <h3 class="ic-title">{{ title() }}</h3>
         }
 
-        <!-- FRAME -->
-        <div class="ic-frame" role="region" aria-roledescription="carousel" [class.ic-frame-portrait]="aspectRatio() === 'portrait'">
-          <div
-            class="ic-track"
-            [style.transform]="trackTransform()"
-          >
-            @for (img of images(); track img.src; let i = $index) {
-              <div
-                class="ic-slide"
-                [attr.aria-hidden]="i !== currentIndex()"
-                [attr.aria-label]="img.label"
-              >
-                <div class="ic-img-wrap" [class.ic-img-wrap-portrait]="aspectRatio() === 'portrait'">
-                  <img [src]="img.src" [alt]="img.label" class="ic-img" [class.ic-img-contain]="imageFit() === 'contain'" loading="lazy" />
-                  @if (img.comingSoon) {
-                    <div class="ic-overlay">
-                      <span aria-hidden="true">⏱</span>
-                      <span>Em Breve</span>
+        <div class="ic-shell" [class.ic-shell-showcase]="variant() === 'showcase'">
+          @if (variant() === 'showcase') {
+            <div class="ic-controls ic-controls-showcase" aria-label="Navegação superior do carrossel">
+              <button class="ic-btn ic-btn-showcase" (click)="prev()" aria-label="Anterior">‹</button>
+              <button class="ic-btn ic-btn-showcase" (click)="next()" aria-label="Próximo">›</button>
+            </div>
+          }
+
+          <div class="ic-frame" role="region" aria-roledescription="carousel" [class.ic-frame-portrait]="aspectRatio() === 'portrait'" [class.ic-frame-showcase]="variant() === 'showcase'">
+            <div class="ic-track" [style.transform]="trackTransform()">
+              @for (img of images(); track img.src; let i = $index) {
+                <article class="ic-slide" [attr.aria-hidden]="i !== currentIndex()" [attr.aria-label]="img.label">
+                  <div class="ic-slide-card" [class.ic-slide-card-showcase]="variant() === 'showcase'">
+                    <div class="ic-img-wrap" [class.ic-img-wrap-portrait]="aspectRatio() === 'portrait'">
+                      <img [src]="img.src" [alt]="img.label" class="ic-img" [class.ic-img-contain]="imageFit() === 'contain'" loading="lazy" />
+                      @if (badgeText()) {
+                        <div class="ic-photo-badge">{{ badgeText() }}</div>
+                      }
+                      @if (img.comingSoon) {
+                        <div class="ic-overlay">
+                          <span aria-hidden="true">⏱</span>
+                          <span>Em Breve</span>
+                        </div>
+                      }
                     </div>
-                  }
-                </div>
 
-                <div class="ic-info">
-                  @if (img.icon) {
-                    <span class="ic-icon" aria-hidden="true">{{ img.icon }}</span>
-                  }
-                  <h4 class="ic-label">
-                    {{ img.label }}
-                    @if (img.comingSoon) {
-                      <span class="ic-badge">Em Breve</span>
-                    }
-                  </h4>
-                  @if (img.description) {
-                    <p class="ic-desc">{{ img.description }}</p>
-                  }
-                </div>
-              </div>
-            }
+                    <div class="ic-info" [class.ic-info-showcase]="variant() === 'showcase'">
+                      @if (img.icon) {
+                        <span class="ic-icon" aria-hidden="true">{{ img.icon }}</span>
+                      }
+                      <h4 class="ic-label">
+                        {{ img.label }}
+                        @if (img.comingSoon) {
+                          <span class="ic-badge">Em Breve</span>
+                        }
+                      </h4>
+                      @if (img.description) {
+                        <p class="ic-desc">{{ img.description }}</p>
+                      }
+                    </div>
+                  </div>
+                </article>
+              }
+            </div>
           </div>
-        </div>
 
-        <!-- CONTROLS -->
-        <div class="ic-controls">
-          <button class="ic-btn" (click)="prev()" aria-label="Anterior">‹</button>
-          <div class="ic-dots" role="tablist">
-            @for (img of images(); track img.src; let i = $index) {
-              <button
-                class="ic-dot"
-                [class.ic-dot-active]="i === currentIndex()"
-                (click)="goTo(i)"
-                [attr.aria-label]="img.label"
-                [attr.aria-selected]="i === currentIndex()"
-                role="tab"
-              ></button>
-            }
+          <div class="ic-controls" [class.ic-controls-showcase]="variant() === 'showcase'">
+            <button class="ic-btn" [class.ic-btn-showcase]="variant() === 'showcase'" (click)="prev()" aria-label="Anterior">‹</button>
+            <div class="ic-dots" role="tablist">
+              @for (img of images(); track img.src; let i = $index) {
+                <button
+                  class="ic-dot"
+                  [class.ic-dot-active]="i === currentIndex()"
+                  (click)="goTo(i)"
+                  [attr.aria-label]="img.label"
+                  [attr.aria-selected]="i === currentIndex()"
+                  role="tab"
+                ></button>
+              }
+            </div>
+            <button class="ic-btn" [class.ic-btn-showcase]="variant() === 'showcase'" (click)="next()" aria-label="Próximo">›</button>
           </div>
-          <button class="ic-btn" (click)="next()" aria-label="Próximo">›</button>
         </div>
 
         <p class="ic-counter" aria-live="polite">{{ currentIndex() + 1 }} / {{ images().length }}</p>
@@ -83,6 +88,7 @@ export type CarouselImage = {
   `,
   styles: [`
     .ic-wrapper { margin: 2rem 0 0; }
+    .ic-wrapper-showcase { margin-top: 1.5rem; }
     .ic-title {
       font-family: 'Playfair Display', serif;
       color: var(--gold);
@@ -93,15 +99,23 @@ export type CarouselImage = {
       text-align: center;
       margin-bottom: 1.25rem;
     }
+    .ic-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
 
     /* ── FRAME / TRACK ── */
     .ic-frame {
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: 18px;
     }
     .ic-frame-portrait {
-      max-width: 540px;
+      max-width: 760px;
       margin: 0 auto;
+    }
+    .ic-frame-showcase {
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
     }
     .ic-track {
       display: flex;
@@ -114,6 +128,15 @@ export type CarouselImage = {
       flex: 0 0 100%;
       min-width: 0;
     }
+    .ic-slide-card {
+      background: var(--dark-light);
+      border: 1px solid rgba(201,168,76,0.18);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .ic-slide-card-showcase {
+      border-color: rgba(201,168,76,0.22);
+    }
     .ic-img-wrap {
       position: relative;
       width: 100%;
@@ -122,8 +145,13 @@ export type CarouselImage = {
       background: #1a1a1a;
     }
     .ic-img-wrap-portrait {
-      aspect-ratio: 3 / 4;
-      background: #111;
+      aspect-ratio: 4 / 5;
+      min-height: clamp(380px, 65vw, 640px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem;
+      background: linear-gradient(135deg, rgba(18,18,18,0.98), rgba(42,31,10,0.95));
     }
     .ic-img {
       width: 100%;
@@ -133,7 +161,24 @@ export type CarouselImage = {
     }
     .ic-img-contain {
       object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 12px;
       background: #111;
+    }
+    .ic-photo-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 1;
     }
     .ic-overlay {
       position: absolute;
@@ -150,18 +195,17 @@ export type CarouselImage = {
       letter-spacing: 2px;
       backdrop-filter: blur(4px);
     }
-    .ic-overlay i { font-size: 1.6rem; }
 
     /* ── INFO ── */
     .ic-info {
       background: var(--dark-light);
-      border: 1px solid rgba(201,168,76,0.18);
-      border-top: none;
-      border-radius: 0 0 16px 16px;
       padding: 1rem 1.25rem 1.1rem;
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+    }
+    .ic-info-showcase {
+      padding: 1.25rem 1.5rem 1.5rem;
     }
     .ic-icon {
       font-size: 1.5rem;
@@ -201,7 +245,11 @@ export type CarouselImage = {
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 0.25rem;
+    }
+    .ic-controls-showcase {
+      justify-content: space-between;
+      width: 100%;
     }
     .ic-btn {
       background: rgba(201,168,76,0.1);
@@ -219,7 +267,14 @@ export type CarouselImage = {
       transition: background 0.25s, transform 0.2s;
       flex-shrink: 0;
     }
-    .ic-btn:hover { background: var(--gold); color: var(--dark); transform: scale(1.07); }
+    .ic-btn-showcase {
+      width: 44px;
+      height: 44px;
+      font-size: 1.6rem;
+      border-width: 1px;
+      background: rgba(26,26,26,0.9);
+    }
+    .ic-btn:hover { background: rgba(201,168,76,0.15); transform: scale(1.04); }
 
     .ic-dots {
       display: flex;
@@ -228,7 +283,8 @@ export type CarouselImage = {
       justify-content: center;
     }
     .ic-dot {
-      width: 9px; height: 9px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       border: 2px solid var(--gold);
       background: transparent;
@@ -246,7 +302,15 @@ export type CarouselImage = {
 
     @media (max-width: 600px) {
       .ic-img-wrap { aspect-ratio: 4 / 3; }
-      .ic-info { padding: 0.75rem 1rem; }
+      .ic-img-wrap-portrait {
+        min-height: 340px;
+        padding: 0.5rem;
+      }
+      .ic-info,
+      .ic-info-showcase { padding: 0.85rem 1rem 1rem; }
+      .ic-controls-showcase {
+        gap: 0.75rem;
+      }
     }
   `],
 })
@@ -256,6 +320,8 @@ export class ImageCarouselComponent {
   readonly ariaLabel = input('Carrossel de imagens');
   readonly aspectRatio = input<'landscape' | 'portrait'>('landscape');
   readonly imageFit = input<'cover' | 'contain'>('cover');
+  readonly variant = input<'default' | 'showcase'>('default');
+  readonly badgeText = input('');
 
   readonly currentIndex = signal(0);
 
