@@ -6,10 +6,11 @@
  * ╚══════════════════════════════════════════════════════════╝
  *
  * USO:
- *   node sender.js <csv>                  → envia (pede confirmação)
- *   node sender.js <csv> --dry-run        → simula sem enviar
+ *   node sender.js                        → usa a lista padrão e limita a 50 envios por dia
+ *   node sender.js --dry-run              → simula sem enviar usando a lista padrão
+ *   node sender.js <csv>                  → envia usando um CSV específico
  *   node sender.js <csv> --yes            → envia sem confirmação
- *   node sender.js <csv> --limit=10       → limita a N envios
+ *   node sender.js <csv> --limit=10       → limita a N envios (respeitando o teto de 50/dia)
  *   node sender.js <csv> --delay=5000     → delay entre envios em ms (padrão: 4000)
  *   node sender.js --status               → mostra resumo do log
  *   node sender.js --reset                → limpa todo o sent_log.json
@@ -29,22 +30,26 @@ const readline = require('readline');
 const DEFAULT_DELAY_MS   = 4000;   // delay base entre envios
 const JITTER_MS          = 3000;   // jitter aleatório (evita padrão de bot)
 const MAX_RETRIES        = 2;      // tentativas por mensagem em caso de erro
+const DAILY_SEND_CAP     = 50;     // limite seguro de disparos por dia
 
 const DIR         = __dirname;
 const LOG_DIR     = path.join(DIR, 'log');
 const SENT_LOG    = path.join(LOG_DIR, 'sent_log.json');
+const DEFAULT_CSV = path.join(DIR, 'disparos', 'lista_disparos_A_20260408.csv');
 
 // ── Argumentos ───────────────────────────────────────────────────────────────
-const args     = process.argv.slice(2);
-const csvPath  = args.find(a => !a.startsWith('--'));
-const DRY_RUN  = args.includes('--dry-run');
-const AUTO_YES = args.includes('--yes');
-const STATUS   = args.includes('--status');
-const RESET    = args.includes('--reset');
+const args      = process.argv.slice(2);
+const csvArg    = args.find(a => !a.startsWith('--'));
+const csvPath   = csvArg ? path.resolve(DIR, csvArg) : DEFAULT_CSV;
+const DRY_RUN   = args.includes('--dry-run');
+const AUTO_YES  = args.includes('--yes');
+const STATUS    = args.includes('--status');
+const RESET     = args.includes('--reset');
 const RESET_RUN = (args.find(a => a.startsWith('--reset-run=')) || '').split('=')[1];
 const limitArg  = args.find(a => a.startsWith('--limit='));
 const delayArg  = args.find(a => a.startsWith('--delay='));
-const LIMIT     = limitArg ? parseInt(limitArg.split('=')[1], 10) : Infinity;
+const parsedLimit = limitArg ? parseInt(limitArg.split('=')[1], 10) : DAILY_SEND_CAP;
+const LIMIT     = Number.isFinite(parsedLimit) && parsedLimit > 0 ? parsedLimit : DAILY_SEND_CAP;
 const DELAY_MS  = delayArg ? parseInt(delayArg.split('=')[1], 10) : DEFAULT_DELAY_MS;
 
 // ── Utilitários ───────────────────────────────────────────────────────────────
@@ -274,16 +279,9 @@ async function main() {
   if (STATUS) { showStatus(); return; }
   if (RESET)  { await resetLog(RESET_RUN); return; }
 
-  if (!csvPath) {
-    console.log('Uso:');
-    console.log('  node sender.js <csv>               → envia mensagens');
-    console.log('  node sender.js <csv> --dry-run     → simula sem enviar');
-    console.log('  node sender.js <csv> --yes         → sem confirmação');
-    console.log('  node sender.js <csv> --limit=10    → limita a N envios');
-    console.log('  node sender.js <csv> --delay=5000  → delay em ms entre envios');
-    console.log('  node sender.js --status            → resumo do log');
-    console.log('  node sender.js --reset             → limpa log de envios');
-    process.exit(0);
+  if (!csvArg) {
+    console.log(cyan(`ℹ️  Usando lista padrão: ${path.relative(DIR, csvPath)}`));
+    console.log('');
   }
 
   if (DRY_RUN) console.log(yellow('⚠️  MODO DRY-RUN — nenhuma mensagem será enviada\n'));
@@ -291,27 +289,35 @@ async function main() {
   // ── 1. Carregar e deduplicar CSV ────────────────────────────────────────────
   let records, duplicates, total;
   try {
-    ({ records, duplicates, total } = loadCSV(path.resolve(DIR, csvPath)));
+    ({ records, duplicates, total } = loadCSV(csvPath));
   } catch (err) {
     console.error(red(`❌ Erro ao ler CSV: ${err.message}`));
     process.exit(1);
   }
 
   console.log(`📋 ${bold('CSV:')} ${path.basename(csvPath)}`);
+  console.log(`   Caminho utilizado:               ${csvPath}`);
   console.log(`   Total de linhas no CSV:          ${total}`);
   console.log(`   Duplicatas removidas:             ${duplicates}`);
   console.log(`   Únicos (numero × categoria):      ${records.length}\n`);
 
   // ── 2. Filtrar já enviados hoje ─────────────────────────────────────────────
   const sentLog   = readSentLog();
+  const today     = new Date().toISOString().slice(0, 10);
+  const sentToday = Object.values(sentLog).filter((entry) => entry.status === 'sent' && (entry.sentAt || '').slice(0, 10) === today).length;
+  const remainingToday = Math.max(0, DAILY_SEND_CAP - sentToday);
   const toSend    = records.filter(c => !sentLog[logKey(c.numero, c.categoria)]);
   const skippedAlready = records.length - toSend.length;
-  const limited   = toSend.slice(0, LIMIT);
+  const effectiveLimit = Math.min(LIMIT, remainingToday);
+  const limited   = toSend.slice(0, effectiveLimit);
 
   console.log(`📊 ${bold('Fila:')}`);
   console.log(`   ${green('✅')} Já enviados hoje (ignorados):  ${skippedAlready}`);
   console.log(`   ${cyan('📤')} Novos para enviar:             ${toSend.length}`);
-  if (LIMIT < Infinity) console.log(`   ${yellow('⚠️ ')} Limitado a:                   ${LIMIT}`);
+  console.log(`   ${yellow('🛡️')} Limite diário seguro:           ${DAILY_SEND_CAP}`);
+  console.log(`   ${yellow('📆')} Já enviados hoje:               ${sentToday}`);
+  console.log(`   ${yellow('⏳')} Restantes permitidos hoje:      ${remainingToday}`);
+  console.log(`   ${yellow('⚠️ ')} Limite aplicado nesta execução: ${effectiveLimit}`);
   console.log(`   ${bold('→  Envios nesta execução:')}       ${limited.length}\n`);
 
   // Resumo por categoria
@@ -323,7 +329,11 @@ async function main() {
   console.log('');
 
   if (limited.length === 0) {
-    console.log(green('✅ Nada a enviar — todas as mensagens desta lista já foram processadas hoje.'));
+    if (remainingToday <= 0) {
+      console.log(yellow(`⚠️  Limite diário de ${DAILY_SEND_CAP} mensagens já foi atingido hoje.`));
+    } else {
+      console.log(green('✅ Nada a enviar — todas as mensagens desta lista já foram processadas hoje.'));
+    }
     showStatus();
     return;
   }

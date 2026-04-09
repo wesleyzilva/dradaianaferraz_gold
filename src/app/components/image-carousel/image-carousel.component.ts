@@ -301,15 +301,34 @@ export type CarouselImage = {
     }
 
     @media (max-width: 600px) {
+      .ic-wrapper {
+        margin: 1.2rem 0 0;
+        padding: 0 0.5rem;
+      }
+      .ic-shell {
+        gap: 0.5rem;
+      }
+      .ic-frame {
+        max-width: 100vw;
+        margin: 0 auto;
+      }
       .ic-img-wrap { aspect-ratio: 4 / 3; }
       .ic-img-wrap-portrait {
-        min-height: 340px;
-        padding: 0.5rem;
+        min-height: 220px;
+        padding: 0.25rem;
       }
       .ic-info,
-      .ic-info-showcase { padding: 0.85rem 1rem 1rem; }
+      .ic-info-showcase { padding: 0.7rem 0.5rem 0.8rem; }
+      .ic-controls,
       .ic-controls-showcase {
-        gap: 0.75rem;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+      .ic-dots {
+        gap: 0.25rem;
+      }
+      .ic-slide-card {
+        border-radius: 10px;
       }
     }
   `],

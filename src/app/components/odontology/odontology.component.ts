@@ -20,22 +20,9 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
         <div class="odonto-intro-callout" aria-label="Como funciona a consulta">
           <div class="callout-main">
             <span class="callout-icon" aria-hidden="true">🦷</span>
-            <p>Cada consulta começa com <strong>câmera intraoral</strong>: você vê em tempo real o que a Dra. Daiana vê, recebe um diagnóstico visual e um plano de cuidado completo — com todas as opções e valores — antes de qualquer decisão.</p>
+            <p>Cada consulta começa com <strong>checkup digital</strong>: você vê em tempo real o que a Dra. Daiana vê, recebe um diagnóstico visual e um plano de cuidado completo — com todas as opções e valores — antes de qualquer decisão.</p>
           </div>
-          <div class="callout-faq">
-            <div class="faq-item">
-              <span class="faq-q">🪥 Com que frequência?</span>
-              <p>A cada 6 meses para limpeza e prevenção. Tratamentos têm retorno definido no seu plano individual.</p>
-            </div>
-            <div class="faq-item">
-              <span class="faq-q">✅ Tratamento é seguro?</span>
-              <p>Sim, baseado na avaliação bucal e da saúde do paciente antes de qualquer protocolo.</p>
-            </div>
-            <div class="faq-item">
-              <span class="faq-q">💳 Como é o pagamento?</span>
-              <p>Orçamento apresentado antes de qualquer procedimento, sem surpresas. Parcelamento disponível.</p>
-            </div>
-          </div>
+          <!-- callout-faq removido -->
         </div>
 
         <div class="carousel-block">

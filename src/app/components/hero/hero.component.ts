@@ -103,15 +103,14 @@ type BottomMenuLink = {
         <div class="hero-text">
           <h1 class="hero-name">Dra. Daiana Ferraz</h1>
           <p class="hero-bio">
-            Mais de 15 anos de experiência, sólida formação acadêmica, atuação clínica, perita judicial e diversas publicações científicas. <br>
+            Com 18 anos de experiência dedicados a saúde e  autoestima de meus pacientes. Trajetória pautada na precisão técnica e olhar humanizado.<br>
+            Especialista em Reabilitação Oral e Harmonização Orofacial. Meu trabalho é fundamentado em um planejamento personalizado para as necessidades do cliente.<br>
             <span class="cro">CRO/SP 93910</span>
           </p>
           <p class="hero-instagram">
             <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer" data-track="social_instagram_hero">@dradaianaferrazsc</a> no Instagram
           </p>
-          <div class="hero-cta">
-            <a [href]="secondaryCtaHref()" class="btn-secondary" data-track="cta_secondary_hero">{{ secondaryCtaLabel() }}</a>
-          </div>
+          <!-- hero-cta removido -->
         </div>
       </div>
     </section>
@@ -428,7 +427,7 @@ type BottomMenuLink = {
         border-bottom: 0;
       }
       .hero-content { flex-direction: column; text-align: center; gap: 2rem; }
-      .hero-photo { width: 220px; height: 220px; }
+      .hero-photo { width: 320px; height: 320px; }
       .hero-bio { margin: 0 auto 2rem; }
       .hero-cta { justify-content: center; }
     }
@@ -543,7 +542,7 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   );
 
   readonly secondaryCtaLabel = computed(() =>
-    this.selectedArea() === 'odontologia' ? 'Conheça a Odontologia' : 'Conheça os Serviços',
+    '',
   );
 
   setArea(area: AppArea): void {

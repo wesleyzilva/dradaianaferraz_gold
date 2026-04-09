@@ -9,14 +9,7 @@ export const SITE_CONFIG = {
     title: 'Harmonização Orofacial e Odontologia Estética em São Carlos/SP',
     crm: 'CRO/SP 93910',
     photo: 'assets/daiana/Daiana1.jpeg',
-    photos: [
-      'assets/daiana/Daiana1.jpeg',
-      'assets/daiana/Daiana2.jpeg',
-      'assets/daiana/Daiana3.jpeg',
-      'assets/daiana/Daiana4.webp',
-      'assets/daiana/Daiana5.jpeg',
-      'assets/daiana/Daiana6.jpg',
-    ],
+    photos: ['assets/daiana/Daiana1.jpeg'],
     bio: 'Atendimento em harmonização orofacial e odontologia estética em São Carlos/SP, com avaliação individual, planejamento clínico e foco em segurança do paciente.',
     whatsapp: 'https://wa.me/5516991400423',
   },
@@ -192,14 +185,14 @@ export const SITE_CONFIG = {
   },
 
   proceduresHarmonizacao: [
-    { name: 'Toxina Botulínica',           image: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp' },
-    { name: 'Preenchimento Labial',       image: 'assets/servicosHarmonizacao/invasivo/Preenchimento.webp' },
-    { name: 'Skinbooster',                image: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp' },
+    { name: 'Toxina Botulínica',            image: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp' },
+    { name: 'Preenchimento Labial',         image: 'assets/servicosHarmonizacao/invasivo/Preenchimento.webp' },
+    { name: 'Skinbooster',                  image: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp' },
     { name: 'Bioestimuladores de Colágeno', image: 'assets/servicosHarmonizacao/invasivo/MicroAgulhamento.webp' },
-    { name: 'Fios de PDO',                image: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp' },
-    { name: 'Rinomodelação',              image: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp' },
-    { name: 'Ultrassom Microfocado',      image: 'assets/servicosHarmonizacao/naoInvasivo/UltrassomMicrofocado.jpeg' },
-    { name: 'Peeling Coreano',            image: 'assets/servicosHarmonizacao/naoInvasivo/Peeling.webp' },
+    { name: 'Fios de PDO',                  image: 'assets/servicosHarmonizacao/invasivo/fiosPDO1.webp' },
+    { name: 'Rinomodelação',                image: 'assets/servicosHarmonizacao/invasivo/rinomodelacao.jpg' },
+    { name: 'Ultrassom Microfocado',        image: 'assets/servicosHarmonizacao/naoInvasivo/UltrassomMicrofocado.jpeg' },
+    { name: 'Peeling Coreano',              image: 'assets/servicosHarmonizacao/naoInvasivo/Peeling.webp' },
   ],
 
   proceduresOdontologia: [
@@ -208,7 +201,7 @@ export const SITE_CONFIG = {
     { name: 'Facetas', image: 'assets/servicosDentista/Lentes.jpeg' },
     { name: 'Profilaxia e Limpeza Profissional', image: 'assets/servicosDentista/clareamentoCaseiro.jpg' },
     { name: 'Prótese Dentária', image: 'assets/servicosDentista/Proteses.jpeg' },
-    { name: 'Tratamento para Bruxismo', image: 'assets/servicosDentista/bruximoPlaca.png' },
+    { name: 'Tratamento para Bruxismo', image: 'assets/servicosDentista/bruximoPlaca.jpeg' },
   ],
 
   reviews: [
@@ -350,12 +343,12 @@ export const SITE_CONFIG = {
   },
 
   imagesHarmonizacaoInvasivo: [
-    { src: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp',                   icon: '💉', label: 'Toxina Botulínica',          description: 'Aplicação com indicação clínica para manejo de linhas de expressão, com planejamento conforme características de cada paciente.' },
-    { src: 'assets/servicosHarmonizacao/invasivo/Preenchimento.webp',                icon: '💋', label: 'Preenchimento Labial',        description: 'Procedimento com ácido hialurônico para definição de contorno e volume, sempre com avaliação prévia.' },
-    { src: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp', icon: '💧', label: 'Skinbooster',                 description: 'Protocolo voltado à hidratação cutânea e qualidade da pele, indicado após avaliação clínica.' },
-    { src: 'assets/servicosHarmonizacao/invasivo/MicroAgulhamento.webp',             icon: '🌟', label: 'Bioestimuladores de Colágeno', description: 'Indicado para estímulo de colágeno e suporte de firmeza da pele conforme indicação profissional.' },
-    { src: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp',                   icon: '🧵', label: 'Fios de PDO',                 description: 'Procedimento minimamente invasivo com objetivo de suporte tecidual e estímulo de colágeno, conforme avaliação.' },
-    { src: 'assets/servicosHarmonizacao/invasivo/PreencimentoAcidoHialuronico.webp', icon: '👃', label: 'Rinomodelação',               description: 'Procedimento não cirúrgico com planejamento individual para ajuste de contorno nasal, quando indicado.' },
+    { src: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp',    icon: '💉', label: 'Toxina Botulínica',           description: 'Aplicação com indicação clínica para manejo de linhas de expressão, com planejamento conforme características de cada paciente.' },
+    { src: 'assets/servicosHarmonizacao/invasivo/Preenchimento.webp', icon: '💋', label: 'Preenchimento Labial',         description: 'Procedimento com ácido hialurônico para definição de contorno e volume, sempre com avaliação prévia.' },
+    { src: 'assets/servicosHarmonizacao/invasivo/Injetaveis.webp',    icon: '💧', label: 'Skinbooster',                  description: 'Protocolo voltado à hidratação cutânea e qualidade da pele, indicado após avaliação clínica.' },
+    { src: 'assets/servicosHarmonizacao/invasivo/MicroAgulhamento.webp', icon: '🌟', label: 'Bioestimuladores de Colágeno', description: 'Indicado para estímulo de colágeno e suporte de firmeza da pele conforme indicação profissional.' },
+    { src: 'assets/servicosHarmonizacao/invasivo/fiosPDO.jpg',        icon: '🧵', label: 'Fios de PDO',                  description: 'Procedimento minimamente invasivo com objetivo de suporte tecidual e estímulo de colágeno, conforme avaliação.' },
+    { src: 'assets/servicosHarmonizacao/invasivo/rinomodelacao.jpg',  icon: '👃', label: 'Rinomodelação',                description: 'Procedimento não cirúrgico com planejamento individual para ajuste de contorno nasal, quando indicado.' },
   ],
 
   imagesHarmonizacaoNaoInvasivo: [
@@ -366,17 +359,15 @@ export const SITE_CONFIG = {
   ],
 
   imagesOdontologia: [
-    { src: 'assets/servicosDentista/cameraIntraOral.webp',       icon: '🦷', label: 'Câmera Intraoral',              description: 'Mapeamento detalhado em tempo real para prevenir problemas e criar um plano inteligente de manutenção do seu sorriso.' },
+    { src: 'assets/servicosDentista/cameraIntraOral.webp',       icon: '🦷', label: 'Checkup Digital',              description: 'Mapeamento detalhado em tempo real para prevenir problemas e criar um plano inteligente de manutenção do seu sorriso.' },
     { src: 'assets/servicosDentista/Clareamento.jpeg',           icon: '✨', label: 'Clareamento de Consultório',     description: 'Clareamento dental com acompanhamento profissional e indicação individual, preservando a saúde bucal.' },
     { src: 'assets/servicosDentista/clareamentoCaseiro.jpg',     icon: '🪥', label: 'Clareamento Caseiro',            description: 'Protocolo supervisionado para uso em casa, com moldeiras personalizadas e gel indicado individualmente.' },
-    { src: 'assets/servicosDentista/facetasCeramica.webp',       icon: '😁', label: 'Facetas de Cerâmica',            description: 'Reabilitação estética de cor e formato com planejamento clínico e indicação individual.' },
-    { src: 'assets/servicosDentista/Lentes.jpeg',                icon: '😁', label: 'Lentes de Contato Dental',      description: 'Alternativa estética de alta precisão para correção de cor e forma com resultado natural e conservador.' },
-    { src: 'assets/servicosDentista/Proteses.jpeg',              icon: '🦷', label: 'Prótese / Ponte Fixa',           description: 'Reabilitação oral com próteses planejadas para devolver mastigação, conforto e estética do sorriso.' },
+    { src: 'assets/servicosDentista/Lentes.jpeg',                icon: '😁', label: 'Lentes de Porcelana',      description: 'Alternativa estética de alta precisão para correção de cor e forma com resultado natural e conservador.' },
+    { src: 'assets/servicosDentista/antesDepois/LentesPorcelana.jpeg', icon: '😁', label: 'Lentes de Porcelana (Antes)', description: 'Imagem individual do caso antes da transformação com lentes de porcelana.' },
     { src: 'assets/servicosDentista/ProteseProtocolo.webp',      icon: '🦷', label: 'Prótese Protocolo',              description: 'Solução de reabilitação completa com protocolo de alta estética e funcionalidade.' },
-    { src: 'assets/servicosDentista/bruximoPlaca.png',           icon: '😬', label: 'Placa para Bruxismo',            description: 'Diagnóstico e manejo do bruxismo para reduzir dores, proteger os dentes e melhorar a qualidade do sono.' },
-    { src: 'assets/servicosDentista/BruxismoAcido.webp',         icon: '😬', label: 'Bruxismo e Erosão Ácida',        description: 'Abordagem personalizada para proteger a estrutura dental da erosão causada pelo bruxismo e acidez.' },
+    { src: 'assets/servicosDentista/bruximoPlaca.jpeg',           icon: '😬', label: 'Placa para Bruxismo',            description: 'Diagnóstico e manejo do bruxismo para reduzir dores, proteger os dentes e melhorar a qualidade do sono.' },
+    { src: 'assets/servicosDentista/BruxismoAcido.webp',         icon: '💉', label: 'Toxina Botulínica para Bruxismo',        description: 'Aplicação de toxina botulínica para relaxamento dos músculos da mastigação e alívio dos sintomas do bruxismo.' },
     { src: 'assets/servicosDentista/ortodontia.jpg',             icon: '🦷', label: 'Ortodontia',                     description: 'Tratamento para alinhamento dos dentes com planejamento individualizado e acompanhamento contínuo.' },
-    { src: 'assets/servicosDentista/pericia.png',                icon: '⚖️', label: 'Perícia Odontológica',             description: 'Laudo técnico com rigor científico para fins legais, seguros ou processos judiciais.' },
     { src: 'assets/servicosDentista/periciaOdonto.webp',         icon: '⚖️', label: 'Perícia Especializada',             description: 'Avaliação pericial odontológica com documentação detalhada e suporte especializado.' },
   ],
 
@@ -387,7 +378,7 @@ export const SITE_CONFIG = {
   //   Odontologia:  assets/servicosDentista/antesDepois/
   beforeAfterHarmonizacaoInvasivo: [
     { label: 'Preenchimento Labial',       before: 'assets/servicosHarmonizacao/invasivo/antesDepois/preenchimentoLabial1.jpeg', after: 'assets/servicosHarmonizacao/invasivo/antesDepois/PreenchimentoLabial.jpeg', description: 'Procedimento com ácido hialurônico para definição e volume labial com resultado natural e harmônico.' },
-    { label: 'Toxina Botúlínica',           before: null as string | null, after: null as string | null, description: 'Aplicação com indicação clínica para suavização de linhas de expressão, com resultado sutil e personalizado.' },
+    { label: 'Toxina Botulínica',          before: null as string | null, after: null as string | null, description: 'Aplicação com indicação clínica para suavização de linhas de expressão, com resultado sutil e personalizado.' },
     { label: 'Rinomodelação',              before: 'assets/servicosHarmonizacao/invasivo/antesDepois/rinomodelacao1.jpg', after: 'assets/servicosHarmonizacao/invasivo/antesDepois/Rinomodelacao.jpeg', description: 'Procedimento não cirúrgico com planejamento individual para ajuste de contorno nasal, quando indicado.' },
     { label: 'Microagulhamento',           before: null as string | null, after: null as string | null, description: 'Estimulação de colágeno com agulhas finas para melhora de textura, poros e cicatrizes.' },
   ],
@@ -395,14 +386,12 @@ export const SITE_CONFIG = {
   beforeAfterHarmonizacaoNaoInvasivo: [
     { label: 'Ultrassom Microfocado',      before: null as string | null, after: 'assets/servicosHarmonizacao/naoInvasivo/antesDepoisNaoInvasivo/Ultrassomicrofocado.jpeg', description: 'Tecnologia de ultrassom para lifting e sustentação sem cortes, com resultado progressivo.' },
     { label: 'Peeling Coreano',            before: null as string | null, after: null as string | null, description: 'Protocolo de renovação celular para uniformidade de tom, textura e luminosidade da pele.' },
-    { label: 'Bioestimulador de Colágeno', before: null as string | null, after: 'assets/servicosHarmonizacao/naoInvasivo/antesDepoisNaoInvasivo/BioestimuladorColageno.jpeg', description: 'Estimulação profunda de colágeno para firmeza e rejuvenescimento gradual e natural.' },
+    { label: 'Bioestimulador de Colágeno', before: null as string | null, after: 'assets/servicosHarmonizacao/naoInvasivo/antesDepoisNaoInvasivo/BioestimuladorColageno.jpeg', description: '' },
   ],
 
   beforeAfterOdontologia: [
-    { label: 'Clareamento Dental',         before: null as string | null, after: null as string | null, description: 'Clareamento com acompanhamento profissional e indicação individual, preservando a saúde bucal.' },
-    { label: 'Facetas de Cerâmica',        before: null as string | null, after: null as string | null, description: 'Reabilitação estética de cor e formato com planejamento clínico e indicação individual.' },
-    { label: 'Prótese Dentária',          before: null as string | null, after: null as string | null, description: 'Reabilitação oral com próteses planejadas para devolver mastigação, conforto e estética.' },
-    { label: 'Tratamento para Bruxismo',   before: null as string | null, after: null as string | null, description: 'Diagnóstico e manejo do bruxismo para proteger os dentes e melhorar a qualidade do sono.' },
+    { label: 'Lentes de Porcelana', before: 'assets/servicosDentista/antesDepois/LentesPorcelana.jpeg', after: 'assets/servicosDentista/antesDepois/LentesPorcelana1.jpeg', description: 'Transformação estética com lentes de porcelana para um sorriso natural e harmônico.' },
+    { label: 'Lentes de Porcelana (Antes)', before: 'assets/servicosDentista/antesDepois/LentesPorcelana.jpeg', after: null, description: 'Imagem individual do caso antes da transformação com lentes de porcelana.' },
   ],
 
   footer: {
