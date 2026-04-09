@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
 import { SITE_CONFIG } from '../../config/site-config';
 import type { AppArea } from '../../app';
+import { ImageCarouselComponent } from '../image-carousel/image-carousel.component';
 
 type BAItem = { label: string; before: string | null; after: string | null; description?: string; };
 
 @Component({
   selector: 'app-before-after',
   standalone: true,
+  imports: [ImageCarouselComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="ba-section" [id]="sectionId()">
@@ -33,50 +35,15 @@ type BAItem = { label: string; before: string | null; after: string | null; desc
             </div>
           }
 
-          <div class="ba-carousel-wrap">
-            <button type="button" class="ba-nav" (click)="prev()" aria-label="Anterior">‹</button>
-            <div class="ba-frame">
-              <div class="ba-track" [style.transform]="trackTransform()">
-                @for (item of activeItems(); track item.label) {
-                  <div class="ba-slide">
-                    <div class="ba-comparison">
-                      <div class="ba-side">
-                        @if (item.before) {
-                          <img [src]="item.before" [alt]="'Antes: ' + item.label" class="ba-img" loading="lazy" />
-                        } @else {
-                            <div class="ba-ph"><span>Em breve</span></div>
-                        }
-                        <span class="ba-tag">Antes</span>
-                      </div>
-                      <div class="ba-divider" aria-hidden="true"><div class="ba-divider-line"></div></div>
-                      <div class="ba-side">
-                        @if (item.after) {
-                          <img [src]="item.after" [alt]="'Depois: ' + item.label" class="ba-img" loading="lazy" />
-                        } @else {
-                            <div class="ba-ph"><span>Em breve</span></div>
-                        }
-                        <span class="ba-tag ba-tag-depois">Depois</span>
-                      </div>
-                    </div>
-                    <div class="ba-info">
-                      <p class="ba-label">{{ item.label }}</p>
-                      @if (item.description) {
-                        <p class="ba-description">{{ item.description }}</p>
-                      }
-                    </div>
-                  </div>
-                }
-              </div>
-            </div>
-            <button type="button" class="ba-nav" (click)="next()" aria-label="Próximo">›</button>
+          <div class="carousel-block">
+            <app-image-carousel
+              [images]="carouselImages()"
+              [title]="carouselTitle()"
+              ariaLabel="Carrossel de resultados reais"
+              aspectRatio="portrait"
+              imageFit="contain"
+            ></app-image-carousel>
           </div>
-
-          <div class="ba-dots" role="group" aria-label="Navegação por procedimento">
-            @for (item of activeItems(); track item.label; let i = $index) {
-              <button type="button" class="ba-dot" [class.ba-dot-active]="currentIndex() === i" (click)="goTo(i)" [attr.aria-label]="item.label"></button>
-            }
-          </div>
-          <p class="ba-counter">{{ currentIndex() + 1 }} / {{ activeItems().length }}</p>
 
           <p class="ba-disclaimer">
             Resultados podem variar conforme as características individuais de cada paciente. Todos os procedimentos são realizados por profissional habilitada.
@@ -87,29 +54,27 @@ type BAItem = { label: string; before: string | null; after: string | null; desc
   `,
   styles: [`
     .ba-section {
-      background: #18132a;
+      background: linear-gradient(135deg, var(--dark) 0%, #2a1f0a 50%, var(--dark) 100%);
       padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
     }
-    :host-context(#before-after-harmonizacao) .ba-section {
-      background: radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.12) 0%, transparent 70%), linear-gradient(135deg, #18132a 0%, #2a1f0a 50%, #18132a 100%);
+    .ba-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
-    :host-context(#before-after-odontologia) .ba-section {
-      background: linear-gradient(135deg, #18132a 0%, #1a2a2a 50%, #18132a 100%);
-    }
-    :host-context(#before-after-harmonizacao) .ba-section {
-      background: radial-gradient(ellipse at 60% 50%, rgba(201,168,76,0.12) 0%, transparent 70%), linear-gradient(135deg, var(--dark) 0%, #2a1f0a 50%, var(--dark) 100%);
-    }
-    :host-context(#before-after-odontologia) .ba-section {
-      background: linear-gradient(135deg, var(--dark) 0%, #1a2a2a 50%, var(--dark) 100%);
-    }
-    .section-container { max-width: 900px; margin: 0 auto; }
+    .section-container { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
     .section-header { text-align: center; margin-bottom: 3rem; }
     .section-eyebrow { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); color: var(--white); margin-bottom: 0.75rem; }
     .gold-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); margin: 0 auto 1.5rem; border-radius: 2px; }
     .section-subtitle { color: rgba(255,255,255,0.62); max-width: 600px; margin: 0 auto; line-height: 1.8; font-size: 0.93rem; }
+    .carousel-block { max-width: 760px; margin: 0 auto; }
 
-    /* ── EM BREVE ── */
+    /* ── EM BREVE ──
     .ba-coming-soon { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 3.5rem 2rem; background: rgba(201,168,76,0.04); border: 1px dashed rgba(201,168,76,0.3); border-radius: 20px; text-align: center; max-width: 520px; margin: 0 auto 2rem; }
     .ba-cs-icon { font-size: 2.8rem; color: rgba(201,168,76,0.35); }
     .ba-cs-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.3rem; margin: 0; }
@@ -169,7 +134,6 @@ export class BeforeAfterComponent {
   readonly odontologiaItems: BAItem[] = this.config.beforeAfterOdontologia;
 
   readonly activeGroup = signal<'invasivo' | 'nao'>('invasivo');
-  readonly currentIndex = signal(0);
 
   private anyImage(items: BAItem[]): boolean {
     return items.some((i) => i.before !== null || i.after !== null);
@@ -190,24 +154,24 @@ export class BeforeAfterComponent {
     return this.activeGroup() === 'invasivo' ? this.invasivoItems : this.naoInvasivoItems;
   });
 
-  readonly trackTransform = computed(() => `translateX(-${this.currentIndex() * 100}%)`);
+  readonly carouselImages = computed(() =>
+    this.activeItems()
+      .filter((item) => item.before !== null || item.after !== null)
+      .map((item) => ({
+        src: item.after ?? item.before ?? '',
+        label: item.label,
+        description: item.description,
+      })),
+  );
+
+  readonly carouselTitle = computed(() => {
+    if (this.area() === 'odontologia') return 'Resultados reais de odontologia';
+    return this.activeGroup() === 'invasivo'
+      ? 'Resultados reais · Harmonização invasiva'
+      : 'Resultados reais · Harmonização não invasiva';
+  });
 
   setGroup(group: 'invasivo' | 'nao'): void {
     this.activeGroup.set(group);
-    this.currentIndex.set(0);
-  }
-
-  prev(): void {
-    const total = this.activeItems().length;
-    this.currentIndex.update((i) => (i - 1 + total) % total);
-  }
-
-  next(): void {
-    const total = this.activeItems().length;
-    this.currentIndex.update((i) => (i + 1) % total);
-  }
-
-  goTo(i: number): void {
-    this.currentIndex.set(i);
   }
 }

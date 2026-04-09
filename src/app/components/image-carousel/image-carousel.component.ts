@@ -19,7 +19,7 @@ export type CarouselImage = {
         }
 
         <!-- FRAME -->
-        <div class="ic-frame" role="region" aria-roledescription="carousel">
+        <div class="ic-frame" role="region" aria-roledescription="carousel" [class.ic-frame-portrait]="aspectRatio() === 'portrait'">
           <div
             class="ic-track"
             [style.transform]="trackTransform()"
@@ -30,8 +30,8 @@ export type CarouselImage = {
                 [attr.aria-hidden]="i !== currentIndex()"
                 [attr.aria-label]="img.label"
               >
-                <div class="ic-img-wrap">
-                  <img [src]="img.src" [alt]="img.label" class="ic-img" loading="lazy" />
+                <div class="ic-img-wrap" [class.ic-img-wrap-portrait]="aspectRatio() === 'portrait'">
+                  <img [src]="img.src" [alt]="img.label" class="ic-img" [class.ic-img-contain]="imageFit() === 'contain'" loading="lazy" />
                   @if (img.comingSoon) {
                     <div class="ic-overlay">
                       <span aria-hidden="true">⏱</span>
@@ -99,6 +99,10 @@ export type CarouselImage = {
       overflow: hidden;
       border-radius: 16px;
     }
+    .ic-frame-portrait {
+      max-width: 540px;
+      margin: 0 auto;
+    }
     .ic-track {
       display: flex;
       transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -117,11 +121,19 @@ export type CarouselImage = {
       overflow: hidden;
       background: #1a1a1a;
     }
+    .ic-img-wrap-portrait {
+      aspect-ratio: 3 / 4;
+      background: #111;
+    }
     .ic-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    .ic-img-contain {
+      object-fit: contain;
+      background: #111;
     }
     .ic-overlay {
       position: absolute;
@@ -242,6 +254,8 @@ export class ImageCarouselComponent {
   readonly images = input<CarouselImage[]>([]);
   readonly title = input('');
   readonly ariaLabel = input('Carrossel de imagens');
+  readonly aspectRatio = input<'landscape' | 'portrait'>('landscape');
+  readonly imageFit = input<'cover' | 'contain'>('cover');
 
   readonly currentIndex = signal(0);
 
