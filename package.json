@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:pages": "ng build --base-href /",
+    "build:pages": "ng build --base-href /dradaianaferraz_gold/",
+    "build:domain": "ng build --base-href /",
+    "deploy:domain": "npm run build:domain && npx angular-cli-ghpages --dir=dist/dradaianaferraz/browser",
     "deploy:pages": "npm run build:pages && npx angular-cli-ghpages --dir=dist/dradaianaferraz/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
