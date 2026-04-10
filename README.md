@@ -29,7 +29,7 @@ O site atrai novos leads. O sender reativa pacientes já cadastrados. O Customer
 
 | Ambiente | URL | Comando |
 |---|---|---|
-| GitHub Pages (atual) | https://wesleyzilva.github.io/dradaianaferraz_gold/ | `npm run deploy` |
+| GitHub Pages (atual) | https://wesleyzilva.github.io/dradaianaferraz_gold/ | `npm run deploy:pages` |
 | Domínio próprio (futuro) | https://dradaianaferraz.com.br | `npm run deploy:domain` |
 
 > Para ativar o domínio próprio: renomear `public/CNAME.pending` → `public/CNAME` e executar `npm run deploy:domain`.
