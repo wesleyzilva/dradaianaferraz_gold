@@ -11,6 +11,50 @@
         "Get-Item": true,
         "ForEach-Object": true,
         ".\\node_modules\\.bin\\ng.cmd": true,
-        "&": true
+        "&": true,
+        "/^powershell -NoProfile -ExecutionPolicy Bypass -File \"C:\\\\repositorio\\\\dradaianaferraz_gold\\\\gitCommands\\\\git-manager\\.ps1\" 2>&1 \\| Select-Object -First 8$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^powershell -NoProfile -ExecutionPolicy Bypass -Command \"& \\{ Set-Location 'C:\\\\repositorio\\\\dradaianaferraz_gold'; \\. \\.\\\\gitCommands\\\\git-manager\\.ps1 -RepoPath 'C:\\\\repositorio\\\\dradaianaferraz_gold' \\}\" 2>&1 \\| Select-Object -First 15$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^python -c \"import py_compile; py_compile\\.compile\\('gerar_disparos\\.py', doraise=True\\); print\\('OK'\\)\" ; node --check sender\\.js ; echo \"sender OK\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Test-Path C:\\\\repositorio\\\\whatsappSenderHttp ; git -C C:\\\\repositorio\\\\whatsappSenderHttp status 2>&1 \\| Select-Object -First 3$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^git clone https://github\\.com/wesleyzilva/whatsappSenderHttp\\.git C:\\\\repositorio\\\\whatsappSenderHttp 2>&1$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^git clone https://github\\.com/wesleyzilva/whatsappSenderHttp\\.git C:\\\\repositorio\\\\whatsappSenderHttp$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^git -C C:\\\\repositorio\\\\whatsappSenderHttp checkout -b whatsapp-dradaiana-sender$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Copy-Item -Path C:\\\\repositorio\\\\dradaianaferraz_gold\\\\whatsapp\\\\\\* -Destination C:\\\\repositorio\\\\whatsappSenderHttp\\\\ -Recurse -Force ; Get-ChildItem C:\\\\repositorio\\\\whatsappSenderHttp \\| Select-Object Name$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Copy-Item -Path \"C:\\\\repositorio\\\\dradaianaferraz_gold\\\\whatsapp\\\\\\*\" -Destination \"C:\\\\repositorio\\\\whatsappSenderHttp\\\\\" -Recurse -Force$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Content C:\\\\repositorio\\\\whatsappSenderHttp\\\\\\.gitignore \"node_modules/`n\\.wwebjs_auth\\*/`n\\.wwebjs_cache/`nlog/run_\\*\\.json`n__pycache__/`n\\*\\.pyc`nlog/sent_log\\.json`n\\.vscode/`nbackup/`ntarget/`n\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location C:\\\\repositorio\\\\dradaianaferraz_gold ; git rm -r --cached whatsapp/ ; git status --short \\| Select-Object -First 10$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
     }
 }
