@@ -1,69 +1,55 @@
-# Dradaianaferraz
+# Landing Page — Dra. Daiana Ferraz
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.5.
+Landing page de conversão para a clínica da Dra. Daiana Ferraz, especialista em odontologia estética e harmonização facial.
 
-## Aplicação publicada
+**Desenvolvimento:** Wesley Silva
 
-Acesse a versão publicada em produção:
+## Objetivo de negócio
 
-- https://wesleyzilva.github.io/dradaianaferraz_gold/
+Converter visitantes (vindos de Google Ads ou busca orgânica) em pacientes via clique direto no WhatsApp.  
+Cada clique no botão WhatsApp é registrado como conversão no Google Ads, fechando o ciclo anúncio → site → agendamento.
 
-## Créditos
+## Como os dois projetos funcionam juntos
 
-Desenvolvimento: **Wesley Silva**
+```
+Google Ads
+    └─► Landing page (este repo)          ← paciente vê e clica no WhatsApp
+             └─► Conversão AW registrada  ← gtag dispara no clique
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
+WhatsappSenderHttp (repo irmão)
+    └─► 01_gerar_lista.py                 ← monta CSV com pacientes da base
+    └─► 02_sender.js                      ← envia mensagens personalizadas
+    └─► 04_gerar_customer_match.py        ← exporta emails/fones para Google Ads
+             └─► Customer Match no Google Ads ← retargeting da base de pacientes
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+O site atrai novos leads. O sender reativa pacientes já cadastrados. O Customer Match fecha o loop fazendo Google Ads alcançar a própria base da clínica.
 
-## Code scaffolding
+## Publicação
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Ambiente | URL | Comando |
+|---|---|---|
+| GitHub Pages (atual) | https://wesleyzilva.github.io/dradaianaferraz_gold/ | `npm run deploy` |
+| Domínio próprio (futuro) | https://dradaianaferraz.com.br | `npm run deploy:domain` |
 
-```bash
-ng generate component component-name
-```
+> Para ativar o domínio próprio: renomear `public/CNAME.pending` → `public/CNAME` e executar `npm run deploy:domain`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Rastreamento configurado
 
-```bash
-ng generate --help
-```
+| Ferramenta | ID | Finalidade |
+|---|---|---|
+| Google Tag Manager | `GTM-PG7CRPC7` | Contêiner central de tags |
+| Google Analytics 4 | `G-7T08P5CXYW` | Comportamento do visitante |
+| Google Ads | `AW-10874062456` | Conversões de clique no WhatsApp |
 
-## Building
+Label de conversão: `ijghCNfp2pkcEPiMlMEo` — disparado via `mini-analytics.component.ts` em todo clique em elemento com `data-track` contendo `whatsapp`.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Comandos essenciais
 
 ```bash
-ng test
+ng serve          # dev local em localhost:4200
+npm run deploy    # build + deploy para GitHub Pages
+ng build          # build apenas (dist/)
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Stack:** Angular 21 · SCSS · angular-cli-ghpages
