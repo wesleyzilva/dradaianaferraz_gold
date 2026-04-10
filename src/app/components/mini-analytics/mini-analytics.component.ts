@@ -189,6 +189,12 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
           event_label: key,
           value: 1,
         });
+        // Google Ads: dispara conversão em todos os cliques de WhatsApp
+        if (trackingMeta.eventCategory === 'lead' && key.includes('whatsapp')) {
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-10874062456/ijghCNfp2pkcEPiMlMEo',
+          });
+        }
       }
 
       if (window.dataLayer) {
