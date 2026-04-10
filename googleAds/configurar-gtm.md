@@ -21,6 +21,9 @@ Configurar o container GTM no site e deixá-lo pronto para disparar eventos de m
 - Eventos custom via `dataLayer` (ex.: `engagement_click`)
 
 ## Checklist final
-- [ ] `gtm.js` dispara em todas as páginas
-- [ ] Container publicado
+- ✅ Container `GTM-PG7CRPC7` instalado no site
+- ✅ Noscript iframe no `<body>`
+- [ ] `gtm.js` dispara em todas as páginas (validar no Preview)
+- [ ] Tags GA4 + Conversion Linker criadas e publicadas
+- [ ] Tags Google Ads criadas e publicadas
 - [ ] Preview sem erros

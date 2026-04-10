@@ -110,7 +110,18 @@ type BottomMenuLink = {
           <p class="hero-instagram">
             <a [href]="config.social.instagram" target="_blank" rel="noopener noreferrer" data-track="social_instagram_hero">@dradaianaferrazsc</a> no Instagram
           </p>
-          <!-- hero-cta removido -->
+          <div class="hero-cta">
+            <a
+              [href]="config.professional.whatsapp"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary"
+              data-track="cta_whatsapp_hero"
+              aria-label="Agendar avaliação pelo WhatsApp"
+            >
+              Agendar Avaliação · WhatsApp
+            </a>
+          </div>
         </div>
       </div>
     </section>

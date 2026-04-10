@@ -30,6 +30,8 @@ Conectar o site ao GA4 para medir tráfego e eventos de lead.
    - `view_map` (opcional)
 
 ## Checklist final
-- [ ] ID `G-...` configurado
-- [ ] Eventos recebendo no Realtime
-- [ ] Conversões marcadas no GA4
+- ✅ ID `G-7T08P5CXYW` configurado no site (gtag.js + site-config.ts)
+- ✅ `window.gtag` definido — eventos chegam ao GA4 independente do GTM
+- [ ] Eventos recebendo no painel Realtime
+- [ ] `generate_lead` marcado como conversão no GA4
+- [ ] Fluxo de dados Web conectado e verificado
