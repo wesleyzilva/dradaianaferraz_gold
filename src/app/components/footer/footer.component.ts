@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MiniAnalyticsComponent } from '../mini-analytics/mini-analytics.component';
 import { SITE_CONFIG } from '../../config/site-config';
+import { BUILD_VERSION, BUILD_TIME } from '../../../environments/version';
+import { BUILD_VERSION, BUILD_TIME } from '../../../environments/version';
 
 @Component({
   selector: 'app-footer',
@@ -53,7 +55,7 @@ import { SITE_CONFIG } from '../../config/site-config';
             </a>
             <!-- WhatsApp link removido, apenas ícone permanece -->
             <p class="copyright">{{ config.footer.copyright }}</p>
-            <span class="footer-tag">Última atualização: {{ config.footer.lastUpdated }}</span>
+            <span class="footer-tag">Build: {{ buildVersion }} · {{ buildTime }}</span>
             <a [href]="technicalResponsibleMailto" class="footer-tag footer-email" aria-label="Enviar e-mail para responsável técnico">
               {{ config.footer.technicalResponsibleEmail }}
             </a>
@@ -209,6 +211,8 @@ import { SITE_CONFIG } from '../../config/site-config';
 })
 export class FooterComponent {
   config = SITE_CONFIG;
+  readonly buildVersion = BUILD_VERSION;
+  readonly buildTime = BUILD_TIME;
 
   readonly technicalResponsibleMailto = `mailto:${this.config.footer.technicalResponsibleEmail}?subject=${encodeURIComponent('Contato pelo site [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pelo site.\n\nTag: viaLandPage\n')}`;
 }
