@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { MiniAnalyticsComponent } from '../mini-analytics/mini-analytics.component';
 import { SITE_CONFIG } from '../../config/site-config';
 import { BUILD_VERSION, BUILD_TIME } from '../../../environments/version';
-import { BUILD_VERSION, BUILD_TIME } from '../../../environments/version';
 
 @Component({
   selector: 'app-footer',
