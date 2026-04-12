@@ -12,6 +12,7 @@
     "build:domain": "ng build --base-href /",
     "deploy:domain": "npm run build:domain && npx angular-cli-ghpages --dir=dist/dradaianaferraz/browser",
     "deploy:pages": "npm run build:pages && npx angular-cli-ghpages --dir=dist/dradaianaferraz/browser",
+    "deploy": "npm run deploy:domain",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
