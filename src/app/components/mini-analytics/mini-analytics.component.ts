@@ -178,6 +178,11 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
 
       const key = trackingMeta.key;
 
+      const anchorEl = trackedElement.tagName === 'A'
+        ? trackedElement
+        : trackedElement.closest('a');
+      const destinationUrl = anchorEl?.getAttribute('href') ?? undefined;
+
       const stats = this.readClickStats();
       stats[key] = (stats[key] ?? 0) + 1;
       localStorage.setItem(this.clickStatsKey, JSON.stringify(stats));
@@ -188,11 +193,13 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
           event_category: trackingMeta.eventCategory,
           event_label: key,
           value: 1,
+          ...(destinationUrl ? { outbound_url: destinationUrl } : {}),
         });
         // Google Ads: dispara conversão em todos os cliques de WhatsApp
         if (trackingMeta.eventCategory === 'lead' && key.includes('whatsapp')) {
           window.gtag('event', 'conversion', {
             send_to: 'AW-10874062456/ijghCNfp2pkcEPiMlMEo',
+            ...(destinationUrl ? { outbound_url: destinationUrl } : {}),
           });
         }
       }
@@ -203,6 +210,7 @@ export class MiniAnalyticsComponent implements OnInit, OnDestroy {
           event_category: trackingMeta.eventCategory,
           event_label: key,
           event_value: stats[key],
+          ...(destinationUrl ? { outbound_url: destinationUrl } : {}),
         });
       }
     };
