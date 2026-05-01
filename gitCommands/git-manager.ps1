@@ -793,7 +793,7 @@ function Show-Menu {
         $syncColor  = 'Yellow'
     }
     else {
-        $syncStatus = "[!] Remoto +$($info.CommitsBehind) a frente -> PULL recomendado (opcao 5)"
+        $syncStatus = "[!] Remoto +$($info.CommitsBehind) a frente -> use opcao 5 (pull) ou 8 (sync)"
         $syncColor  = 'Yellow'
     }
 
@@ -813,29 +813,29 @@ function Show-Menu {
     }
 
     Write-Host ''
-    Write-Host '  === VERIFICACAO ===' -ForegroundColor Yellow
-    Write-Host '  [1]  Comparar local vs remoto (qual esta mais atualizado)' -ForegroundColor White
-    Write-Host '  [2]  Informacoes completas do repositorio'                 -ForegroundColor White
-    Write-Host '  [3]  Listar branches'                                      -ForegroundColor White
+    Write-Host '  === VERIFICACAO ==='                                           -ForegroundColor Cyan
+    Write-Host '  [1]  Comparar local vs remoto (qual esta mais atualizado)'   -ForegroundColor Cyan
+    Write-Host '  [2]  Informacoes completas do repositorio'                   -ForegroundColor Cyan
+    Write-Host '  [3]  Listar branches'                                        -ForegroundColor Cyan
     Write-Host ''
-    Write-Host '  === SINCRONIZACAO ===' -ForegroundColor Yellow
-    Write-Host '  [4]  Trocar de branch'                                     -ForegroundColor White
-    Write-Host '  [5]  Baixar do remoto (pull)'                              -ForegroundColor White
+    Write-Host '  === SINCRONIZACAO ==='                                        -ForegroundColor Blue
+    Write-Host '  [4]  Trocar de branch'                                       -ForegroundColor White
+    Write-Host '  [5]  Baixar do remoto (pull)'                                -ForegroundColor White
     Write-Host ''
-    Write-Host '  === ENVIAR ALTERACOES ===' -ForegroundColor Yellow
-    Write-Host '  [6]  Commitar (mensagem aleatoria)'                        -ForegroundColor White
-    Write-Host '  [7]  Subir para o remoto (push)'                           -ForegroundColor White
-    Write-Host '  [12] Sincronizar (pull --rebase + push)'                    -ForegroundColor Yellow
+    Write-Host '  === ENVIAR ALTERACOES ==='                                    -ForegroundColor Yellow
+    Write-Host '  [6]  Commitar (mensagem aleatoria)'                          -ForegroundColor Yellow
+    Write-Host '  [7]  Subir para o remoto (push)'                             -ForegroundColor Green
+    Write-Host '  [8]  Sincronizar (pull --rebase + push)'                     -ForegroundColor Yellow
     Write-Host ''
-    Write-Host '  === PUBLICACAO ===' -ForegroundColor Green
-    Write-Host '  [8]  Deploy para GitHub Pages (build + deploy)'            -ForegroundColor Green
-    Write-Host '  [11] Force Redeploy (republica sem perguntas)'             -ForegroundColor Magenta
+    Write-Host '  === PUBLICACAO ==='                                           -ForegroundColor Magenta
+    Write-Host '  [9]  Deploy para GitHub Pages (build + deploy)'              -ForegroundColor Green
+    Write-Host '  [10] Force Redeploy (republica sem perguntas)'               -ForegroundColor Magenta
     Write-Host ''
-    Write-Host '  === WORKSPACE ===' -ForegroundColor Cyan
-    Write-Host '  [9]  Baixar repositorio e adicionar ao workspace'          -ForegroundColor White
-    Write-Host '  [10] Remover repositorio do workspace'                     -ForegroundColor White
+    Write-Host '  === WORKSPACE ==='                                            -ForegroundColor DarkCyan
+    Write-Host '  [11] Baixar repositorio e adicionar ao workspace'            -ForegroundColor White
+    Write-Host '  [12] Remover repositorio do workspace'                       -ForegroundColor White
     Write-Host ''
-    Write-Host '  [0]  Sair'                                                 -ForegroundColor DarkGray
+    Write-Host '  [0]  Sair'                                                   -ForegroundColor DarkGray
     Write-Host ''
 }
 
@@ -854,20 +854,20 @@ while ($true) {
     Write-Host ''
 
     switch ($opcao.Trim()) {
-        '1' { Show-CompareStatus  }
-        '2' { Show-RepoInfo       }
-        '3' { Show-Branches       }
-        '4' { Switch-Branch       }
-        '5' { Invoke-Pull         }
-        '6' { Invoke-RandomCommit }
-        '7'  { Invoke-Push         }
-        '12' { Invoke-SyncPush     }
-        '8'  { Invoke-DeployPages        }
-        '11' { Invoke-DeployPages -Force  }
-        '9' { Invoke-CloneAndAddToWorkspace }
-        '10' { Invoke-RemoveFromWorkspace   }
-        '0' { Write-Host "`n  Ate logo!`n" -ForegroundColor Cyan; exit 0 }
-        default { Write-Warn 'Opcao invalida. Digite um numero entre 0 e 11.' }
+        '1'  { Show-CompareStatus              }
+        '2'  { Show-RepoInfo                   }
+        '3'  { Show-Branches                   }
+        '4'  { Switch-Branch                   }
+        '5'  { Invoke-Pull                     }
+        '6'  { Invoke-RandomCommit             }
+        '7'  { Invoke-Push                     }
+        '8'  { Invoke-SyncPush                 }
+        '9'  { Invoke-DeployPages              }
+        '10' { Invoke-DeployPages -Force       }
+        '11' { Invoke-CloneAndAddToWorkspace   }
+        '12' { Invoke-RemoveFromWorkspace      }
+        '0'  { Write-Host "`n  Ate logo!`n" -ForegroundColor Cyan; exit 0 }
+        default { Write-Warn 'Opcao invalida. Digite um numero entre 0 e 12.' }
     }
 
     Write-Host ''
