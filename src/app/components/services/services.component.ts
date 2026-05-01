@@ -289,7 +289,7 @@ export class ServicesComponent {
       : 'Procedimentos invasivos envolvem aplicação injetável ou técnica minimamente invasiva, com planejamento clínico para correções estruturais e resultados mais direcionados.',
   );
 
-  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Serviços Harmonização. Interesse: avaliação de harmonização.')}`;
+  readonly harmonizacaoWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, Dra. Daiana! Vi os procedimentos de harmonização orofacial no site e gostaria de agendar uma avaliação.')}`;
 
   setInvasiveness(value: Invasiveness): void {
     this.selectedInvasiveness.set(value);

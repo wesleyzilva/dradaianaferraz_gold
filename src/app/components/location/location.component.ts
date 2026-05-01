@@ -349,7 +349,7 @@ export class LocationComponent {
     // Google Maps Directions API: origem dinâmica (usuário), destino fixo
     this.directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
     this.uberUrl = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${destination}`;
-    this.locationWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Vim da página e meu nome é ')}`;
+    this.locationWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, Dra. Daiana! Vi o endereço da clínica no site e quero agendar uma consulta.')}`;
     this.locationEmailMailto = `mailto:${this.config.location.email}?subject=${encodeURIComponent('Contato pela landing page [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pela landing page.\n\nTag: viaLandPage\n')}`;
   }
 

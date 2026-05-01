@@ -178,5 +178,5 @@ import { ImageCarouselComponent } from '../image-carousel/image-carousel.compone
 export class OdontologyComponent {
   config = SITE_CONFIG;
   readonly sectionId = input('services-odontologia');
-  readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Serviços Odontologia. Interesse: avaliação odontológica.')}`;
+  readonly odontologiaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, Dra. Daiana! Vi os serviços odontológicos no site e quero agendar uma avaliação dental.')}`;
 }

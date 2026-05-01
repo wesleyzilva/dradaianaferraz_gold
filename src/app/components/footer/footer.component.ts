@@ -13,7 +13,7 @@ import { BUILD_VERSION, BUILD_TIME } from '../../../environments/version';
         <div class="footer-container">
           <div class="footer-main-row">
             <div class="social-links">
-              <a [href]="config.professional.whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-link" data-track="social_whatsapp">
+              <a [href]="footerWhatsappUrl" target="_blank" rel="noopener" aria-label="WhatsApp" class="social-link" data-track="social_whatsapp">
                 <svg width="22" height="22" viewBox="0 0 448 448" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="448" height="448" rx="90" fill="#25D366"/><path d="M224 96c-70.7 0-128 57.3-128 128 0 22.6 6.1 44.6 17.7 63.8L96 352l65.1-17.1C180.6 338.1 202.1 352 224 352c70.7 0 128-57.3 128-128S294.7 96 224 96zm0 224c-19.2 0-38.1-5.6-54.1-16.2l-3.9-2.6-38.7 10.2 10.3-37.7-2.5-3.9C124.6 246.1 120 235.2 120 224c0-57.3 46.7-104 104-104s104 46.7 104 104-46.7 104-104 104zm58.7-77.5c-3.2-1.6-18.9-9.3-21.8-10.4-2.9-1.1-5-1.6-7.1 1.6-2.1 3.2-8.1 10.4-9.9 12.5-1.8 2.1-3.6 2.4-6.8 0.8-18.6-9.3-30.8-16.6-43.1-37.2-3.3-5.7 3.3-5.3 9.3-17.7 1-2.1 0.5-3.9-0.3-5.5-0.8-1.6-7.1-17.1-9.7-23.4-2.6-6.3-5.2-5.4-7.1-5.5-1.8-0.1-3.9-0.1-6-0.1-2.1 0-5.5 0.8-8.3 3.7-2.8 2.9-10.9 10.7-10.9 25.9 0 15.2 11.2 30 12.6 32.1 1.4 2.1 22.1 33.7 53.5 47.3 7.5 3.2 13.3 5.1 17.8 6.5 7.5 2.4 14.3 2.1 19.7 1.3 6-0.8 18.6-7.2 21.2-14.1 2.6-6.9 2.6-12.7 1.8-13.9-0.7-1.2-3-1.9-6.3-3.4z" fill="#fff"/></svg>
               </a>
               <a [href]="config.social.instagram" target="_blank" rel="noopener" aria-label="Instagram" class="social-link" data-track="social_instagram">
@@ -212,6 +212,8 @@ export class FooterComponent {
   config = SITE_CONFIG;
   readonly buildVersion = BUILD_VERSION;
   readonly buildTime = BUILD_TIME;
+
+  readonly footerWhatsappUrl = `${SITE_CONFIG.professional.whatsapp}?text=${encodeURIComponent('Oi, Dra. Daiana! Vi o seu perfil e gostaria de saber mais sobre os seus serviços.')}`;
 
   readonly technicalResponsibleMailto = `mailto:${this.config.footer.technicalResponsibleEmail}?subject=${encodeURIComponent('Contato pelo site [viaLandPage]')}&body=${encodeURIComponent('Olá, entrei em contato pelo site.\n\nTag: viaLandPage\n')}`;
 }

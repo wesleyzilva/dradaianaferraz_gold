@@ -300,7 +300,7 @@ import { SITE_CONFIG } from '../../config/site-config';
 export class ProductsComponent {
   config = SITE_CONFIG;
   readonly currentIndex = signal(0);
-  readonly annaPegovaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Olá! Vim do site. Origem: Linha Anna Pegova. Interesse: produtos Anna Pegova.')}`;
+  readonly annaPegovaWhatsappUrl = `${this.config.professional.whatsapp}?text=${encodeURIComponent('Oi, Dra. Daiana! Vi a linha Anna Pegova no site e tenho interesse em saber mais sobre os produtos.')}`;
 
   readonly carouselTransform = computed(() => `translateX(-${this.currentIndex() * 100}%)`);
 
