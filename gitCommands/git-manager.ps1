@@ -418,6 +418,42 @@ function Invoke-Push {
     }
 }
 
+function Invoke-SyncPush {
+    Write-Header 'SINCRONIZAR (pull --rebase + push)'
+    $info = Get-RepoInfo
+
+    Write-Info 'Baixando alteracoes do remoto com rebase...'
+    $pullOut = git pull --rebase origin $info.Branch 2>&1
+    $pullOut | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
+    if ($LASTEXITCODE -ne 0) {
+        Write-Err 'Pull/rebase falhou. Resolva os conflitos e tente novamente.'
+        return
+    }
+    Write-OK 'Rebase concluido.'
+    Write-Host ''
+
+    $infoAfter = Get-RepoInfo
+    if ($infoAfter.CommitsAhead -eq 0) {
+        Write-OK 'Nenhum commit local para enviar apos o rebase.'
+        return
+    }
+
+    Write-Info "$($infoAfter.CommitsAhead) commit(s) serao enviados para origin/$($infoAfter.Branch)."
+    $resp = Read-Host '  Confirmar push? (s/N)'
+    if ($resp -notmatch '^[sS]$') { Write-Host '  Cancelado.'; return }
+
+    Write-Info "Executando: git push origin $($infoAfter.Branch)"
+    $out = git push origin $infoAfter.Branch 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-OK 'Push concluido com sucesso.'
+        $out | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
+    }
+    else {
+        Write-Err 'Push falhou:'
+        $out | ForEach-Object { Write-Host "  $_" -ForegroundColor Red }
+    }
+}
+
 # ---------------------------------------------------------------------------
 # OPCAO 4 - Listar branches
 # ---------------------------------------------------------------------------
@@ -789,6 +825,7 @@ function Show-Menu {
     Write-Host '  === ENVIAR ALTERACOES ===' -ForegroundColor Yellow
     Write-Host '  [6]  Commitar (mensagem aleatoria)'                        -ForegroundColor White
     Write-Host '  [7]  Subir para o remoto (push)'                           -ForegroundColor White
+    Write-Host '  [12] Sincronizar (pull --rebase + push)'                    -ForegroundColor Yellow
     Write-Host ''
     Write-Host '  === PUBLICACAO ===' -ForegroundColor Green
     Write-Host '  [8]  Deploy para GitHub Pages (build + deploy)'            -ForegroundColor Green
@@ -823,7 +860,8 @@ while ($true) {
         '4' { Switch-Branch       }
         '5' { Invoke-Pull         }
         '6' { Invoke-RandomCommit }
-        '7' { Invoke-Push         }
+        '7'  { Invoke-Push         }
+        '12' { Invoke-SyncPush     }
         '8'  { Invoke-DeployPages        }
         '11' { Invoke-DeployPages -Force  }
         '9' { Invoke-CloneAndAddToWorkspace }
