@@ -1,8 +1,123 @@
-# Landing Page — Dra. Daiana Ferraz
+<h1 align="center">Landing Page — Dra. Daiana Ferraz</h1>
 
-Landing page de conversão da clínica da Dra. Daiana Ferraz, com foco em captação de pacientes para odontologia estética e harmonização facial.
+<p align="center">
+  <em>Conversion-focused Angular landing page for a dental aesthetics and facial harmonisation clinic</em>
+</p>
 
-**Desenvolvimento:** Wesley Silva
+<p align="center">
+  <img src="https://img.shields.io/badge/Angular-21+-DD0031?style=for-the-badge&logo=angular&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Google%20Ads-Integrated-4285F4?style=for-the-badge&logo=googleads&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Google%20Analytics%204-Tracked-E37400?style=for-the-badge&logo=googleanalytics&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Status-Live-27AE60?style=for-the-badge"/>
+</p>
+
+**Live URL:** https://wesleyzilva.github.io/dradaianaferraz_gold/
+
+---
+
+## The Problem It Solves
+
+Healthcare clinics running Google Ads without a dedicated landing page lose most of their paid traffic to generic website pages with no clear conversion path. Every untracked WhatsApp click is a lead not attributed to the campaign — making it impossible to optimise ad spend.
+
+This project delivers a single-purpose, high-converting landing page that captures patient intent, routes it to WhatsApp, and records every conversion in Google Ads — closing the attribution loop.
+
+---
+
+## Conversion Architecture
+
+```
+Google Ads / Organic Search
+    └─► Landing page (this repository)
+             └─► Patient navigates: hero → services → social proof
+                      └─► Clicks WhatsApp
+                               └─► Conversion recorded: AW-10874062456
+                                        └─► Google Ads optimises for more leads
+
+WhatsappSenderHttp (companion repository)
+    └─► reactivates existing patient base
+    └─► exports Customer Match → Google Ads re-targets the clinic's own patients
+```
+
+---
+
+## Tracking Configuration
+
+| Platform | ID | Purpose |
+|----------|----|---------|
+| Google Tag Manager | `GTM-PG7CRPC7` | Central tag container |
+| Google Analytics 4 | `G-7T08P5CXYW` | Navigation and engagement analysis |
+| Google Ads Conversion | `AW-10874062456` | WhatsApp click attribution |
+
+**Conversion label:** `ijghCNfp2pkcEPiMlMEo`  
+Trigger: any click on an element with `data-track` containing `whatsapp`.
+
+---
+
+## Tracked Events
+
+| Event | GA4 Name | Trigger |
+|-------|----------|---------|
+| WhatsApp lead | `generate_lead` | Click on WhatsApp button |
+| Route request | `route_click` | Click to open Google Maps |
+| Social profile | `social_click` | Instagram, Doctoralia, Google Business |
+| Email contact | `contact_click` | Click on email |
+| General engagement | `engagement_click` | Any tracked interaction |
+
+---
+
+## Patient Conversion Funnel
+
+```
+1. Entry via Google Ads or organic search
+2. Hero section — specialist presentation
+3. Service sections — dental aesthetics / facial harmonisation
+4. Social proof — before/after photos, reviews
+5. Location — clinic address and maps link
+6. Conversion — WhatsApp click → lead captured
+```
+
+---
+
+## Deployment
+
+| Environment | Command | Notes |
+|-------------|---------|-------|
+| Local development | `ng serve` | http://localhost:4200/ |
+| Local build | `ng build` | Output in `dist/` |
+| GitHub Pages (current) | `npm run deploy:pages` | Uses base-href `/dradaianaferraz_gold/` |
+| Custom domain (pending) | `npm run deploy:domain` | Use only when `dradaianaferraz.com.br` is active |
+
+**Domain configuration:** `public/CNAME.pending` — rename to `public/CNAME` only when the custom domain is ready.
+
+---
+
+## Project Structure
+
+```
+src/                 Angular application source
+public/              Static assets and build config
+public/CNAME.pending Future custom domain configuration
+googleAds/           Google Ads briefing and campaign docs
+docs/                Project documentation
+dist/                Build output
+```
+
+---
+
+## Tech Stack
+
+![Angular](https://img.shields.io/badge/Angular%2021-DD0031?style=flat-square&logo=angular&logoColor=white)
+![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=sass&logoColor=white)
+![Google Tag Manager](https://img.shields.io/badge/GTM-246FDB?style=flat-square&logo=googletagmanager&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-181717?style=flat-square&logo=github&logoColor=white)
+
+---
+
+## Author
+
+**Wesley Gomes da Silva** · IT Manager · Agile Coach · Full-Stack Developer
+
+[GitHub](https://github.com/wesleyzilva) · [LinkedIn](https://www.linkedin.com/in/wesleyzilva/) · [Portfolio](https://wesleyzilva.github.io/portfolioNearshoreWesIA/#hero)
 
 ## Finalidade deste projeto
 
