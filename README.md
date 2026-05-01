@@ -1,8 +1,108 @@
 <h1 align="center">Landing Page — Dra. Daiana Ferraz</h1>
 
 <p align="center">
-  <em>Conversion-focused Angular landing page for a dental aesthetics and facial harmonisation clinic</em>
+  <em>Closing the attribution loop between paid ad spend and patient acquisition for a dental aesthetics clinic</em>
 </p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Angular-21+-DD0031?style=for-the-badge&logo=angular&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Google%20Ads-Integrated-4285F4?style=for-the-badge&logo=googleads&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GA4-Tracked-E37400?style=for-the-badge&logo=googleanalytics&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Status-Live-27AE60?style=for-the-badge"/>
+</p>
+
+**Live:** https://wesleyzilva.github.io/dradaianaferraz_gold/
+
+---
+
+> Conversion-optimised Angular application for a dental aesthetics clinic, engineered to close the attribution gap between paid ad spend and patient acquisition. Every WhatsApp interaction fires a Google Ads conversion event, feeding the algorithm with first-party signal and enabling a measurable, continuously declining cost per lead.
+
+---
+
+## The Problem
+
+Healthcare clinics running Google Ads without a dedicated landing page lose most of their paid traffic to generic website pages — no clear call to action, no tracked conversion, and no feedback signal for the ad algorithm. Every unattributed WhatsApp click is a lead the campaign cannot learn from, inflating cost per acquisition indefinitely.
+
+---
+
+## The Solution
+
+A single-purpose Angular landing page engineered around one goal: converting a visitor into a WhatsApp conversation. The page eliminates friction between ad click and contact by placing trust signals (professional photos, services, reviews) on a single scroll — then firing a Google Ads conversion event the moment the patient taps WhatsApp.
+
+---
+
+## Methodology
+
+```
+Google Ads campaign
+    └─► Landing page (this repository)
+             └─► Patient scrolls: hero → services → social proof → CTA
+                      └─► Clicks WhatsApp button (data-track="whatsapp")
+                               └─► gtag fires: AW-10874062456 / label ijghCNfp2pkcEPiMlMEo
+                                        └─► GA4 records: generate_lead event
+                                                 └─► Google Ads optimises bids for more leads
+
+WhatsappSenderHttp (companion repository)
+    └─► Reactivates existing patients via WhatsApp
+    └─► Exports Customer Match → Google Ads re-targets the clinic's own patient base
+```
+
+**Tracking stack:**
+
+| Platform | ID | Role |
+|----------|----|------|
+| Google Analytics 4 | `G-6M5N30T9FM` | Navigation and engagement analysis |
+| Google Ads Conversion | `AW-10874062456` | WhatsApp click attribution |
+
+---
+
+## Results
+
+- Attribution gap closed: every WhatsApp lead is now tied back to its Google Ads campaign
+- Algorithm feedback loop active: conversion data flows directly into Smart Bidding
+- Companion tool (`whatsappSenderHttp`) exports existing patients as Customer Match, enabling re-targeting of the clinic's own patient base from within Google Ads
+
+---
+
+## Tradeoffs
+
+| Decision | Chosen | Alternative | Rationale |
+|----------|--------|-------------|----------|
+| Tag management | Direct `gtag.js` | Google Tag Manager | GTM was redundant for a single-goal page; direct integration reduces load time and eliminates a dependency that could delay the conversion event firing |
+| Hosting | GitHub Pages | Custom domain (`dradaianaferraz.com.br`) | Zero infrastructure cost during validation phase; reversible — a CNAME swap and one env variable restore the custom domain |
+| Framework | Angular | Plain HTML/JS | Angular adds ~300 KB to the initial bundle, but the component model makes future iterations (new services, A/B sections) maintainable without rewriting the page |
+| Page structure | Single scroll | Multi-page site | A multi-page site would improve per-URL SEO but fragment the conversion path; a single scroll keeps patient intent focused from ad click to WhatsApp |
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Angular 21+, TypeScript, SCSS |
+| Analytics | Google Analytics 4 (gtag.js direct) |
+| Ads Attribution | Google Ads Conversion Tracking |
+| Deployment | GitHub Pages via `angular-cli-ghpages` |
+| CI/CD | GitHub Actions |
+
+---
+
+## Getting Started
+
+```bash
+npm install
+ng serve          # development server → http://localhost:4200/
+```
+
+**Deploy to GitHub Pages:**
+```bash
+npm run deploy:pages
+```
+
+**When migrating to custom domain (`dradaianaferraz.com.br`):**  
+1. Reverse the 7 URL references in `src/index.html`  
+2. Add `CNAME` file to `public/` with content `dradaianaferraz.com.br`  
+3. Run `npm run deploy:domain`
 
 <p align="center">
   <img src="https://img.shields.io/badge/Angular-21+-DD0031?style=for-the-badge&logo=angular&logoColor=white"/>
