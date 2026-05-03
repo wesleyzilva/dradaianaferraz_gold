@@ -378,3 +378,19 @@ dist/                saída do build
 ## Stack
 
 Angular 21 · SCSS · angular-cli-ghpages
+
+---
+
+## Big Picture
+
+This landing page is one node in a **closed-loop performance marketing system** for a healthcare clinic. The chain is: paid ad spend → landing page (conversion interface) → WhatsApp interaction → Google Ads conversion event → algorithm receives first-party signal → CPA decreases over time. Without this page, every ad click goes to an attribution-blind generic website, breaking the feedback loop that allows the campaign to self-optimise. This is a **growth infrastructure asset**, not a marketing page.
+
+## Executive Tradeoffs
+
+| Dimension | Decision | Alternative Rejected | Rationale |
+|-----------|----------|---------------------|-----------|
+| Framework | Angular SPA | Static HTML | Modular components enable future A/B testing, analytics injection, and route-level tracking without full rebuilds |
+| Conversion channel | WhatsApp CTA | Contact form | Healthcare leads convert 3–5× higher via synchronous messaging; form → email → reply cycle loses warm intent |
+| Attribution layer | Google Ads gTag + GA4 | Meta Pixel | Google Ads-native integration; browser privacy controls impact third-party pixels more severely |
+| Hosting | GitHub Pages | Vercel / paid hosting | Zero cost, Git-native CI/CD, custom domain support; sufficient performance for single-page landing traffic |
+| Analytics | GA4 event model | Universal Analytics | GA4's event-first model is required for Google Ads conversion import; UA is end-of-life |
