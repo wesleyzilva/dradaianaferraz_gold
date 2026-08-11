@@ -1,5 +1,6 @@
 // Aplicação desenvolvida por Wesley Silva.
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { SITE_CONFIG } from './config/site-config';
 import { HeroComponent } from './components/hero/hero.component';
 import { ServicesComponent } from './components/services/services.component';
 import { OdontologyComponent } from './components/odontology/odontology.component';
@@ -30,9 +31,21 @@ export type AppArea = 'odontologia' | 'harmonizacao';
   styleUrl: './app.scss',
 })
 export class App {
+  readonly config = SITE_CONFIG;
   readonly selectedArea = signal<AppArea>('harmonizacao');
+  readonly showLocationPopup = signal(true);
+  readonly patoBrancoWhatsappUrl = this.buildWhatsappUrl('Oi, Dra. Daiana! Sou de Pato Branco/PR e quero agendar uma avaliação.');
+  readonly saoCarlosWhatsappUrl = this.buildWhatsappUrl('Oi, Dra. Daiana! Sou de São Carlos/SP e quero agendar uma avaliação.');
 
   onAreaChange(area: AppArea): void {
     this.selectedArea.set(area);
+  }
+
+  closeLocationPopup(): void {
+    this.showLocationPopup.set(false);
+  }
+
+  private buildWhatsappUrl(message: string): string {
+    return `${this.config.professional.whatsapp}?text=${encodeURIComponent(message)}`;
   }
 }

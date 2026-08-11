@@ -1,3 +1,54 @@
+@if (showLocationPopup()) {
+	<div class="location-popup-backdrop" (click)="closeLocationPopup()">
+		<section
+			class="location-popup"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="location-popup-title"
+			aria-describedby="location-popup-description"
+			(click)="$event.stopPropagation()"
+		>
+			<button
+				type="button"
+				class="location-popup-close"
+				aria-label="Fechar aviso de localidades"
+				(click)="closeLocationPopup()"
+			>
+				×
+			</button>
+			<p class="location-popup-eyebrow">Aviso importante</p>
+			<h2 id="location-popup-title">Atendimento em Pato Branco/PR e datas periódicas em São Carlos/SP</h2>
+			<p id="location-popup-description" class="location-popup-description">
+				A Dra. Daiana atende em Pato Branco, no Paraná, e também vem periodicamente para São Carlos, em São Paulo.
+				Escolha sua cidade para pedir sua avaliação pelo WhatsApp.
+			</p>
+			<div class="location-popup-actions">
+				<a
+					[href]="patoBrancoWhatsappUrl"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="location-popup-btn location-popup-btn-primary"
+					data-track="popup_whatsapp_pato_branco"
+				>
+					Sou de Pato Branco/PR
+				</a>
+				<a
+					[href]="saoCarlosWhatsappUrl"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="location-popup-btn location-popup-btn-secondary"
+					data-track="popup_whatsapp_sao_carlos"
+				>
+					Sou de São Carlos/SP
+				</a>
+			</div>
+			<button type="button" class="location-popup-dismiss" (click)="closeLocationPopup()">
+				Fechar
+			</button>
+		</section>
+	</div>
+}
+
 <app-hero
 	[selectedArea]="selectedArea()"
 	(selectedAreaChange)="onAreaChange($event)"

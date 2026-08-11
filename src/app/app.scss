@@ -2,3 +2,118 @@
 :host {
   display: block;
 }
+
+.location-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(13, 13, 13, 0.74);
+  backdrop-filter: blur(4px);
+}
+
+.location-popup {
+  position: relative;
+  width: min(100%, 32rem);
+  padding: 2rem;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(32, 32, 32, 0.98), rgba(18, 18, 18, 0.98));
+  color: var(--white);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  text-align: left;
+}
+
+.location-popup-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.location-popup-eyebrow {
+  margin: 0 0 0.5rem;
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.location-popup h2 {
+  margin: 0 0 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.65rem, 4vw, 2.3rem);
+  line-height: 1.2;
+}
+
+.location-popup-description {
+  margin: 0 0 1.5rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+}
+
+.location-popup-actions {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.location-popup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.2rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.location-popup-btn:hover,
+.location-popup-btn:focus-visible,
+.location-popup-dismiss:hover,
+.location-popup-dismiss:focus-visible,
+.location-popup-close:hover,
+.location-popup-close:focus-visible {
+  transform: translateY(-1px);
+}
+
+.location-popup-btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--dark);
+  box-shadow: 0 12px 24px rgba(201, 168, 76, 0.2);
+}
+
+.location-popup-btn-secondary {
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+}
+
+.location-popup-dismiss {
+  margin-top: 1rem;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .location-popup {
+    padding: 1.5rem 1.25rem;
+    border-radius: 20px;
+  }
+}
