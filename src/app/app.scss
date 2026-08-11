@@ -90,6 +90,13 @@
   transform: translateY(-1px);
 }
 
+.location-popup-btn:focus-visible,
+.location-popup-dismiss:focus-visible,
+.location-popup-close:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
 .location-popup-btn-primary {
   background: linear-gradient(135deg, var(--gold), var(--gold-dark));
   color: var(--dark);

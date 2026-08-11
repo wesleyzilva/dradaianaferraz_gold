@@ -98,9 +98,13 @@ export class App {
   }
 
   private buildWhatsappUrl(message: string): string {
-    const url = new URL(this.config.professional.whatsapp);
-    url.searchParams.set('text', message);
-    return url.toString();
+    try {
+      const url = new URL(this.config.professional.whatsapp);
+      url.searchParams.set('text', message);
+      return url.toString();
+    } catch {
+      return this.config.professional.whatsapp;
+    }
   }
 
   private focusLocationPopup(): void {
