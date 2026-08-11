@@ -98,7 +98,9 @@ export class App {
   }
 
   private buildWhatsappUrl(message: string): string {
-    return `${this.config.professional.whatsapp}?text=${encodeURIComponent(message)}`;
+    const url = new URL(this.config.professional.whatsapp);
+    url.searchParams.set('text', message);
+    return url.toString();
   }
 
   private focusLocationPopup(): void {
