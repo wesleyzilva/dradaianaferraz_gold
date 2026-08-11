@@ -576,10 +576,11 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.isMobileViewport.set(window.matchMedia('(max-width: 900px)').matches);
+    const hasMatchMedia = typeof window !== 'undefined' && typeof window.matchMedia === 'function';
+    this.isMobileViewport.set(hasMatchMedia ? window.matchMedia('(max-width: 900px)').matches : false);
 
     const footerElement = document.querySelector('app-footer .footer');
-    if (!footerElement) {
+    if (!footerElement || typeof IntersectionObserver === 'undefined') {
       return;
     }
 

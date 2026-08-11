@@ -14,10 +14,12 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render the location popup', async () => {
     const fixture = TestBed.createComponent(App);
+    fixture.detectChanges();
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, dradaianaferraz');
+    expect(compiled.querySelector('#location-popup-title')?.textContent).toContain('Pato Branco/PR');
+    expect(compiled.textContent).toContain('Sou de São Carlos/SP');
   });
 });
