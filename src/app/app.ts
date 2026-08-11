@@ -103,6 +103,7 @@ export class App {
       url.searchParams.set('text', message);
       return url.toString();
     } catch {
+      console.warn('Invalid WhatsApp URL in site configuration.');
       return this.config.professional.whatsapp;
     }
   }
