@@ -263,7 +263,7 @@ Resumo operacional:
 |---|---|---|
 | Desenvolvimento local | `ng serve` | sobe em `http://localhost:4200/` |
 | Build local | `ng build` | gera arquivos em `dist/` |
-| Publicar no GitHub Pages | `npm run deploy:pages` | usa `base-href /dradaianaferraz_gold/` |
+| Publicar no GitHub Pages | `npm run deploy:pages` | usa `base-href /dradaianaferraz_gold/` para manter os assets corretos no Pages |
 | Publicar com domínio próprio | `npm run deploy:domain` | usar apenas quando o domínio estiver ativo |
 
 ### Regra para domínio próprio
