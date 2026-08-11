@@ -1,12 +1,15 @@
 @if (showLocationPopup()) {
 	<div class="location-popup-backdrop" (click)="closeLocationPopup()">
 		<section
+			#locationPopup
 			class="location-popup"
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="location-popup-title"
 			aria-describedby="location-popup-description"
+			tabindex="-1"
 			(click)="$event.stopPropagation()"
+			(keydown)="handleLocationPopupKeydown($event)"
 		>
 			<button
 				type="button"
