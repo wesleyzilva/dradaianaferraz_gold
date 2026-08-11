@@ -36,10 +36,13 @@ export class App {
   readonly config = SITE_CONFIG;
   readonly selectedArea = signal<AppArea>('harmonizacao');
   readonly showLocationPopup = signal(true);
-  readonly patoBrancoWhatsappUrl = this.buildWhatsappUrl('Oi, Dra. Daiana! Sou de Pato Branco/PR e quero agendar uma avaliação.');
-  readonly saoCarlosWhatsappUrl = this.buildWhatsappUrl('Oi, Dra. Daiana! Sou de São Carlos/SP e quero agendar uma avaliação.');
+  readonly patoBrancoWhatsappUrl: string;
+  readonly saoCarlosWhatsappUrl: string;
 
   constructor() {
+    this.patoBrancoWhatsappUrl = this.buildWhatsappUrl('Oi, Dra. Daiana! Sou de Pato Branco/PR e quero agendar uma avaliação.');
+    this.saoCarlosWhatsappUrl = this.buildWhatsappUrl('Oi, Dra. Daiana! Sou de São Carlos/SP e quero agendar uma avaliação.');
+
     afterNextRender(() => {
       this.focusLocationPopup();
     });
@@ -104,7 +107,7 @@ export class App {
       return url.toString();
     } catch {
       console.warn('Invalid WhatsApp URL in site configuration.');
-      return this.config.professional.whatsapp;
+      return this.config.professional?.whatsapp ?? '#';
     }
   }
 
